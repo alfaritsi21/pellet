@@ -1,5 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index'
+import Login from '../views/Auth/login.vue'
+import Register from '../views/Auth/register.vue'
+import Forgot from '../views/Auth/forgot.vue'
+import Reset from '../views/Auth/reset.vue'
+import Pin from '../views/Auth/pin.vue'
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
@@ -11,12 +17,34 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/login',
+    name: 'Login',
+    component: Login
+    // meta: { requiresVisitor: true }
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+    // meta: { requiresVisitor: true }
+  },
+  {
+    path: '/forgot',
+    name: 'Forgot',
+    component: Forgot
+    // meta: { requiresVisitor: true }
+  },
+  {
+    path: '/pin',
+    name: 'Pin',
+    component: Pin
+    // meta: { requiresVisitor: true }
+  },
+  {
+    path: '/reset',
+    name: 'Reset',
+    component: Reset
+    // meta: { requiresVisitor: true }
   }
 ]
 
@@ -24,6 +52,28 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLogin) {
+      next({
+        path: '/login'
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+    if (store.getters.isLogin) {
+      next({
+        path: '/home'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
