@@ -22,14 +22,14 @@
           wherever you are. Desktop, laptop, mobile phone? we cover all of that
           for you!
         </p>
-        <b-form @submit.prevent="onSubmit">
+        <b-form @submit.prevent="onSubmit('danger')">
           <div class="username">
             <img src="../../assets/image/person.png" alt="" />
             <b-form-input
               id="input-1"
               required
               placeholder="Enter your username"
-              v-model="user_name"
+              v-model="form.user_name"
             ></b-form-input>
           </div>
           <br />
@@ -40,7 +40,7 @@
               type="number"
               required
               placeholder="Enter your phone number"
-              v-model="user_phone"
+              v-model="form.user_phone"
             ></b-form-input>
           </div>
           <br />
@@ -51,7 +51,7 @@
               type="email"
               required
               placeholder="Enter your e-mail"
-              v-model="user_email"
+              v-model="form.user_email"
             ></b-form-input>
           </div>
           <br />
@@ -62,7 +62,7 @@
               type="password"
               required
               placeholder="Create your password"
-              v-model="user_password"
+              v-model="form.user_password"
             ></b-form-input
             ><img src="../../assets/image/eye-crossed.png" alt="" />
           </div>
@@ -74,7 +74,7 @@
               type="password"
               required
               placeholder="Repeate your password"
-              v-model="re_password"
+              v-model="form.confirm_password"
             ></b-form-input
             ><img src="../../assets/image/eye-crossed.png" alt="" />
           </div>
@@ -94,9 +94,40 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Register',
-  components: {}
+  data() {
+    return {
+      form: {
+        user_email: '',
+        user_password: '',
+        user_name: '',
+        user_phone: '',
+        confirm_password: ''
+      }
+    }
+  },
+  computed: {
+    ...mapGetters([])
+  },
+  components: {},
+  methods: {
+    ...mapActions(['register']),
+    onSubmit(variant = null) {
+      this.register(this.form)
+        .then(response => {
+          this.$router.push('/login')
+        })
+        .catch(error => {
+          this.$bvToast.toast(error.data.msg, {
+            title: 'Warning',
+            variant: variant,
+            solid: true
+          })
+        })
+    }
+  }
 }
 </script>
 

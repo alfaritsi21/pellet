@@ -22,7 +22,7 @@
           wherever you are. Desktop, laptop, mobile phone? we cover all of that
           for you!
         </p>
-        <b-form @submit.prevent="onSubmit">
+        <b-form @submit.prevent="onSubmit('danger')">
           <div class="email">
             <img src="../../assets/image/mail.png" alt="" />
             <b-form-input
@@ -30,7 +30,7 @@
               type="email"
               required
               placeholder="Enter your email"
-              v-model="user_email"
+              v-model="form.user_email"
             ></b-form-input>
           </div>
           <br />
@@ -41,7 +41,7 @@
               type="password"
               required
               placeholder="Enter your password"
-              v-model="user_password"
+              v-model="form.user_password"
             ></b-form-input
             ><img src="../../assets/image/eye-crossed.png" alt="" />
           </div>
@@ -49,7 +49,7 @@
             <router-link to="/forgot">Forgot password?</router-link>
           </div>
           <br />
-          <b-button type="submit" variant="primary">Login</b-button>
+          <b-button type="submit" variant="danger" class="mb-2">Login</b-button>
           <br />
           <div class="p4">
             <p>
@@ -64,9 +64,40 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Login',
-  components: {}
+  data() {
+    return {
+      form: {
+        user_email: '',
+        user_password: ''
+      }
+    }
+  },
+  computed: {
+    ...mapGetters([])
+  },
+  components: {},
+  methods: {
+    ...mapActions(['login']),
+    onSubmit(variant = null) {
+      this.login(this.form)
+        .then(response => {
+          this.$router.push('/')
+          // this.$router.push({
+          //   name: 'Home'
+          // })
+        })
+        .catch(error => {
+          this.$bvToast.toast(error.data.msg, {
+            title: 'Warning',
+            variant: variant,
+            solid: true
+          })
+        })
+    }
+  }
 }
 </script>
 

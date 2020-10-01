@@ -22,7 +22,7 @@
           link to your email and you will be directed to the reset password
           screens.
         </p>
-        <b-form @submit.prevent="onSubmit">
+        <b-form @submit.prevent="onSubmit('danger')">
           <div class="email">
             <img src="../../assets/image/mail.png" alt="" />
             <b-form-input
@@ -30,7 +30,7 @@
               type="email"
               required
               placeholder="Enter your e-mail"
-              v-model="user_email"
+              v-model="form.user_email"
             ></b-form-input>
           </div>
           <br />
@@ -49,9 +49,42 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Forgot',
-  components: {}
+  data() {
+    return {
+      form: {
+        user_email: ''
+      }
+    }
+  },
+  computed: {
+    ...mapGetters([])
+  },
+  components: {},
+  methods: {
+    ...mapActions(['cekEmailForgot']),
+    onSubmit(variant = null) {
+      this.cekEmailForgot(this.form)
+        .then(response => {
+          alert('Email has been sent, please check your email !')
+          this.$router.push('/reset')
+          this.$bvToast.toast(response, {
+            title: 'Success',
+            variant: 'success',
+            solid: true
+          })
+        })
+        .catch(error => {
+          this.$bvToast.toast(error.data.msg, {
+            title: 'Warning',
+            variant: variant,
+            solid: true
+          })
+        })
+    }
+  }
 }
 </script>
 

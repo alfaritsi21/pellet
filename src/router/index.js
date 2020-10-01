@@ -12,39 +12,40 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
     path: '/login',
     name: 'Login',
-    component: Login
-    // meta: { requiresVisitor: true }
+    component: Login,
+    meta: { requiresVisitor: true }
   },
   {
     path: '/register',
     name: 'Register',
-    component: Register
-    // meta: { requiresVisitor: true }
+    component: Register,
+    meta: { requiresVisitor: true }
   },
   {
     path: '/forgot',
     name: 'Forgot',
-    component: Forgot
-    // meta: { requiresVisitor: true }
+    component: Forgot,
+    meta: { requiresVisitor: true }
   },
   {
     path: '/pin',
     name: 'Pin',
-    component: Pin
-    // meta: { requiresVisitor: true }
+    component: Pin,
+    meta: { requiresVisitor: true }
   },
   {
     path: '/reset',
     name: 'Reset',
-    component: Reset
-    // meta: { requiresVisitor: true }
+    component: Reset,
+    meta: { requiresVisitor: true }
+  },
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    meta: { requiresAuth: true }
   }
 ]
 
@@ -66,7 +67,7 @@ router.beforeEach((to, from, next) => {
   } else if (to.matched.some(record => record.meta.requiresVisitor)) {
     if (store.getters.isLogin) {
       next({
-        path: '/home'
+        path: '/'
       })
     } else {
       next()

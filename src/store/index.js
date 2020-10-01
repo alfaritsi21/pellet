@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import menu from './modules/menu'
+import Auth from './modules/Auth'
 import transfer from './modules/transfer'
 
 import createPersistedState from 'vuex-persistedstate'
@@ -13,12 +14,13 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     menu,
-    transfer
+    transfer,
+    Auth
   },
   getters: {},
   plugins: [
     createPersistedState({
-      paths: ['Auth.user', 'Auth.urlApi'],
+      paths: ['Auth.user', 'Auth.isLogin'],
       storage: window.sessionStorage
     })
   ]

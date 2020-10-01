@@ -21,7 +21,7 @@
           Now you can create a new password for your Zwallet account. Type your
           password twice so we can confirm your new passsword.
         </p>
-        <b-form @submit.prevent="onSubmit">
+        <b-form @submit.prevent="onSubmit('danger')">
           <div class="password">
             <img src="../../assets/image/lock.png" alt="" />
             <b-form-input
@@ -29,7 +29,7 @@
               type="password"
               required
               placeholder="Create new password"
-              v-model="user_password"
+              v-model="form.user_password"
             ></b-form-input
             ><img src="../../assets/image/eye-crossed.png" alt="" />
           </div>
@@ -40,7 +40,7 @@
               type="password"
               required
               placeholder="Repeate new password"
-              v-model="re_password"
+              v-model="form.confirm_password"
             ></b-form-input
             ><img src="../../assets/image/eye-crossed.png" alt="" />
           </div>
@@ -54,9 +54,43 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Reset',
-  components: {}
+  data() {
+    return {
+      form: {
+        user_email: '',
+        confirm_password: ''
+      }
+    }
+  },
+  computed: {
+    ...mapGetters([])
+  },
+  components: {},
+  methods: {
+    ...mapActions(['createNewPassword']),
+    onSubmit(variant = null) {
+      this.createNewPassword(this.form)
+        .then(response => {
+          this.$bvToast.toast(response, {
+            title: 'Success',
+            variant: 'success',
+            solid: true
+          })
+          alert('New Password has been created')
+          this.$router.push('/login')
+        })
+        .catch(error => {
+          this.$bvToast.toast(error.data.msg, {
+            title: 'Warning',
+            variant: variant,
+            solid: true
+          })
+        })
+    }
+  }
 }
 </script>
 

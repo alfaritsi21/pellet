@@ -82,7 +82,9 @@
                     icon="box-arrow-right"
                   ></b-icon>
                 </b-col>
-                <b-col class="side-menu" cols="6">Logout</b-col>
+                <b-col class="side-menu" cols="6" @click="onLogout"
+                  >Logout</b-col
+                >
               </b-row>
             </b-col>
           </b-row></b-col
@@ -130,7 +132,7 @@ import Profile from '../components/_modules/Profile'
 import Topup from '../components/_modules/Topup'
 import Transfer from '../components/_modules/Transfer'
 
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -154,7 +156,11 @@ export default {
       'setShowTransfer',
       'setShowTopup',
       'setShowProfile'
-    ])
+    ]),
+    ...mapActions(['logout']),
+    onLogout() {
+      this.logout()
+    }
   }
 }
 </script>
