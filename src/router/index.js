@@ -7,6 +7,7 @@ import Forgot from '../views/Auth/forgot.vue'
 import Reset from '../views/Auth/reset.vue'
 import Pin from '../views/Auth/pin.vue'
 import Home from '../views/Home.vue'
+import Landing from '../views/Landing.vue'
 
 Vue.use(VueRouter)
 
@@ -46,6 +47,11 @@ const routes = [
     name: 'Home',
     component: Home,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/landing',
+    name: 'Landing',
+    component: Landing
   }
 ]
 
