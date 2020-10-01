@@ -17,8 +17,8 @@
   background-size: cover;
   text-align: center;
 }
-.form {
-  padding-top: 80px;
+.formRegist {
+  padding-top: 20px;
   padding-left: 60px !important;
   position: relative;
   height: 100%;
@@ -57,7 +57,7 @@
   padding-bottom: 0;
 }
 
-.form h4 {
+.formRegist h4 {
   font-size: 22px;
   font-weight: bold;
   width: 70%;
@@ -66,12 +66,12 @@
   max-height: 200px;
   overflow: auto;
 }
-.form p {
+.formRegist p {
   font-size: 14px;
   width: 70%;
   color: #3a3d4296;
   line-height: 30px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   max-height: 200px;
   overflow: auto;
 }
@@ -83,7 +83,7 @@
   flex: wrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .username img {
   position: absolute;
@@ -94,7 +94,7 @@
   padding-left: 40px;
   border: 1px solid rgba(0, 0, 0, 0);
 }
-.username {
+.email {
   position: relative;
   border-bottom: 1.5px solid#3a3d426b;
   width: 75%;
@@ -102,7 +102,7 @@
   flex: wrap;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .email img {
   position: absolute;
@@ -110,6 +110,26 @@
   left: 2px;
 }
 .email input {
+  padding-left: 40px;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.phone {
+  position: relative;
+  border-bottom: 1.5px solid#3a3d426b;
+  width: 75%;
+  display: flex;
+  flex: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.phone img {
+  position: absolute;
+  top: 5.5px;
+  left: 2px;
+}
+.phone input {
   padding-left: 40px;
   border: 1px solid rgba(0, 0, 0, 0);
 }
@@ -140,18 +160,8 @@
   right: 0px;
   cursor: pointer;
 }
-.forgot {
-  font-size: 13px;
-  text-align: right;
-  width: 75%;
-  margin-bottom: 20px;
-}
-
-.forgot a {
-  color: #3a3d42c4;
-}
-.form button {
-  margin-top: 40px;
+.formRegist button {
+  margin-top: 20px;
   width: 75%;
   font-size: 16px;
   background-color: #dadada;
@@ -161,7 +171,7 @@
   height: 50px;
   margin-bottom: 40px;
 }
-.form button:hover {
+.formRegist button:hover {
   margin-top: 40px;
   width: 75%;
   font-size: 16px;
@@ -182,10 +192,14 @@
 }
 
 @media (max-width: 1368px) {
-  .form {
-    padding-top: 50px;
+  .formRegist {
+    padding-top: 20px;
     position: relative;
     height: 100%;
+  }
+  .formRegist button {
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
   .cover img:nth-of-type(1) {
     width: 450px;
@@ -204,10 +218,26 @@
   }
 }
 @media (max-width: 1068px) {
-  .form {
-    padding-top: 10px;
+  .formRegist {
+    padding-top: 5px;
     position: relative;
     height: 100%;
+  }
+  .formRegist button {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  .password {
+    margin-bottom: 10px;
+  }
+  .username {
+    margin-bottom: 10px;
+  }
+  .email {
+    margin-bottom: 10px;
+  }
+  .phone {
+    margin-bottom: 10px;
   }
 }
 @media (max-width: 576px) {

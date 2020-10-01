@@ -12,7 +12,7 @@
           coverage.
         </p>
       </b-col>
-      <b-col cols="12" sm="12" md="12" lg="6" xl="6" class="form">
+      <b-col cols="12" sm="12" md="12" lg="6" xl="6" class="formRegist">
         <h4>
           Start Accessing Banking Needs With All Devices and All Platforms With
           30.000+ Users
@@ -30,6 +30,17 @@
               required
               placeholder="Enter your username"
               v-model="user_name"
+            ></b-form-input>
+          </div>
+          <br />
+          <div class="phone">
+            <img src="../../assets/image/person.png" alt="" />
+            <b-form-input
+              id="input-4"
+              type="number"
+              required
+              placeholder="Enter your phone number"
+              v-model="user_phone"
             ></b-form-input>
           </div>
           <br />
@@ -52,6 +63,18 @@
               required
               placeholder="Create your password"
               v-model="user_password"
+            ></b-form-input
+            ><img src="../../assets/image/eye-crossed.png" alt="" />
+          </div>
+          <br />
+          <div class="password">
+            <img src="../../assets/image/lock.png" alt="" />
+            <b-form-input
+              id="input-5"
+              type="password"
+              required
+              placeholder="Repeate your password"
+              v-model="re_password"
             ></b-form-input
             ><img src="../../assets/image/eye-crossed.png" alt="" />
           </div>
