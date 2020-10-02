@@ -4,6 +4,7 @@ import menu from './modules/menu'
 import Auth from './modules/Auth'
 import transfer from './modules/transfer'
 import PersonalInfo from './modules/personal-info'
+import Topup from './modules/topup'
 
 import createPersistedState from 'vuex-persistedstate'
 
@@ -17,7 +18,8 @@ export default new Vuex.Store({
     menu,
     transfer,
     Auth,
-    PersonalInfo
+    PersonalInfo,
+    Topup
   },
   getters: {},
   plugins: [

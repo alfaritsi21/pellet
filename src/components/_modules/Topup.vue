@@ -39,7 +39,45 @@
         </h6>
       </div>
     </div>
-    <a href="#" @click="topupNow">Top up now</a>
+    <a href="#" @click="topupNow(1)">Top up</a>
+    <div v-if="isTopUp === true" class="topUp-modal">
+      <div class="sub-topUp-Modal">
+        <h5 @click="topupNow(2)">X</h5>
+        <div class="inputAmount">
+          <input type="number" placeholder="0.00" v-model="nominal" />
+        </div>
+        <p>Type the amount you want to top up and then press top up now.</p>
+        <div class="btna">
+          <button @click="onTopUp(1)" type="button">Top Up Now</button>
+        </div>
+        <div v-if="validation === true" class="pinCheck">
+          <h4>Please input your pin number</h4>
+          <div class="rowPin2">
+            <div class="sub-rowPin2">
+              <input v-model="pin[0]" maxlength="1" type="text" />
+            </div>
+            <div class="sub-rowPin2">
+              <input v-model="pin[1]" maxlength="1" type="text" />
+            </div>
+            <div class="sub-rowPin2">
+              <input v-model="pin[2]" maxlength="1" type="text" />
+            </div>
+            <div class="sub-rowPin2">
+              <input v-model="pin[3]" maxlength="1" type="text" />
+            </div>
+            <div class="sub-rowPin2">
+              <input v-model="pin[4]" maxlength="1" type="text" />
+            </div>
+            <div class="sub-rowPin2">
+              <input v-model="pin[5]" maxlength="1" type="text" />
+            </div>
+          </div>
+          <div class="btna">
+            <button @click="onTopUp(2)" type="button">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -48,16 +86,77 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Transfer',
   data() {
-    return {}
+    return {
+      pin: [],
+      validation: false,
+      nominal: '',
+      isTopUp: false
+    }
   },
   components: {},
   computed: {
-    ...mapGetters([])
+    ...mapGetters(['userData'])
   },
   methods: {
-    ...mapActions([]),
-    topupNow() {
-      console.log('aaa')
+    ...mapActions(['topup', 'cekPin']),
+    onTopUp(val) {
+      if (val === 1) {
+        this.validation = true
+      } else {
+        const pin = this.pin.join('')
+        this.cekPin(this.userData.user_id)
+          .then(result => {
+            if (result === Number(pin)) {
+              this.topup([pin, this.nominal, this.userData])
+                .then(response => {
+                  this.$bvToast.toast(response.msg, {
+                    title: 'Success',
+                    variant: 'success',
+                    solid: true
+                  })
+                  this.nominal = ''
+                  this.pin = []
+                  this.validation = false
+                })
+                .catch(error => {
+                  this.$bvToast.toast(error.data.msg + ' please try again', {
+                    title: 'Warning',
+                    variant: 'danger',
+                    solid: true
+                  })
+                  this.nominal = ''
+                  this.pin = []
+                  this.validation = false
+                })
+            } else {
+              this.$bvToast.toast('Invalid pin, please try again', {
+                title: 'Warning',
+                variant: 'danger',
+                solid: true
+              })
+              this.nominal = ''
+              this.pin = []
+              this.validation = false
+            }
+          })
+          .catch(err => {
+            this.$bvToast.toast(err.data.msg, {
+              title: 'Warning',
+              variant: 'danger',
+              solid: true
+            })
+            this.nominal = ''
+            this.pin = []
+            this.validation = false
+          })
+      }
+    },
+    topupNow(val) {
+      if (val === 1) {
+        this.isTopUp = true
+      } else {
+        this.isTopUp = false
+      }
     }
   }
 }

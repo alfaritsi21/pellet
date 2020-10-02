@@ -147,6 +147,9 @@ export default {
   getters: {
     isLogin(state) {
       return state.token !== null
+    },
+    userData(state) {
+      return state.user
     }
   }
 }
