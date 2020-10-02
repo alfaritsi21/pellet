@@ -39,7 +39,7 @@
         </h6>
       </div>
     </div>
-    <a href="#">Top up now</a>
+    <a href="#" @click="topupNow">Top up now</a>
   </div>
 </template>
 
@@ -55,7 +55,10 @@ export default {
     ...mapGetters([])
   },
   methods: {
-    ...mapActions([])
+    ...mapActions([]),
+    topupNow() {
+      console.log('aaa')
+    }
   }
 }
 </script>
