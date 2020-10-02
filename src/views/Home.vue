@@ -295,7 +295,7 @@ export default {
   border-radius: 15px;
   height: 490px;
   overflow-y: scroll;
-  padding: 20px;
+  padding: 10px 10px 0px 10px;
 }
 
 .main-content::-webkit-scrollbar {

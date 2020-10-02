@@ -11,12 +11,13 @@
       </div>
     </div>
     <div v-if="isSelect === false" class="receiver">
-      <div v-for="(item, index) in 15" :key="index" class="receiver-user">
-        <img
-          @click="selectReceiver(item)"
-          src="../../assets/image/propict.png"
-          alt=""
-        />
+      <div
+        v-for="(item, index) in 15"
+        @click="selectReceiver(item)"
+        :key="index"
+        class="receiver-user"
+      >
+        <img src="../../assets/image/propict.png" alt="" />
         <h6>Momo Taro</h6>
         <p>+62 812-4343-6731</p>
       </div>

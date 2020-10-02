@@ -15,31 +15,39 @@
         >
         <b-row
           ><b-col
-            ><h5>Robert Downey Jr</h5>
-            <p>+62 813-9387-7946</p></b-col
+            ><h5 class="name-text">Robert Downey Jr</h5>
+            <p class="name-phone">+62 813-9387-7946</p></b-col
           ></b-row
         >
         <b-container fluid class="card" @click="setShowPersonalInfo"
           ><b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7"><h6>Personal Information</h6> </b-col>
+            <b-col class="p-4" md="7"
+              ><h6 class="name-text-button">Personal Information</h6>
+            </b-col>
             <b-col md="3"><b-icon icon="arrow-right"></b-icon></b-col> </b-row
         ></b-container>
 
         <b-container fluid class="card" @click="setShowChangePassword"
           ><b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7"><h6>Change Password</h6> </b-col>
+            <b-col class="p-4" md="7"
+              ><h6 class="name-text-button">Change Password</h6>
+            </b-col>
             <b-col md="3"><b-icon icon="arrow-right"></b-icon></b-col> </b-row
         ></b-container>
 
         <b-container fluid class="card" @click="setShowChangePin"
           ><b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7"><h6>Change PIN</h6> </b-col>
+            <b-col class="p-4" md="7"
+              ><h6 class="name-text-button">Change PIN</h6>
+            </b-col>
             <b-col md="3"><b-icon icon="arrow-right"></b-icon></b-col> </b-row
         ></b-container>
 
         <b-container fluid class="card"
           ><b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7"><h6>Logout</h6> </b-col>
+            <b-col class="p-4" md="7"
+              ><h6 class="name-text-button">Logout</h6>
+            </b-col>
             <b-col md="3"><b-icon icon="arrow-right"></b-icon></b-col> </b-row
         ></b-container> </b-col
     ></b-row>
@@ -89,7 +97,7 @@ export default {
   height: 70px;
   background-blend-mode: normal;
   border-radius: 10px;
-  margin-top: 15px;
+  margin-top: 0;
 }
 
 .card {
@@ -99,5 +107,39 @@ export default {
   background-color: rgba(229, 232, 237, 1);
   margin-bottom: 5px;
   border-radius: 10px;
+}
+
+.name-text {
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  /* identical to box height, or 133% */
+
+  text-align: center;
+
+  color: #4d4b57;
+}
+
+.name-text-button {
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  /* identical to box height, or 175% */
+
+  color: #4d4b57;
+}
+
+.name-phone {
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  /* identical to box height, or 169% */
+
+  text-align: center;
+
+  color: #7a7886;
 }
 </style>
