@@ -16,6 +16,7 @@ export default {
     },
     setLoginData(state, payload) {
       state.user = payload
+      state.token = payload.token
       state.isLogin = true
     },
     setKeys(state, payload) {
