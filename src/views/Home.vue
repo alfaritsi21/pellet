@@ -1,9 +1,11 @@
 <template>
-  <b-container fluid>
+  <b-container fluid class="main-page">
     <!-- =====================NAVBAR============================= -->
     <b-container fluid class="navbar-container">
       <b-row align-h="around">
-        <b-col md="4"><p class="navbar-logo">Pellet</p></b-col>
+        <b-col md="4"
+          ><p class="navbar-logo" @click="setShowDashboard">Pellet</p></b-col
+        >
         <b-col md="3" class="navbar-profile">
           <img
             src="https://media1.popsugar-assets.com/files/thumbor/HwtAUAufmAZv-FgGEIMJS2eQM-A/0x1:2771x2772/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2020/03/30/878/n/1922398/eb11f12e5e825104ca01c1.02079643_/i/Robert-Downey-Jr.jpg"
@@ -25,9 +27,9 @@
           ><b-row align-h="between">
             <b-col cols="12" class="side-content" @click="setShowDashboard">
               <b-row>
-                <b-col cols="1" class="side-indicator"
+                <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                >
+                > -->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="grid"></b-icon>
                 </b-col>
@@ -36,9 +38,9 @@
             </b-col>
             <b-col cols="12" class="side-content" @click="setShowTransfer">
               <b-row>
-                <b-col cols="1" class="side-indicator"
+                <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                >
+                > -->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="arrow-up"></b-icon>
                 </b-col>
@@ -47,9 +49,9 @@
             </b-col>
             <b-col cols="12" class="side-content" @click="setShowTopup">
               <b-row>
-                <b-col cols="1" class="side-indicator"
+                <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                >
+                > -->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="plus"></b-icon>
                 </b-col>
@@ -62,9 +64,9 @@
               @click="setShowProfile"
             >
               <b-row>
-                <b-col cols="1" class="side-indicator"
+                <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                >
+                > -->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="person"></b-icon>
                 </b-col>
@@ -73,9 +75,9 @@
             </b-col>
             <b-col cols="12" class="side-logout">
               <b-row>
-                <b-col cols="1" class="side-indicator"
+                <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                >
+                > -->
                 <b-col cols="3">
                   <b-icon
                     class="side-notification"
@@ -87,18 +89,24 @@
             </b-col>
           </b-row></b-col
         >
-        <b-col class="main-content" cols="7">
-          <div class="dashboard-container" v-show="showDashboard">
+        <b-col cols="7">
+          <div class="main-content-dashboard" v-show="showDashboard">
             <Dashboard />
           </div>
-          <div class="dashboard-container" v-show="showTransfer">
+          <div class="dashboard-container main-content" v-show="showTransfer">
             <Transfer />
           </div>
-          <div class="dashboard-container" v-show="showTopup">
+          <div class="dashboard-container main-content" v-show="showTopup">
             <Topup />
           </div>
-          <div class="dashboard-container" v-show="showProfile">
+          <div class="dashboard-container main-content" v-show="showProfile">
             <Profile />
+          </div>
+          <div
+            class="dashboard-container main-content"
+            v-show="showTransaction"
+          >
+            <Transaction />
           </div>
         </b-col>
       </b-row>
@@ -129,6 +137,7 @@ import Dashboard from '../components/_modules/Dashboard'
 import Profile from '../components/_modules/Profile'
 import Topup from '../components/_modules/Topup'
 import Transfer from '../components/_modules/Transfer'
+import Transaction from '../components/_modules/Transaction'
 
 import { mapGetters, mapMutations } from 'vuex'
 
@@ -138,14 +147,16 @@ export default {
     Dashboard,
     Profile,
     Topup,
-    Transfer
+    Transfer,
+    Transaction
   },
   computed: {
     ...mapGetters({
       showDashboard: 'getshowDashboard',
       showTransfer: 'getShowTransfer',
       showTopup: 'getshowTopup',
-      showProfile: 'getshowProfile'
+      showProfile: 'getshowProfile',
+      showTransaction: 'getshowTransaction'
     })
   },
   methods: {
@@ -160,6 +171,10 @@ export default {
 </script>
 
 <style scoped>
+.main-page {
+  background-color: rgba(99, 121, 244, 0.2);
+}
+
 .container-fluid {
   padding: 0;
   margin: 0;
@@ -192,6 +207,10 @@ export default {
   padding: 15px 0;
 
   color: #6379f4;
+}
+
+.navbar-logo:hover {
+  cursor: pointer;
 }
 
 .navbar-profile {
@@ -276,6 +295,11 @@ export default {
   border-radius: 10px;
 }
 
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
 .side-content:hover {
   cursor: pointer;
   background-color: whitesmoke;
@@ -287,7 +311,7 @@ export default {
 
 .side-indicator {
   width: 5px;
-  /* background: #6379f4; */
+  background: #6379f4;
   text-align: left;
 }
 
@@ -317,6 +341,7 @@ export default {
   font-size: 15px;
   line-height: 31px;
   text-align: left;
+  margin-bottom: 15px;
 
   /* color: #6379f4; */
 }
@@ -338,5 +363,16 @@ export default {
   /* identical to box height, or 175% */
 
   color: rgba(239, 239, 239, 0.9);
+}
+
+.dashboard-container-primary {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.main-content-dashboard {
+  margin-left: 30px;
+  background: transparent;
+  height: 490px;
 }
 </style>
