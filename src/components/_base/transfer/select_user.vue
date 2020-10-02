@@ -113,7 +113,7 @@
       </div>
     </div>
     <div v-if="isPin === true" class="pinConfirmation">
-      <div class="pinInput">
+      <div class="pinInput22">
         <img @click="onExit" src="../../../assets/image/x.png" alt="" />
         <button @click="pinContinue" type="button">Continue</button>
         <div class="rowPin">

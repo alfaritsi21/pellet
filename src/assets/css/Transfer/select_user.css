@@ -184,29 +184,30 @@
   align-items: center;
 }
 
-.pinInput {
+.pinInput22 {
   position: relative;
   width: 450px;
   background-color: white;
+  border: 1px solid black;
   border-radius: 25px;
   height: 370px;
   padding: 30px;
   display: flex;
   align-items: center;
 }
-.pinInput img {
+.pinInput22 img {
   position: absolute;
   top: 25px;
   right: 30px;
   cursor: pointer;
 }
-.pinInput img:hover {
+.pinInput22 img:hover {
   width: 23px;
   height: 23px;
   right: 33;
   top: 27px;
 }
-.pinInput h4 {
+.pinInput22 h4 {
   padding-bottom: 0;
   position: absolute;
   top: 25px;
@@ -215,7 +216,7 @@
   font-size: 16px;
 }
 
-.pinInput p {
+.pinInput22 p {
   padding-bottom: 0;
   position: absolute;
   top: 60px;
@@ -225,7 +226,7 @@
   width: 300px;
   line-height: 25px;
 }
-.pinInput button {
+.pinInput22 button {
   z-index: 1;
   padding-bottom: 0;
   position: absolute;
@@ -256,6 +257,7 @@
   border-radius: 10px;
 }
 .sub-rowPin input {
+  width: 100%;
   text-align: center;
   font-size: 28px;
   font-weight: bold;
