@@ -34,7 +34,7 @@ const routes = [
     path: '/pin',
     name: 'Pin',
     component: Pin,
-    meta: { requiresVisitor: true }
+    meta: { requiresAuth: true }
   },
   {
     path: '/reset',

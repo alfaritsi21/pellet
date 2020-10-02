@@ -106,6 +106,25 @@ export default {
           })
       })
     },
+    newPin(context, payload) {
+      const form = {
+        pin: payload[0]
+      }
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`${context.state.urlApi}user/${payload[1]}`, form)
+          .then(response => {
+            resolve(response.data.msg)
+          })
+          .catch(error => {
+            if (error.response === undefined) {
+              alert('Tidak dapat terhubung ke server')
+            } else {
+              reject(error.response)
+            }
+          })
+      })
+    },
     interceptorRequest(context) {
       axios.interceptors.request.use(
         function(config) {

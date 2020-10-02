@@ -129,7 +129,7 @@ export default {
                   this.validation = false
                 })
             } else {
-              this.$bvToast.toast('Invalid pin, please try again', {
+              this.$bvToast.toast('Invalid pin number, please try again', {
                 title: 'Warning',
                 variant: 'danger',
                 solid: true

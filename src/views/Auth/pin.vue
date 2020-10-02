@@ -2,14 +2,13 @@
   <b-container fluid class="conta">
     <b-row class="pin">
       <b-col cols="12" sm="12" md="12" lg="6" xl="6" class="cover">
-        <h1>Pellete</h1>
+        <h1>Pellet</h1>
         <img src="../../assets/image/Group57.png" alt="" />
         <h5>App that Covering Banking Needs.</h5>
         <p>
-          Pellete is an application that focussing in banking needs for all
-          users in the world. Always updated and always following world trends.
-          5000+ users registered in Zwallet everyday with worldwide users
-          coverage.
+          Pellet is an application that focussing in banking needs for all users
+          in the world. Always updated and always following world trends. 5000+
+          users registered in Zwallet everyday with worldwide users coverage.
         </p>
       </b-col>
       <b-col cols="12" sm="12" md="12" lg="6" xl="6" class="form">
@@ -37,23 +36,25 @@
         </p>
         <b-form @submit.prevent="onSubmit">
           <div v-if="isSuccess === false" class="pinInput">
-            <div class="satu">
-              <input type="number" />
-            </div>
-            <div class="dua">
-              <input type="number" />
-            </div>
-            <div class="tiga">
-              <input type="number" />
-            </div>
-            <div class="empat">
-              <input type="number" />
-            </div>
-            <div class="lima">
-              <input type="number" />
-            </div>
-            <div class="enam">
-              <input type="number" />
+            <div class="rowPin3">
+              <div class="sub-rowPin3">
+                <input v-model="pin[0]" maxlength="1" type="text" />
+              </div>
+              <div class="sub-rowPin3">
+                <input v-model="pin[1]" maxlength="1" type="text" />
+              </div>
+              <div class="sub-rowPin3">
+                <input v-model="pin[2]" maxlength="1" type="text" />
+              </div>
+              <div class="sub-rowPin3">
+                <input v-model="pin[3]" maxlength="1" type="text" />
+              </div>
+              <div class="sub-rowPin3">
+                <input v-model="pin[4]" maxlength="1" type="text" />
+              </div>
+              <div class="sub-rowPin3">
+                <input v-model="pin[5]" maxlength="1" type="text" />
+              </div>
             </div>
           </div>
           <br />
@@ -65,7 +66,7 @@
             v-if="isSuccess === true"
             type="button"
             variant="primary"
-            >Login now</b-button
+            >Got to home</b-button
           >
         </b-form>
       </b-col>
@@ -74,17 +75,42 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Forgot',
   data() {
     return {
+      pin: [],
       isSuccess: false
     }
   },
+  computed: {
+    ...mapGetters(['userData'])
+  },
   components: {},
   methods: {
+    ...mapActions(['newPin']),
+    onSubmit() {
+      const pin = this.pin.join('')
+      this.newPin([pin, this.userData.user_id])
+        .then(response => {
+          this.$bvToast.toast(response, {
+            title: 'Success',
+            variant: 'success',
+            solid: true
+          })
+          this.isSuccess = true
+        })
+        .catch(error => {
+          this.$bvToast.toast(error.data.msg, {
+            title: 'Warning',
+            variant: 'danger',
+            solid: true
+          })
+        })
+    },
     onLogin() {
-      this.$router.push('/login')
+      this.$router.push('/')
     }
   }
 }

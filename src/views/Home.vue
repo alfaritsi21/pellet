@@ -152,13 +152,17 @@ export default {
     Transfer,
     Transaction
   },
+  created() {
+    this.cekDataUser()
+  },
   computed: {
     ...mapGetters({
       showDashboard: 'getshowDashboard',
       showTransfer: 'getShowTransfer',
       showTopup: 'getshowTopup',
       showProfile: 'getshowProfile',
-      showTransaction: 'getshowTransaction'
+      showTransaction: 'getshowTransaction',
+      userData: 'userData'
     })
   },
   methods: {
@@ -169,7 +173,32 @@ export default {
       'setShowProfile',
       'setShowMainProfile'
     ]),
-    ...mapActions(['logout']),
+    ...mapActions(['logout', 'cekPin']),
+    cekDataUser() {
+      this.cekPin(this.userData.user_id)
+        .then(response => {
+          if (response === 0) {
+            this.$bvToast.toast(
+              'Please create new pin to secure your account',
+              {
+                title: 'Warning',
+                variant: 'danger',
+                solid: true
+              }
+            )
+            setTimeout(() => {
+              this.$router.push('/pin')
+            }, 2000)
+          }
+        })
+        .catch(error => {
+          this.$bvToast.toast(error.data.msg, {
+            title: 'Warning',
+            variant: 'danger',
+            solid: true
+          })
+        })
+    },
     onLogout() {
       this.logout()
     },
