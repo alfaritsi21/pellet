@@ -189,7 +189,7 @@ export default {
 }
 
 .navbar-logo {
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: bold;
   font-size: 29px;
@@ -221,7 +221,7 @@ export default {
   margin-bottom: 0;
   margin-left: 5px;
   margin-right: 5px;
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
@@ -234,7 +234,7 @@ export default {
 }
 
 .navbar-phone {
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 13px;
@@ -317,7 +317,7 @@ export default {
 }
 
 .side-menu {
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
@@ -336,7 +336,7 @@ export default {
 
 .footer-text {
   margin-top: 5px;
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 16px;

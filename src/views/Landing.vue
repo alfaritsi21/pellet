@@ -1,5 +1,5 @@
 <template>
-  <b-container-fluid class="container">
+  <b-container fluid class="container">
     <!-- <div class="navbar">zwalet</div> -->
     <b-jumbotron class="jumbotron p-0 m-0">
       <b-row class="m-0">
@@ -200,7 +200,7 @@
         </b-col></b-row
       >
     </div>
-  </b-container-fluid>
+  </b-container>
 </template>
 
 <script>

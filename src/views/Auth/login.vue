@@ -83,13 +83,10 @@ export default {
     ...mapActions(['login']),
     onSubmit(variant = null) {
       this.login(this.form)
-        .then(response => {
+        .then((response) => {
           this.$router.push('/')
-          // this.$router.push({
-          //   name: 'Home'
-          // })
         })
-        .catch(error => {
+        .catch((error) => {
           this.$bvToast.toast(error.data.msg, {
             title: 'Warning',
             variant: variant,

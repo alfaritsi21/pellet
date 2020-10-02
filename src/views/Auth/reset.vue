@@ -72,22 +72,38 @@ export default {
   methods: {
     ...mapActions(['createNewPassword']),
     onSubmit(variant = null) {
-      this.createNewPassword(this.form)
-        .then(response => {
+      const keys = this.$route.query.keys
+      this.createNewPassword([this.form, keys])
+        .then((response) => {
           this.$bvToast.toast(response, {
             title: 'Success',
             variant: 'success',
             solid: true
           })
-          alert('New Password has been created')
-          this.$router.push('/login')
+          setTimeout(() => {
+            this.$router.push('/login')
+          }, 2000)
         })
-        .catch(error => {
-          this.$bvToast.toast(error.data.msg, {
-            title: 'Warning',
-            variant: variant,
-            solid: true
-          })
+        .catch((error) => {
+          if (
+            error.data.msg === 'Key has expired' ||
+            error.data.msg === 'Invalid key'
+          ) {
+            this.$bvToast.toast(error.data.msg, {
+              title: 'Warning',
+              variant: variant,
+              solid: true
+            })
+            setTimeout(() => {
+              this.$router.push('/forgot')
+            }, 1000)
+          } else {
+            this.$bvToast.toast(error.data.msg, {
+              title: 'Warning',
+              variant: variant,
+              solid: true
+            })
+          }
         })
     }
   }

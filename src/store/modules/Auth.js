@@ -61,9 +61,9 @@ export default {
     logout(context, payload) {
       alert("You'll be redirect to login page")
       if (context.state.isLogin === true) {
-        router.push('/login')
         localStorage.removeItem('token')
         context.commit('delUser')
+        router.push('/login')
       } else {
         return null
       }
@@ -90,8 +90,8 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `${context.state.urlApi}user/change/?keys=${context.state.keys}`,
-            payload
+            `${context.state.urlApi}user/change/?keys=${payload[1]}`,
+            payload[0]
           )
           .then(response => {
             resolve(response.data.msg)

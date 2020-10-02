@@ -51,7 +51,8 @@ const routes = [
   {
     path: '/landing',
     name: 'Landing',
-    component: Landing
+    component: Landing,
+    meta: { requiresVisitor: true }
   }
 ]
 
@@ -65,7 +66,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.isLogin) {
       next({
-        path: '/login'
+        path: '/landing'
       })
     } else {
       next()

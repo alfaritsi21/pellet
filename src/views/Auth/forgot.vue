@@ -67,16 +67,14 @@ export default {
     ...mapActions(['cekEmailForgot']),
     onSubmit(variant = null) {
       this.cekEmailForgot(this.form)
-        .then(response => {
-          alert('Email has been sent, please check your email !')
-          this.$router.push('/reset')
+        .then((response) => {
           this.$bvToast.toast(response, {
             title: 'Success',
             variant: 'success',
             solid: true
           })
         })
-        .catch(error => {
+        .catch((error) => {
           this.$bvToast.toast(error.data.msg, {
             title: 'Warning',
             variant: variant,
