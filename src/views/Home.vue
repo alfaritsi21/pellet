@@ -61,7 +61,7 @@
             <b-col
               cols="12"
               class="side-content side-profile"
-              @click="setShowProfile"
+              @click="showProfiles"
             >
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
@@ -84,7 +84,9 @@
                     icon="box-arrow-right"
                   ></b-icon>
                 </b-col>
-                <b-col class="side-menu" cols="6">Logout</b-col>
+                <b-col class="side-menu" cols="6" @click="onLogout"
+                  >Logout</b-col
+                >
               </b-row>
             </b-col>
           </b-row></b-col
@@ -139,7 +141,7 @@ import Topup from '../components/_modules/Topup'
 import Transfer from '../components/_modules/Transfer'
 import Transaction from '../components/_modules/Transaction'
 
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
@@ -164,8 +166,17 @@ export default {
       'setShowDashboard',
       'setShowTransfer',
       'setShowTopup',
-      'setShowProfile'
-    ])
+      'setShowProfile',
+      'setShowMainProfile'
+    ]),
+    ...mapActions(['logout']),
+    onLogout() {
+      this.logout()
+    },
+    showProfiles() {
+      this.setShowProfile()
+      this.setShowMainProfile()
+    }
   }
 }
 </script>
@@ -198,7 +209,7 @@ export default {
 }
 
 .navbar-logo {
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: bold;
   font-size: 29px;
@@ -234,7 +245,7 @@ export default {
   margin-bottom: 0;
   margin-left: 5px;
   margin-right: 5px;
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
@@ -247,7 +258,7 @@ export default {
 }
 
 .navbar-phone {
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 13px;
@@ -335,7 +346,7 @@ export default {
 }
 
 .side-menu {
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
@@ -355,7 +366,7 @@ export default {
 
 .footer-text {
   margin-top: 5px;
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
