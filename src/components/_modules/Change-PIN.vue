@@ -25,16 +25,6 @@
         ></b-row
       >
     </b-form>
-    <!-- <div class="card"></div>
-      <div class="card"></div>
-      <div class="card"></div>
-      <div class="card"></div>
-      <div class="card"></div>
-      <div class="card"></div> -->
-
-    <!-- <b-row align-h="center" class="text-center m-5"
-          ><b-col cols="6">asdasd</b-col></b-row
-        > -->
   </b-container>
 </template>
 
@@ -44,7 +34,7 @@ p {
 }
 
 .containerPin {
-  margin-top: 70px;
+  margin-top: 30px;
 }
 input {
   /* padding: 20px; */
