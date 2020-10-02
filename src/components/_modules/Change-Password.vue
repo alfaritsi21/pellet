@@ -70,6 +70,10 @@ p {
   color: grey;
 }
 
+.p-3 {
+  padding-bottom: 0px !important;
+}
+
 .containerPass {
   margin-top: 30px;
   /* display: flex;

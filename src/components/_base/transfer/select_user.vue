@@ -5,7 +5,10 @@
       @submit.prevent="onContinue"
       class="sub-select-receiver"
     >
-      <h6>Transfer Money</h6>
+      <div class="button">
+        <img @click="onBack(1)" src="../../../assets/image/back.png" alt="" />
+      </div>
+      <h6 class="transfer-money">Transfer Money</h6>
       <div class="transfer-to-receiver">
         <img src="../../../assets/image/propict.png" alt="" />
         <h6>Momo Taro</h6>
@@ -15,20 +18,33 @@
         Type the amount you want to transfer and then press continue to the next
         steps.
       </p>
-      <input class="amount" type="number" placeholder="0.00" />
-      <h6 class="aa">Rp.120.000 Available</h6>
-      <div class="notes">
-        <img src="../../../assets/image/edit-2.png" alt="" />
-        <input type="text" placeholder="Add some notes" />
+      <div class="input-value-container">
+        <input class="amount" type="number" placeholder="0.00" />
+        <h6 class="aa">Rp.120.000 Available</h6>
+        <div class="notes">
+          <img src="../../../assets/image/edit-2.png" alt="" />
+          <input type="text" placeholder="Add some notes" />
+        </div>
       </div>
+
       <div class="button">
         <button class="xx" type="submit">Continue</button>
-        <img @click="onBack(1)" src="../../../assets/image/back.png" alt="" />
       </div>
     </form>
     <div v-if="isContinue === true" class="confirmation">
       <div v-if="isStatus === false">
-        <h6 class="re">Transfer To</h6>
+        <b-row>
+          <b-col cols="1">
+            <img
+              class="back-img"
+              @click="onBack(2)"
+              src="../../../assets/image/back.png"
+              alt=""
+            />
+          </b-col>
+          <b-col cols="2"> <h6 class="re">Transfer To</h6> </b-col>
+        </b-row>
+
         <div class="transfer-to-receiver">
           <img src="../../../assets/image/propict.png" alt="" />
           <h6>Momo Taro</h6>
@@ -51,7 +67,6 @@
           <button @click="onContinue2" class="yy" type="button">
             Continue
           </button>
-          <img @click="onBack(2)" src="../../../assets/image/back.png" alt="" />
         </div>
       </div>
       <div v-if="isStatus === true" class="status">
