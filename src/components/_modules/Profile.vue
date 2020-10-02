@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-row align-h="center" v-show="showMainProfile"
+    <b-row align-h="center" v-if="showMainProfile"
       ><b-col class="main mt-2" cols="6">
         <b-row
           ><b-col
@@ -43,9 +43,9 @@
             <b-col md="3"><b-icon icon="arrow-right"></b-icon></b-col> </b-row
         ></b-container> </b-col
     ></b-row>
-    <b-row v-show="showPersonalInfo"> <PersonalInfo /></b-row>
-    <b-row v-show="showChangePassword"> <ChangePassword /></b-row>
-    <b-row v-show="showChangePin"> <ChangePin /></b-row>
+    <b-row v-if="showPersonalInfo"> <PersonalInfo /></b-row>
+    <b-row v-if="showChangePassword"> <ChangePassword /></b-row>
+    <b-row v-if="showChangePin"> <ChangePin /></b-row>
   </div>
 </template>
 
@@ -79,7 +79,7 @@ export default {
 }
 </script>
 
-<style  scoped>
+<style scoped>
 /* .main {
   background-color: coral;
 } */

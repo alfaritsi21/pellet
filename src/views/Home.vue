@@ -59,7 +59,7 @@
             <b-col
               cols="12"
               class="side-content side-profile"
-              @click="setShowProfile"
+              @click="showProfiles"
             >
               <b-row>
                 <b-col cols="1" class="side-indicator"
@@ -155,11 +155,16 @@ export default {
       'setShowDashboard',
       'setShowTransfer',
       'setShowTopup',
-      'setShowProfile'
+      'setShowProfile',
+      'setShowMainProfile'
     ]),
     ...mapActions(['logout']),
     onLogout() {
       this.logout()
+    },
+    showProfiles() {
+      this.setShowProfile()
+      this.setShowMainProfile()
     }
   }
 }
