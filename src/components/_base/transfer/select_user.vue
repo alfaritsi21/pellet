@@ -118,7 +118,7 @@
         <button @click="pinContinue" type="button">Continue</button>
         <div class="rowPin">
           <div v-for="(item, index) in 6" :key="index" class="sub-rowPin">
-            <input type="text" />
+            <input maxlength="1" type="text" />
           </div>
         </div>
         <p>
