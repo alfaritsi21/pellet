@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import menu from './modules/menu'
+import PersonalInfo from './modules/personal-info'
 
 import createPersistedState from 'vuex-persistedstate'
 
@@ -11,7 +12,8 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    menu
+    menu,
+    PersonalInfo
   },
   getters: {},
   plugins: [
