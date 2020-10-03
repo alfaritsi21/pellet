@@ -4,8 +4,10 @@
     <b-row align-h="between" class="balance-container">
       <b-col md="5" class="balance-detail">
         <p class="balance-text">Balance</p>
-        <p class="balance-nominal">Rp 120.000,00</p>
-        <p class="balance-phone">+62 8712 3575</p>
+        <p class="balance-nominal">Rp {{ getUserData2.user_saldo }},00</p>
+        <p class="balance-phone">
+          +62 {{ getUserData2.user_phone.substring(1) }}
+        </p>
       </b-col>
       <b-col md="4" class="balance-menu">
         <div>
@@ -165,10 +167,21 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Dashboard',
+  data() {
+    return {
+      urlApi: process.env.VUE_APP_URL
+    }
+  },
+  created() {
+    this.cekDataUser()
+  },
+  computed: {
+    ...mapGetters(['userData', 'getUserData2'])
+  },
   components: {},
   methods: {
     ...mapMutations([
@@ -177,7 +190,11 @@ export default {
       'setShowTopup',
       'setShowProfile',
       'setShowTransaction'
-    ])
+    ]),
+    ...mapActions(['cekPin']),
+    cekDataUser() {
+      this.cekPin(this.userData.user_id)
+    }
   }
 }
 </script>

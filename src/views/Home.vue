@@ -8,13 +8,19 @@
         >
         <b-col md="3" class="navbar-profile">
           <img
-            src="https://media1.popsugar-assets.com/files/thumbor/HwtAUAufmAZv-FgGEIMJS2eQM-A/0x1:2771x2772/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2020/03/30/878/n/1922398/eb11f12e5e825104ca01c1.02079643_/i/Robert-Downey-Jr.jpg"
+            :src="`${urlApi}${userData2.user_img}`"
             alt=""
             class="navbar-image"
           />
           <div class="navbar-detail">
-            <p class="navbar-name">Robert Downey Jr</p>
-            <p class="navbar-phone">+62 8712 3575</p>
+            <p class="navbar-name">
+              {{
+                userData2.first_name === ''
+                  ? userData2.user_name
+                  : userData2.first_name + ' ' + userData2.last_name
+              }}
+            </p>
+            <p class="navbar-phone">{{ userData2.user_phone }}</p>
           </div>
           <b-icon class="navbar-notification" icon="bell"></b-icon>
         </b-col>
@@ -145,6 +151,11 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      urlApi: process.env.VUE_APP_URL
+    }
+  },
   components: {
     Dashboard,
     Profile,
@@ -162,7 +173,8 @@ export default {
       showTopup: 'getshowTopup',
       showProfile: 'getshowProfile',
       showTransaction: 'getshowTransaction',
-      userData: 'userData'
+      userData: 'userData',
+      userData2: 'getUserData2'
     })
   },
   methods: {
