@@ -1,9 +1,14 @@
 import axios from 'axios'
 export default {
   state: {
-    urlApi: process.env.VUE_APP_URL
+    urlApi: process.env.VUE_APP_URL,
+    userProfileData: {}
   },
-  mutations: {},
+  mutations: {
+    setDataUser2(state, payload) {
+      state.userProfileData = payload
+    }
+  },
   actions: {
     topup(context, payload) {
       const form = {
@@ -32,6 +37,7 @@ export default {
           .get(`${context.state.urlApi}profile/${payload}`)
           .then(response => {
             resolve(response.data.data[0].user_pin)
+            context.commit('setDataUser2', response.data.data[0])
           })
           .catch(error => {
             if (error.response === undefined) {
@@ -44,8 +50,8 @@ export default {
     }
   },
   getters: {
-    // isLogin(state) {
-    //   return state.token !== null
-    // }
+    getUserData2(state) {
+      return state.userProfileData
+    }
   }
 }
