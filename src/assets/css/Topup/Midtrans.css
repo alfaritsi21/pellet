@@ -1,0 +1,205 @@
+.topup {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.topup .sub-topup-1 {
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+.topup .sub-topup-1 h5:nth-of-type(1) {
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+}
+.topup .sub-topup-2 {
+  width: 100%;
+  overflow: auto;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  bottom: 20px;
+}
+.topup .sub-topup-2 h6 {
+  display: flex;
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #6379f4;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.topup .sub-topup-2 h6 p {
+  font-size: 14px;
+  margin-bottom: 0;
+  padding-left: 20px;
+  font-weight: lighter;
+  color: #7a7886;
+}
+.topup a {
+  position: absolute;
+  bottom: 10px;
+  background-color: #6379f4;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  right: 30px;
+  font-size: 12px;
+}
+
+.topup a:hover {
+  border: 1px solid #6379f4;
+  background-color: white;
+  color: #6379f4;
+  right: 30px;
+  font-size: 12px;
+}
+.topup a:active {
+  border: 2px solid #6379f4;
+  background-color: white;
+  font-weight: bold;
+  color: #6379f4;
+  font-size: 11px;
+}
+.topUp-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  background-color: rgba(92, 91, 91, 0.404);
+}
+.sub-topUp-Modal {
+  position: relative;
+  margin: 0 auto;
+  background-origin: 1px solid black;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  border-radius: 20px;
+  background-color: white;
+}
+.sub-topUp-Modal .inputAmount {
+  border-bottom: 1px solid #7a7886bb;
+  width: 60%;
+  position: relative;
+  margin: 0 auto;
+}
+.sub-topUp-Modal p:nth-of-type(1) {
+  width: 55%;
+  margin-top: 10px;
+  color: #7a7886;
+  font-size: 14px;
+}
+.sub-topUp-Modal input {
+  text-align: center;
+  width: 100%;
+  color: #7a7886bb;
+  font-size: 28px;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+.sub-topUp-Modal input::-webkit-outer-spin-button,
+.sub-topUp-Modal input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.sub-topUp-Modal input:focus {
+  outline: none;
+}
+.sub-topUp-Modal h5 {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  padding: 0 5px;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sub-topUp-Modal .btna,
+.btna {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+}
+.sub-topUp-Modal .btna button,
+.btna button {
+  border: 1px solid rgba(0, 0, 0, 0);
+  background-color: #6379f4;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 20px;
+}
+.sub-topUp-Modal .btna button:active,
+.btna button:active {
+  border: 2px solid #6379f47c;
+  background-color: #dde0f3cb;
+  color: #6379f4;
+  padding: 10px 30px;
+  outline: none;
+}
+
+.sub-topUp-Modal .pinCheck {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+}
+.sub-topUp-Modal .pinCheck h4 {
+  position: absolute;
+  top: 30px;
+  font-size: 20px;
+  color: #7a7886;
+  left: 0;
+  width: 100%;
+}
+.rowPin2 {
+  margin: 0 auto;
+  position: relative;
+  width: 90%;
+  height: 60px;
+  z-index: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.sub-rowPin2 {
+  width: 50px;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid #3a3d4288;
+  border-radius: 10px;
+}
+.sub-rowPin2 input {
+  width: 100%;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  border-top: 1px solid rgba(0, 0, 0, 0);
+  border-left: 1px solid rgba(0, 0, 0, 0);
+  border-right: 1px solid rgba(0, 0, 0, 0);
+  border-bottom: 1px solid #3a3d4288;
+  border-radius: 0;
+}
+.sub-rowPin2 input::-webkit-outer-spin-button,
+.sub-rowPin2 input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.sub-rowPin2 input:focus {
+  outline: none;
+}

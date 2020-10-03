@@ -176,7 +176,7 @@ export default {
     ...mapActions(['logout', 'cekPin']),
     cekDataUser() {
       this.cekPin(this.userData.user_id)
-        .then(response => {
+        .then((response) => {
           if (response === 0) {
             this.$bvToast.toast(
               'Please create new pin to secure your account',
@@ -191,7 +191,7 @@ export default {
             }, 2000)
           }
         })
-        .catch(error => {
+        .catch((error) => {
           this.$bvToast.toast(error.data.msg, {
             title: 'Warning',
             variant: 'danger',
