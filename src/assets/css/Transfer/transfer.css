@@ -40,7 +40,7 @@
 }
 
 .receiver {
-  height: 335px;
+  height: 300px;
   padding: 0;
   margin: 0;
   position: relative;
@@ -90,4 +90,15 @@
 
 .select-receiver {
   position: relative;
+}
+
+.paginationTF {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }

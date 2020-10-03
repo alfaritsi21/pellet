@@ -5,7 +5,10 @@ export default {
     isSelect: false,
     isContinue: false,
     showUserData: {},
-    receiverData: {}
+    receiverData: {},
+    page: 1,
+    limit: 3,
+    paginationInfo: {}
   },
   mutations: {
     setIsSelect(state, payload) {
@@ -19,6 +22,12 @@ export default {
     },
     setReceiverData(state, payload) {
       state.receiverData = payload
+    },
+    setPage(state, payload) {
+      state.page = payload
+    },
+    setPagination(state, payload) {
+      state.paginationInfo = payload
     }
   },
   actions: {
@@ -47,13 +56,36 @@ export default {
     selectReceiverData(context, payload) {
       context.commit('setReceiverData', payload)
     },
-    showUser(context, payload) {
+    searchReceiverAccount(context, payload) {
+      const form = {
+        search_name: payload
+      }
       return new Promise((resolve, reject) => {
         axios
-          .get(`${context.state.urlApi}profile`)
+          .post(`${context.state.urlApi}profile/search`, form)
           .then(response => {
             resolve(response.data)
             context.commit('setShowUser', response.data.data)
+          })
+          .catch(error => {
+            if (error.response === undefined) {
+              alert('Tidak dapat terhubung ke server')
+            } else {
+              reject(error.response)
+            }
+          })
+      })
+    },
+    showUser(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(
+            `${context.state.urlApi}profile/?page=${context.state.page}&limit=${context.state.limit}`
+          )
+          .then(response => {
+            resolve(response.data)
+            context.commit('setShowUser', response.data.data)
+            context.commit('setPagination', response.data.pagination)
           })
           .catch(error => {
             if (error.response === undefined) {
@@ -72,6 +104,15 @@ export default {
     }
   },
   getters: {
+    getLimit(state) {
+      return state.limit
+    },
+    paginationInfo(state) {
+      return state.paginationInfo
+    },
+    getPage(state) {
+      return state.page
+    },
     isSelect(state) {
       return state.isSelect
     },
