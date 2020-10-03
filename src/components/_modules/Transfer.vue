@@ -35,7 +35,7 @@
         <p>+62 {{ item.user_phone.substring(1) }}</p>
       </div>
     </div>
-    <div class="paginationTF">
+    <div v-if="isSelect === false" class="paginationTF">
       <b-pagination
         v-model="currentPage"
         @change="handlePageChange"

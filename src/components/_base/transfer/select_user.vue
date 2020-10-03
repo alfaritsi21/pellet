@@ -237,7 +237,7 @@ export default {
       this.cekPin(this.userData.user_id)
         .then((result) => {
           if (result === Number(pin)) {
-            if (this.getUserData2.user_saldo >= this.nominal) {
+            if (Number(this.getUserData2.user_saldo) >= Number(this.nominal)) {
               this.transfer([
                 this.userData.user_id,
                 this.getReceiverData.user_id,
