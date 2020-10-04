@@ -7,6 +7,7 @@ import PersonalInfo from './modules/personal-info'
 import Topup from './modules/topup'
 import Midtrans from './modules/midtrans'
 import dashboard from './modules/dashboard'
+import Transaction from './modules/transaction'
 
 import createPersistedState from 'vuex-persistedstate'
 
@@ -23,7 +24,8 @@ export default new Vuex.Store({
     PersonalInfo,
     Topup,
     Midtrans,
-    dashboard
+    dashboard,
+    Transaction
   },
   getters: {},
   plugins: [
