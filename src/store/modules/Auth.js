@@ -60,11 +60,18 @@ export default {
       })
     },
     logout(context, payload) {
-      alert("You'll be redirect to login page")
+      // alert("You'll be redirect to login page")
       if (context.state.isLogin === true) {
         localStorage.removeItem('token')
         context.commit('delUser')
-        router.push('/login')
+        payload.toast("You'll be redirect to login page", {
+          title: 'Success',
+          variant: 'success',
+          solid: true
+        })
+        setTimeout(() => {
+          router.push('/login')
+        }, 2000)
       } else {
         return null
       }
