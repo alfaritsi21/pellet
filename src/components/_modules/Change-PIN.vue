@@ -10,23 +10,111 @@
       </b-col></b-row
     >
 
-    <b-form class="containerPin">
-      <input maxlength="1" type="text" />
-      <input maxlength="1" type="text" />
-      <input maxlength="1" type="text" />
-      <input maxlength="1" type="text" />
-      <input maxlength="1" type="text" />
-      <input maxlength="1" type="text" />
-      <b-row align-h="center" class="mt-5"
-        ><b-col cols="6"
-          ><b-button block class="submit" type="submit"
-            >Continue</b-button
-          ></b-col
-        ></b-row
-      >
+    <b-form @submit.prevent="submit" class="containerPin">
+      <input maxlength="1" type="text" v-model="pin[0]" />
+      <input maxlength="1" type="text" v-model="pin[1]" />
+      <input maxlength="1" type="text" v-model="pin[2]" />
+      <input maxlength="1" type="text" v-model="pin[3]" />
+      <input maxlength="1" type="text" v-model="pin[4]" />
+      <input maxlength="1" type="text" v-model="pin[5]" />
+      <b-row align-h="center" class="mt-5">
+        <b-col cols="6">
+          <b-button
+            v-if="currentPin === true"
+            block
+            class="submit"
+            type="submit"
+            @click="onSubmit(1)"
+          >
+            Current pin
+          </b-button>
+          <b-button
+            v-else
+            block
+            class="submit"
+            type="submit"
+            @click="onSubmit(2)"
+          >
+            Change pin now</b-button
+          >
+        </b-col>
+      </b-row>
     </b-form>
   </b-container>
 </template>
+
+<script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+export default {
+  data() {
+    return {
+      pin: [],
+      currentPin: true
+    }
+  },
+  computed: {
+    ...mapGetters(['userData'])
+  },
+  methods: {
+    ...mapActions(['changePin', 'cekPin']),
+    ...mapMutations(['setShowDashboard']),
+    onSubmit(val) {
+      if (val === 1) {
+        const pin = this.pin.join('')
+        this.cekPin(this.userData.user_id)
+          .then((result) => {
+            if (result === Number(pin)) {
+              this.$bvToast.toast('Now please input your new pin', {
+                title: 'Check pin success',
+                variant: 'success',
+                solid: true
+              })
+              this.currentPin = false
+              this.pin = []
+            } else {
+              this.$bvToast.toast('Icorrect pin number, please try again', {
+                title: 'Warning',
+                variant: 'danger',
+                solid: true
+              })
+              this.pin = []
+            }
+          })
+          .catch((err) => {
+            this.$bvToast.toast(err.data.msg, {
+              title: 'Warning',
+              variant: 'danger',
+              solid: true
+            })
+            this.pin = []
+          })
+      } else {
+        const pin = this.pin.join('')
+        this.changePin([pin, this.userData.user_id])
+          .then((response) => {
+            this.$bvToast.toast(response, {
+              title: 'Success',
+              variant: 'success',
+              solid: true
+            })
+            this.pin = []
+            this.currentPin = true
+            this.setShowDashboard()
+          })
+          .catch((error) => {
+            this.$bvToast.toast(error.data.msg, {
+              title: 'Warning',
+              variant: 'danger',
+              solid: true
+            })
+            this.pin = []
+          })
+      }
+    },
+    submit() {}
+  }
+}
+</script>
 
 <style  scoped>
 p {

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export default {
   state: {
+    urlApi: process.env.VUE_APP_URL,
     showMainProfile: true,
     showPersonalInfo: false,
     showChangePassword: false,
@@ -101,6 +102,25 @@ export default {
           })
           .catch(error => {
             reject(error.response)
+          })
+      })
+    },
+    changePin(context, payload) {
+      const form = {
+        user_pin: payload[0]
+      }
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`${context.state.urlApi}user/newpin/${payload[1]}`, form)
+          .then(response => {
+            resolve(response.data.msg)
+          })
+          .catch(error => {
+            if (error.response === undefined) {
+              alert('Tidak dapat terhubung ke server')
+            } else {
+              reject(error.response)
+            }
           })
       })
     }
