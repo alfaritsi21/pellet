@@ -55,21 +55,15 @@
           </b-row>
           <b-row align-h="between">
             <b-col cols="6">
-              <p class="chart-nominal">Rp.2.120.000,00</p>
+              <p class="chart-nominal">{{ formatCurrency(weeklyIncome) }}</p>
             </b-col>
             <b-col cols="6">
-              <p class="chart-nominal">Rp.1.560.000,00</p>
+              <p class="chart-nominal">{{ formatCurrency(weeklyExpense) }}</p>
             </b-col>
           </b-row>
           <div class="chart">
             <line-chart
-              :data="{
-                '2017-01-01': 11,
-                '2017-01-02': 6,
-                '2017-01-03': 8,
-                '2017-01-04': 9,
-                '2017-01-05': 7
-              }"
+              :data="chartData"
               width="380px"
               height="230px"
             ></line-chart>
@@ -173,11 +167,16 @@ export default {
   name: 'Dashboard',
   data() {
     return {
-      urlApi: process.env.VUE_APP_URL
+      urlApi: process.env.VUE_APP_URL,
+      chartData: {},
+      weeklyIncome: 0,
+      weeklyExpense: 0
     }
   },
   created() {
     this.cekDataUser()
+    this.getWeeklyIncomeTotal()
+    this.getWeeklyExpenseTotal()
   },
   computed: {
     ...mapGetters(['userData', 'getUserData2'])
@@ -191,9 +190,50 @@ export default {
       'setShowProfile',
       'setShowTransaction'
     ]),
-    ...mapActions(['cekPin']),
+    ...mapActions(['cekPin', 'getIncomeTotal', 'getExpenseTotal']),
     cekDataUser() {
       this.cekPin(this.userData.user_id)
+    },
+    getWeeklyIncomeTotal() {
+      const d = new Date()
+      d.setDate(d.getDate() - 7)
+      const date = d.toISOString().slice(0, 10)
+      const income = {
+        date: date,
+        user: this.userData.user_id
+      }
+      this.getIncomeTotal(income)
+        .then((response) => {
+          console.log(response)
+          this.weeklyIncome = response[0].income
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getWeeklyExpenseTotal() {
+      const d = new Date()
+      d.setDate(d.getDate() - 7)
+      const date = d.toISOString().slice(0, 10)
+      console.log(date)
+      const expense = {
+        date: date,
+        user: this.userData.user_id
+      }
+      this.getExpenseTotal(expense)
+        .then((response) => {
+          console.log(response)
+          this.weeklyExpense = response[0].expense
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    formatCurrency(number) {
+      return number.toLocaleString('ID-JK', {
+        style: 'currency',
+        currency: 'IDR'
+      })
     }
   }
 }
