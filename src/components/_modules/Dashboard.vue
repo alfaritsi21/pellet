@@ -6,7 +6,7 @@
         <p class="balance-text">Balance</p>
         <p class="balance-nominal">Rp {{ getUserData2.user_saldo }},00</p>
         <p class="balance-phone">
-          +62 {{ getUserData2.user_phone.substring(1) }}
+          {{ getUserData2.user_phone }}
         </p>
       </b-col>
       <b-col md="4" class="balance-menu">

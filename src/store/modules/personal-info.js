@@ -88,6 +88,21 @@ export default {
             console.log(error)
           })
       })
+    },
+    changePassword(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(
+            `${process.env.VUE_APP_URL}user/newpass/${payload[0]}`,
+            payload[1]
+          )
+          .then(response => {
+            resolve(response.data)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
     }
   },
   getters: {

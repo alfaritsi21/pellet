@@ -10,7 +10,7 @@
               class="profile-image"
             />
 
-            <p style="cursor:pointer;" @click="setImage()" class="mt-2">
+            <p style="cursor: pointer" @click="setImage()" class="mt-2">
               <b-icon
                 @click="$bvModal.show('modalUpdateImage')"
                 icon="pencil"
@@ -53,7 +53,9 @@
                   : userData2.first_name + ' ' + userData2.last_name
               }}
             </h5>
-            <p class="name-phone">+62 813-9387-7946</p></b-col
+            <p class="name-phone">
+              {{ userData2.user_phone }}
+            </p></b-col
           ></b-row
         >
         <b-container fluid class="card" @click="setShowPersonalInfo"
@@ -156,7 +158,7 @@ export default {
         form: data
       }
       this.patchImage(setData)
-        .then(response => {
+        .then((response) => {
           console.log(response)
           this.$bvToast.toast(response.msg, {
             title: 'Status :',
@@ -165,7 +167,7 @@ export default {
           })
           // this.getUserById(this.userData2.user_id)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
           this.$bvToast.toast(error.msg, {
             title: 'Status :',

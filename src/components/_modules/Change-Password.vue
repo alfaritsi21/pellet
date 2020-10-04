@@ -10,34 +10,34 @@
       </b-col></b-row
     >
 
-    <b-form class="containerPass">
+    <b-form @submit.prevent="onSubmit" class="containerPass">
       <div class="input-prepend">
         <span><b-icon icon="lock"></b-icon></span>
         <input
-          v-model="form.user_password"
+          v-model="form.current_password"
           placeholder="Current password"
-          type="text"
+          :type="type1"
         />
-        <span><b-icon icon="eye-slash"></b-icon></span>
+        <span><b-icon icon="eye-slash" @click="visibility(1)"></b-icon></span>
       </div>
 
       <div class="input-prepend">
         <span><b-icon icon="lock"></b-icon></span>
         <input
-          v-model="form.user_newPassword"
+          v-model="form.user_password"
           placeholder="New password password"
-          type="text"
+          :type="type2"
         />
-        <span><b-icon icon="eye-slash"></b-icon></span>
+        <span><b-icon icon="eye-slash" @click="visibility(2)"></b-icon></span>
       </div>
       <div class="input-prepend">
         <span><b-icon icon="lock"></b-icon></span>
         <input
-          v-model="form.user_password_confirm"
+          v-model="form.confirm_password"
           placeholder="Repeat new password"
-          type="text"
+          :type="type3"
         />
-        <span><b-icon icon="eye-slash"></b-icon></span>
+        <span><b-icon icon="eye-slash" @click="visibility(3)"></b-icon></span>
       </div>
 
       <b-row align-h="center" class="mt-5"
@@ -52,13 +52,69 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
     return {
+      type1: 'password',
+      type2: 'password',
+      type3: 'password',
       form: {
+        current_password: '',
         user_password: '',
-        user_newPassword: '',
-        user_password_confirm: ''
+        confirm_password: ''
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['userData'])
+  },
+  methods: {
+    ...mapActions(['changePassword']),
+    ...mapMutations(['setShowDashboard']),
+    onSubmit() {
+      this.changePassword([this.userData.user_id, this.form])
+        .then((response) => {
+          this.$bvToast.toast(response.msg, {
+            title: 'Success',
+            variant: 'success',
+            solid: true
+          })
+          this.form.current_password = ''
+          this.form.user_password = ''
+          this.form.confirm_password = ''
+          this.setShowDashboard()
+        })
+        .catch((error) => {
+          this.$bvToast.toast(error.data.msg, {
+            title: 'Warning',
+            variant: 'danger',
+            solid: true
+          })
+          this.form.current_password = ''
+          this.form.user_password = ''
+          this.form.confirm_password = ''
+        })
+    },
+    visibility(val) {
+      if (val === 1) {
+        if (this.type1 === 'password') {
+          this.type1 = 'text'
+        } else {
+          this.type1 = 'password'
+        }
+      } else if (val === 2) {
+        if (this.type2 === 'password') {
+          this.type2 = 'text'
+        } else {
+          this.type2 = 'password'
+        }
+      } else {
+        if (this.type3 === 'password') {
+          this.type3 = 'text'
+        } else {
+          this.type3 = 'password'
+        }
       }
     }
   }

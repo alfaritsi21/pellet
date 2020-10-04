@@ -212,7 +212,7 @@ export default {
         })
     },
     onLogout() {
-      this.logout()
+      this.logout(this.$bvToast)
     },
     showProfiles() {
       this.setShowProfile()

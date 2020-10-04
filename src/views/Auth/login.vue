@@ -82,10 +82,18 @@ export default {
     ...mapActions(['login']),
     onSubmit(variant = null) {
       this.login(this.form)
-        .then(response => {
-          this.$router.push('/')
+        .then((response) => {
+          this.$bvToast.toast('Login success', {
+            title: 'Success',
+            variant: 'success',
+            solid: true
+          })
+
+          setTimeout(() => {
+            this.$router.push('/')
+          }, 2000)
         })
-        .catch(error => {
+        .catch((error) => {
           this.$bvToast.toast(error.data.msg, {
             title: 'Warning',
             variant: variant,
