@@ -16,13 +16,13 @@
       <b-row class="card">
         <b-col cols="12"
           ><p>First Name</p>
-          <strong>Robert</strong></b-col
+          <strong>{{ userData2.first_name }}</strong></b-col
         >
       </b-row>
       <b-row class="card">
         <b-col
           ><p>Last Name</p>
-          <strong>Chandler</strong></b-col
+          <strong>{{ userData2.last_name }}</strong></b-col
         >
       </b-row>
       <b-row class="card">
@@ -34,12 +34,114 @@
       <b-row class="card" align-h="between" align-v="center">
         <b-col cols="8"
           ><p>Phone Number</p>
-          <strong>Robert</strong></b-col
-        ><b-col cols="4" class="text-right">Manage</b-col>
+          <strong>{{ userData2.user_phone }}</strong></b-col
+        ><b-col
+          style="cursor:pointer"
+          cols="4"
+          @click="$bvModal.show('updateProfile')"
+          class="text-right"
+          >Manage Personal Info</b-col
+        >
       </b-row>
+      <b-modal id="updateProfile" hide-footer style
+        ><template v-slot:modal-title>Manage Personal Info</template>
+        <b-form @submit.prevent style="color:grey;">
+          <b-form-group label="Name">
+            <b-input
+              type="text"
+              v-model="form.user_name"
+              :placeholder="userData2.user_name"
+            />
+          </b-form-group>
+          <b-form-group label="First Name">
+            <b-input
+              type="text"
+              v-model="form.first_name"
+              placeholder="Input first name"
+            />
+          </b-form-group>
+          <b-form-group label="Last Name">
+            <b-input
+              type="text"
+              v-model="form.last_name"
+              placeholder="input Last Name"
+            />
+          </b-form-group>
+          <b-form-group label="Phone">
+            <b-input
+              type="number"
+              v-model="form.user_phone"
+              placeholder="Input Your Phone Number"
+            />
+          </b-form-group>
+          <b-row>
+            <b-col @click="$bvModal.hide('updateProfile')">
+              <b-button
+                @click="updateProfile()"
+                block
+                style="color:white;"
+                variant="info"
+                type="submit"
+                class="my-3"
+                >Submit</b-button
+              >
+            </b-col>
+          </b-row>
+        </b-form>
+      </b-modal>
     </b-container>
   </b-container>
 </template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex'
+export default {
+  data() {
+    return {
+      form: {
+        user_name: '',
+        first_name: '',
+        last_name: '',
+        user_phone: null
+      }
+    }
+  },
+  computed: {
+    ...mapGetters({
+      userData2: 'getUserData2',
+      userData: 'userData',
+      user_img: 'getUserImg'
+    })
+  },
+  methods: {
+    ...mapActions(['patchProfile']),
+    updateProfile() {
+      // console.log(this.form)
+      const setData = {
+        user_id: this.userData2.user_id,
+        form: this.form
+      }
+      this.patchProfile(setData)
+        .then(response => {
+          console.log(response)
+          this.$bvToast.toast(response.msg, {
+            title: 'Status :',
+            autoHideDelay: 2000,
+            appendToast: true
+          })
+        })
+        .catch(error => {
+          console.log(error)
+          this.$bvToast.toast(error.msg, {
+            title: 'Status :',
+            autoHideDelay: 500,
+            appendToast: true
+          })
+        })
+    }
+  }
+}
+</script>
 
 <style scoped>
 .personal {

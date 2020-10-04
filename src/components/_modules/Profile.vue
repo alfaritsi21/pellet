@@ -5,17 +5,54 @@
         <b-row
           ><b-col
             ><img
-              src="https://media1.popsugar-assets.com/files/thumbor/HwtAUAufmAZv-FgGEIMJS2eQM-A/0x1:2771x2772/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2020/03/30/878/n/1922398/eb11f12e5e825104ca01c1.02079643_/i/Robert-Downey-Jr.jpg"
+              :src="`${urlApi}${userData2.user_img}`"
               alt=""
-              class="navbar-image"
+              class="profile-image"
             />
 
-            <p class="mt-2"><b-icon icon="pencil"></b-icon>Edit</p></b-col
+            <p style="cursor:pointer;" @click="setImage()" class="mt-2">
+              <b-icon
+                @click="$bvModal.show('modalUpdateImage')"
+                icon="pencil"
+              ></b-icon
+              >Edit
+            </p></b-col
           ></b-row
         >
+        <b-modal id="modalUpdateImage" hide-footer style>
+          <template v-slot:modal-title>Update Image</template>
+          <b-form v-on:submit.prevent>
+            <input type="file" @change="handleFile" />
+            <div @click="$bvModal.hide('modalUpdateImage')">
+              <b-button
+                type="button"
+                class="mt-3"
+                variant="info"
+                block
+                @click="updateImage()"
+                >Update</b-button
+              >
+            </div>
+            <div>
+              <b-button
+                class="mt-2"
+                variant="secondary"
+                block
+                @click="$bvModal.hide('modalUpdateImage')"
+                >Cancel</b-button
+              >
+            </div>
+          </b-form>
+        </b-modal>
         <b-row
           ><b-col
-            ><h5 class="name-text">Robert Downey Jr</h5>
+            ><h5 class="name-text">
+              {{
+                userData2.first_name === ''
+                  ? userData2.user_name
+                  : userData2.first_name + ' ' + userData2.last_name
+              }}
+            </h5>
             <p class="name-phone">+62 813-9387-7946</p></b-col
           ></b-row
         >
@@ -46,7 +83,7 @@
         <b-container fluid class="card"
           ><b-row align-h="around" align-v="center">
             <b-col class="p-4" md="7"
-              ><h6 class="name-text-button">Logout</h6>
+              ><h6 @click="logout" class="name-text-button">Logout</h6>
             </b-col>
             <b-col md="3"><b-icon icon="arrow-right"></b-icon></b-col> </b-row
         ></b-container> </b-col
@@ -61,19 +98,34 @@
 import PersonalInfo from '../_modules/Personal-Info'
 import ChangePassword from '../_modules/Change-Password'
 import ChangePin from '../_modules/Change-PIN'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   components: {
     PersonalInfo,
     ChangePassword,
     ChangePin
   },
+  data() {
+    return {
+      urlApi: process.env.VUE_APP_URL,
+      form: {
+        user_name: '',
+        first_name: '',
+        last_name: '',
+        user_phone: '',
+        user_img: {}
+      }
+    }
+  },
   computed: {
     ...mapGetters({
       showMainProfile: 'getShowMainProfile',
       showPersonalInfo: 'getShowPersonalInfo',
       showChangePassword: 'getShowChangePassword',
-      showChangePin: 'getShowChangePin'
+      showChangePin: 'getShowChangePin',
+      userData2: 'getUserData2',
+      userData: 'userData',
+      user_img: 'getUserImg'
     })
   },
   methods: {
@@ -82,7 +134,50 @@ export default {
       'setShowMainProfile',
       'setShowChangePassword',
       'setShowChangePin'
-    ])
+    ]),
+    ...mapActions(['patchImage', 'getUserById', 'logout']),
+    handleFile(event) {
+      console.log(event)
+      this.form.user_img = event.target.files[0]
+    },
+    setImage(data) {
+      this.form = {
+        user_img: this.userData2.user_img
+      }
+      // console.log(this.form)
+    },
+    updateImage() {
+      // console.log(this.userData2.user_id)
+      // console.log(this.form)
+      const data = new FormData()
+      data.append('user_img', this.form.user_img)
+      const setData = {
+        user_id: this.userData2.user_id,
+        form: data
+      }
+      this.patchImage(setData)
+        .then(response => {
+          console.log(response)
+          this.$bvToast.toast(response.msg, {
+            title: 'Status :',
+            autoHideDelay: 2000,
+            appendToast: true
+          })
+          // this.getUserById(this.userData2.user_id)
+        })
+        .catch(error => {
+          console.log(error)
+          this.$bvToast.toast(error.msg, {
+            title: 'Status :',
+            autoHideDelay: 2000,
+            appendToast: true
+          })
+        })
+    },
+    updateProfile() {}
+    // logout() {
+    //   this.logout()
+    // }
   }
 }
 </script>
@@ -92,7 +187,7 @@ export default {
   background-color: coral;
 } */
 
-.navbar-image {
+.profile-image {
   width: 70px;
   height: 70px;
   background-blend-mode: normal;
@@ -137,9 +232,15 @@ export default {
   font-weight: normal;
   font-size: 14px;
   /* identical to box height, or 169% */
-
   text-align: center;
-
   color: #7a7886;
+}
+
+.navbar-image {
+  width: 48px;
+  height: 48px;
+  background-blend-mode: normal;
+  border-radius: 10px;
+  margin-top: 15px;
 }
 </style>
