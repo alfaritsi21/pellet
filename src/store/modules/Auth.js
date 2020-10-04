@@ -44,7 +44,6 @@ export default {
     },
     register(context, payload) {
       return new Promise((resolve, reject) => {
-        console.log(payload)
         axios
           .post(`${context.state.urlApi}user/register`, payload)
           .then(response => {
@@ -83,7 +82,6 @@ export default {
           .then(response => {
             resolve(response.data.msg)
             context.commit('setKeys', response.data.data)
-            console.log(response.data)
           })
           .catch(error => {
             if (error.response === undefined) {
