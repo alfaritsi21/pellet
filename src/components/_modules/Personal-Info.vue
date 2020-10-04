@@ -123,7 +123,6 @@ export default {
       }
       this.patchProfile(setData)
         .then((response) => {
-          console.log(response)
           this.$bvToast.toast(response.msg, {
             title: 'Status :',
             autoHideDelay: 2000,

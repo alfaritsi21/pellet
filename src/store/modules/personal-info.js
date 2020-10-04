@@ -44,7 +44,6 @@ export default {
       axios
         .get(`${process.env.VUE_APP_URL}profile/${payload}`)
         .then(response => {
-          console.log(response.data)
           context.commit('setUserById', response.data)
           // context.state.products = response.data.data
           // context.state.totalData = response.data.pagination.totalData
@@ -55,8 +54,6 @@ export default {
         })
     },
     patchImage(context, payload) {
-      console.log(payload.user_id)
-      console.log(payload.form)
       return new Promise((resolve, reject) => {
         axios
           .patch(
@@ -73,8 +70,6 @@ export default {
       })
     },
     patchProfile(context, payload) {
-      console.log(payload.user_id)
-      console.log(payload.form)
       return new Promise((resolve, reject) => {
         axios
           .patch(

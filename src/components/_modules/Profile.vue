@@ -139,7 +139,6 @@ export default {
     ]),
     ...mapActions(['patchImage', 'getUserById', 'logout']),
     handleFile(event) {
-      console.log(event)
       this.form.user_img = event.target.files[0]
     },
     setImage(data) {
@@ -159,7 +158,6 @@ export default {
       }
       this.patchImage(setData)
         .then((response) => {
-          console.log(response)
           this.$bvToast.toast(response.msg, {
             title: 'Status :',
             autoHideDelay: 2000,

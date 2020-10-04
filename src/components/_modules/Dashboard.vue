@@ -168,7 +168,30 @@ export default {
   data() {
     return {
       urlApi: process.env.VUE_APP_URL,
-      chartData: {},
+      chartData: [
+        {
+          name: 'Income',
+          data: {
+            '2020-10-01': 100000,
+            '2020-10-03': 18000,
+            '2020-10-04': 12000,
+            '2020-10-05': 21000,
+            '2020-10-06': 34000,
+            '2020-10-07': 16000
+          }
+        },
+        {
+          name: 'Expense',
+          data: {
+            '2020-10-01': 98000,
+            '2020-10-03': 22000,
+            '2020-10-04': 46000,
+            '2020-10-05': 26000,
+            '2020-10-06': 34000,
+            '2020-10-07': 16000
+          }
+        }
+      ],
       weeklyIncome: 0,
       weeklyExpense: 0
     }
@@ -177,6 +200,8 @@ export default {
     this.cekDataUser()
     this.getWeeklyIncomeTotal()
     this.getWeeklyExpenseTotal()
+    this.getWeeklyIncomePerDay()
+    this.getWeeklyExpensePerDay()
   },
   computed: {
     ...mapGetters(['userData', 'getUserData2'])
@@ -190,7 +215,13 @@ export default {
       'setShowProfile',
       'setShowTransaction'
     ]),
-    ...mapActions(['cekPin', 'getIncomeTotal', 'getExpenseTotal']),
+    ...mapActions([
+      'cekPin',
+      'getIncomeTotal',
+      'getExpenseTotal',
+      'getIncomePerDay',
+      'getExpensePerDay'
+    ]),
     cekDataUser() {
       this.cekPin(this.userData.user_id)
     },
@@ -204,7 +235,6 @@ export default {
       }
       this.getIncomeTotal(income)
         .then((response) => {
-          console.log(response)
           this.weeklyIncome = response[0].income
         })
         .catch((err) => {
@@ -215,15 +245,99 @@ export default {
       const d = new Date()
       d.setDate(d.getDate() - 7)
       const date = d.toISOString().slice(0, 10)
-      console.log(date)
       const expense = {
         date: date,
         user: this.userData.user_id
       }
       this.getExpenseTotal(expense)
         .then((response) => {
-          console.log(response)
           this.weeklyExpense = response[0].expense
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getWeeklyIncomePerDay() {
+      const d = new Date()
+      d.setDate(d.getDate() - 7)
+      const date = d.toISOString().slice(0, 10)
+      const income = {
+        date: date,
+        user: this.userData.user_id
+      }
+      this.getIncomePerDay(income)
+        .then((response) => {
+          console.log(response)
+          const incomeData = {}
+          for (let index = 0; index < 7; index++) {
+            const d = new Date()
+            d.setDate(d.getDate() - index)
+            const date = d.toISOString().slice(0, 10)
+            var columnName = date
+            incomeData[columnName] = 0
+          }
+
+          for (let index = 0; index < response.length; index++) {
+            const d = new Date(response[index].date)
+            const date = d.toISOString().slice(0, 10)
+            incomeData[date] = response[index].income
+          }
+
+          console.log(incomeData)
+          this.chartData = [
+            {
+              name: 'Income',
+              data: incomeData
+            },
+            this.chartData[1]
+          ]
+          console.log(this.chartData)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getWeeklyExpensePerDay() {
+      const d = new Date()
+      d.setDate(d.getDate() - 7)
+      const date = d.toISOString().slice(0, 10)
+      const expense = {
+        date: date,
+        user: this.userData.user_id
+      }
+      this.getExpensePerDay(expense)
+        .then((response) => {
+          console.log(response)
+          const expenseData = {}
+          for (let index = 0; index < 7; index++) {
+            const d = new Date()
+            d.setDate(d.getDate() - index)
+            const date = d.toISOString().slice(0, 10)
+            var columnName = date
+            expenseData[columnName] = 0
+          }
+
+          for (let index = 0; index < response.length; index++) {
+            const d = new Date(response[index].date)
+            const date = d.toISOString().slice(0, 10)
+            expenseData[date] = response[index].expense
+          }
+
+          console.log(expenseData)
+          this.chartData = [
+            this.chartData[0],
+            {
+              name: 'Expense',
+              data: expenseData
+            }
+          ]
+          console.log(this.chartData)
+        })
+        .catch((error) => {
+          console.log(error)
         })
         .catch((err) => {
           console.log(err)
