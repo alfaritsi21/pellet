@@ -4,9 +4,9 @@
       <h6><b>Select Top Up Nominal</b></h6>
     </div>
     <div class="select-topup">
-      <b-form>
+      <b-form @submit.prevent="onTopUp(1)">
         <input v-model="nominal" type="number" min="1000" placeholder="0.00" />
-        <b-button type="button" @click="onTopUp(1)">Top Up Now</b-button>
+        <b-button type="submit">Top Up Now</b-button>
       </b-form>
     </div>
     <div class="howto-topup">
@@ -90,10 +90,10 @@ export default {
         } else {
           const pin = this.pin.join('')
           this.cekPin(this.userData.user_id)
-            .then((result) => {
+            .then(result => {
               if (result === Number(pin)) {
                 this.topup([pin, this.nominal, this.userData])
-                  .then((response) => {
+                  .then(response => {
                     this.$bvToast.toast(response.msg, {
                       title: 'Success',
                       variant: 'success',
@@ -103,7 +103,7 @@ export default {
                     this.pin = []
                     this.validation = false
                   })
-                  .catch((error) => {
+                  .catch(error => {
                     this.$bvToast.toast(error.data.msg + ' please try again', {
                       title: 'Warning',
                       variant: 'danger',
@@ -124,7 +124,7 @@ export default {
                 this.validation = false
               }
             })
-            .catch((err) => {
+            .catch(err => {
               this.$bvToast.toast(err.data.msg, {
                 title: 'Warning',
                 variant: 'danger',

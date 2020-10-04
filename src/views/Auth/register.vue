@@ -78,7 +78,7 @@
             ><img src="../../assets/image/eye-crossed.png" alt="" />
           </div>
           <br />
-          <b-button type="submit" variant="primary">Login</b-button>
+          <b-button type="submit" variant="primary">Register</b-button>
           <br />
           <div class="p4">
             <p>
