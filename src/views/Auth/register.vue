@@ -116,7 +116,14 @@ export default {
     onSubmit(variant = null) {
       this.register(this.form)
         .then(response => {
-          this.$router.push('/login')
+          this.$bvToast.toast('Register success', {
+            title: 'Success',
+            variant: 'success',
+            solid: true
+          })
+          setTimeout(() => {
+            this.$router.push('/login')
+          }, 2000)
         })
         .catch(error => {
           this.$bvToast.toast(error.data.msg, {
