@@ -1,11 +1,5 @@
 <template>
   <div>
-<<<<<<< HEAD
-    <h1>Top Up</h1>
-    <h1>Top Up</h1>
-    <h1>Top Up</h1>
-    <h1>Top Up</h1>
-=======
     <div class="text">
       <h6><b>Select Top Up Nominal</b></h6>
     </div>
@@ -44,7 +38,6 @@
         <span>8</span> You can see your money in Pellet within 3 hours.
       </div>
     </b-modal>
->>>>>>> 30a6f3646047073fc97b63b9228c6da57c7c0fef
   </div>
 </template>
 
