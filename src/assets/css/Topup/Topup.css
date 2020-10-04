@@ -1,0 +1,106 @@
+.topup {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.topUp-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  background-color: rgba(92, 91, 91, 0.404);
+}
+.sub-topUp-Modal {
+  position: relative;
+  margin: 0 auto;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.sub-topUp-Modal .btna {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  padding: 0 100px;
+}
+
+.sub-topUp-Modal .btna button {
+  border: 1px solid rgba(0, 0, 0, 0);
+  background-color: #6379f4;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 10px;
+}
+
+.sub-topUp-Modal .btna button:active {
+  border: 2px solid #6379f47c;
+  background-color: #dde0f3cb;
+  color: #6379f4;
+  padding: 10px 30px;
+  outline: none;
+}
+
+.sub-topUp-Modal .pinCheck {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+}
+.sub-topUp-Modal .pinCheck h4 {
+  position: absolute;
+  top: 30px;
+  font-size: 20px;
+  color: #7a7886;
+  left: 0;
+  width: 100%;
+}
+.pinCheck .rowPin2 {
+  margin: 0 auto;
+  position: relative;
+  width: 90%;
+  height: 60px;
+  z-index: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.pinCheck .rowPin2 .sub-rowPin2 {
+  width: 50px;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid #3a3d4288;
+  border-radius: 10px;
+}
+.pinCheck .rowPin2 .sub-rowPin2 input {
+  width: 100%;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  border: none;
+  border-radius: 0;
+}
+.pinCheck .rowPin2 .sub-rowPin2 input::-webkit-outer-spin-button,
+.pinCheck .rowPin2 .sub-rowPin2 input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.pinCheck .rowPin2 .sub-rowPin2 input:focus {
+  outline: none;
+}

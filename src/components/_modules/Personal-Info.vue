@@ -28,7 +28,7 @@
       <b-row class="card">
         <b-col
           ><p>Verified E-Mail</p>
-          <strong>Pewdiepie1@gmail.com</strong></b-col
+          <strong>{{ userData2.user_email }}</strong></b-col
         >
       </b-row>
       <b-row class="card" align-h="between" align-v="center">
@@ -36,7 +36,7 @@
           ><p>Phone Number</p>
           <strong>{{ userData2.user_phone }}</strong></b-col
         ><b-col
-          style="cursor:pointer"
+          style="cursor: pointer"
           cols="4"
           @click="$bvModal.show('updateProfile')"
           class="text-right"
@@ -45,7 +45,7 @@
       </b-row>
       <b-modal id="updateProfile" hide-footer style
         ><template v-slot:modal-title>Manage Personal Info</template>
-        <b-form @submit.prevent style="color:grey;">
+        <b-form @submit.prevent style="color: grey">
           <b-form-group label="Name">
             <b-input
               type="text"
@@ -79,7 +79,7 @@
               <b-button
                 @click="updateProfile()"
                 block
-                style="color:white;"
+                style="color: white"
                 variant="info"
                 type="submit"
                 class="my-3"
@@ -122,7 +122,7 @@ export default {
         form: this.form
       }
       this.patchProfile(setData)
-        .then(response => {
+        .then((response) => {
           console.log(response)
           this.$bvToast.toast(response.msg, {
             title: 'Status :',
@@ -130,7 +130,7 @@ export default {
             appendToast: true
           })
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
           this.$bvToast.toast(error.msg, {
             title: 'Status :',

@@ -4,14 +4,9 @@
       <h6><b>Select Top Up Nominal</b></h6>
     </div>
     <div class="select-topup">
-      <b-form @submit="onSubmit()">
-        <input
-          v-model="form.topup_nominal"
-          type="number"
-          min="10000"
-          placeholder="Input Nominal"
-        />
-        <b-button>Top Up Now</b-button>
+      <b-form>
+        <input v-model="nominal" type="number" min="1000" placeholder="0.00" />
+        <b-button type="button" @click="onTopUp(1)">Top Up Now</b-button>
       </b-form>
     </div>
     <div class="howto-topup">
@@ -38,20 +33,120 @@
         <span>8</span> You can see your money in Pellet within 3 hours.
       </div>
     </b-modal>
+    <div v-if="validation === true" class="topup">
+      <div class="topUp-modal">
+        <div class="sub-topUp-Modal">
+          <div class="pinCheck">
+            <h4>Please input your pin number</h4>
+            <div class="rowPin2">
+              <div class="sub-rowPin2">
+                <input v-model="pin[0]" maxlength="1" type="text" />
+              </div>
+              <div class="sub-rowPin2">
+                <input v-model="pin[1]" maxlength="1" type="text" />
+              </div>
+              <div class="sub-rowPin2">
+                <input v-model="pin[2]" maxlength="1" type="text" />
+              </div>
+              <div class="sub-rowPin2">
+                <input v-model="pin[3]" maxlength="1" type="text" />
+              </div>
+              <div class="sub-rowPin2">
+                <input v-model="pin[4]" maxlength="1" type="text" />
+              </div>
+              <div class="sub-rowPin2">
+                <input v-model="pin[5]" maxlength="1" type="text" />
+              </div>
+            </div>
+            <div class="btna">
+              <button @click="onTopUp(2)" type="button">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      form: {
-        topup_nominal: 0
+      pin: [],
+      validation: false,
+      nominal: ''
+    }
+  },
+  computed: {
+    ...mapGetters(['userData'])
+  },
+  methods: {
+    ...mapActions(['topup', 'cekPin']),
+    onTopUp(val) {
+      if (Number(this.nominal) >= 5000) {
+        if (val === 1) {
+          this.validation = true
+        } else {
+          const pin = this.pin.join('')
+          this.cekPin(this.userData.user_id)
+            .then((result) => {
+              if (result === Number(pin)) {
+                this.topup([pin, this.nominal, this.userData])
+                  .then((response) => {
+                    this.$bvToast.toast(response.msg, {
+                      title: 'Success',
+                      variant: 'success',
+                      solid: true
+                    })
+                    this.nominal = ''
+                    this.pin = []
+                    this.validation = false
+                  })
+                  .catch((error) => {
+                    this.$bvToast.toast(error.data.msg + ' please try again', {
+                      title: 'Warning',
+                      variant: 'danger',
+                      solid: true
+                    })
+                    this.nominal = ''
+                    this.pin = []
+                    this.validation = false
+                  })
+              } else {
+                this.$bvToast.toast('Invalid pin number, please try again', {
+                  title: 'Warning',
+                  variant: 'danger',
+                  solid: true
+                })
+                this.nominal = ''
+                this.pin = []
+                this.validation = false
+              }
+            })
+            .catch((err) => {
+              this.$bvToast.toast(err.data.msg, {
+                title: 'Warning',
+                variant: 'danger',
+                solid: true
+              })
+              this.nominal = ''
+              this.pin = []
+              this.validation = false
+            })
+        }
+      } else {
+        this.$bvToast.toast('Minimum top up Rp. 5000', {
+          title: 'Warning',
+          variant: 'danger',
+          solid: true
+        })
       }
     }
   }
 }
 </script>
+<style src="../../assets/css/Topup/Topup.css"></style>
 <style scoped>
 .card {
   margin-bottom: 10px;
@@ -105,6 +200,14 @@ input {
       rgba(169, 169, 169, 0.4)
     )
     center bottom 5px / calc(100% - 10px) 2px no-repeat;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input:focus {
+  outline: none;
 }
 .howto-topup {
   width: 50%;
