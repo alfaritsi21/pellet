@@ -33,10 +33,10 @@ export default {
   actions: {
     transfer(context, payload) {
       const form = {
-        user_id: payload[0],
-        target_id: payload[1],
-        tf_nominal: payload[2],
-        tf_desc: payload[3]
+        user: payload[0],
+        target: payload[1],
+        nominal: payload[2],
+        desc: payload[3]
       }
       return new Promise((resolve, reject) => {
         axios
