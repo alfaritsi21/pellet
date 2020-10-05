@@ -17,7 +17,7 @@
             />
             <h6
               @click="$refs.file.click()"
-              style="cursor: pointer;margin-top:5px"
+              style="cursor: pointer; margin-top: 5px"
             >
               <b-icon icon="pencil"></b-icon>Edit
             </h6>
@@ -95,10 +95,12 @@
           </b-row>
         </b-container>
 
-        <b-container fluid class="card">
+        <b-container fluid class="card" @click.prevent="handleLogout">
           <b-row align-h="around" align-v="center">
             <b-col class="p-4" md="7">
-              <h6 @click="logout" class="name-text-button">Logout</h6>
+              <h6 class="name-text-button">
+                Logout
+              </h6>
             </b-col>
             <b-col md="3">
               <b-icon icon="arrow-right"></b-icon>
@@ -161,7 +163,7 @@ export default {
       'setShowChangePassword',
       'setShowChangePin'
     ]),
-    ...mapActions(['patchImage', 'getUserById', 'cekpin', 'logout']),
+    ...mapActions(['patchImage', 'getUserById', 'cekPin', 'logout']),
     // handleFile(event) {
     //   this.form.user_img = event.target.files[0]
     // },
@@ -186,15 +188,14 @@ export default {
           console.log(response)
           this.$bvToast.toast(`${response.msg}`, {
             title: 'Info ',
-            variant: 'info',
+            variant: 'success',
             solid: true
           })
           // this.form = {}
-          // this.cekPin(this.userData2.user_id)
+          this.cekPin(this.userData.user_id)
           this.getUserById(this.userData2.user_id)
         })
         .catch(error => {
-          console.log(error.data)
           this.$bvToast.toast(`${error.data.msg}`, {
             title: 'Check it again ',
             variant: 'danger',
@@ -202,10 +203,24 @@ export default {
           })
         })
     },
-    updateProfile() {}
+    updateProfile() {},
     // logout() {
     //   this.logout()
-    // }
+    // },
+    handleLogout() {
+      this.$bvModal
+        .msgBoxConfirm('Are you sure?', {
+          cancelVariant: 'light',
+          okVariant: 'info',
+          headerClass: 'p-2 border-bottom-0',
+          footerClass: 'p-2 border-top-0',
+          centered: true
+        })
+        .then(item => {
+          this.isLogout = item
+          this.isLogout ? this.logout(this.$bvToast) : console.log(item)
+        })
+    }
   }
 }
 </script>

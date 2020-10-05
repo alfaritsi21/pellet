@@ -1,19 +1,31 @@
 <template>
   <div id="app">
-    <router-view />
+    <Loading :isLoading="isLoading" />
+    <div v-if="!isLoading">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import Loading from './components/_modules/Splash'
 export default {
   name: 'App',
+  components: {
+    Loading
+  },
   methods: {
     ...mapActions(['interceptorRequest', 'interceptorResponse'])
   },
   created() {
     this.interceptorRequest()
     this.interceptorResponse()
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isLoading = false
+    }, 3000)
   }
 }
 </script>

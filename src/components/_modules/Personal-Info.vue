@@ -7,8 +7,8 @@
         <br />
         <p>
           We got your personal information from the sign
-          <br />up proccess. If you want to make changes on
-          <br />your information, contact our support.
+          <br />up proccess. If you want to make changes on <br />your
+          information, contact our support.
         </p>
       </b-col>
     </b-row>
@@ -42,7 +42,8 @@
           @click="$bvModal.show('updateProfile')"
           v-on:click="setUpdate()"
           class="text-right"
-        >Manage Personal Info</b-col>
+          >Manage Personal Info</b-col
+        >
       </b-row>
       <b-modal id="updateProfile" hide-footer style>
         <template v-slot:modal-title>Manage Personal Info</template>
@@ -56,13 +57,25 @@
             />
           </b-form-group>
           <b-form-group label="First Name">
-            <b-input type="text" v-model="form.first_name" placeholder="Input first name" />
+            <b-input
+              type="text"
+              v-model="form.first_name"
+              placeholder="Input first name"
+            />
           </b-form-group>
           <b-form-group label="Last Name">
-            <b-input type="text" v-model="form.last_name" placeholder="input Last Name" />
+            <b-input
+              type="text"
+              v-model="form.last_name"
+              placeholder="input Last Name"
+            />
           </b-form-group>
           <b-form-group label="Phone">
-            <b-input type="number" v-model="form.user_phone" placeholder="Input your phone" />
+            <b-input
+              type="number"
+              v-model="form.user_phone"
+              placeholder="Input your phone"
+            />
           </b-form-group>
           <b-row>
             <b-col @click="$bvModal.hide('updateProfile')">
@@ -73,7 +86,8 @@
                 variant="info"
                 type="submit"
                 class="my-3"
-              >Update</b-button>
+                >Update</b-button
+              >
             </b-col>
           </b-row>
         </b-form>
@@ -95,9 +109,6 @@ export default {
       }
     }
   },
-  created() {
-    this.getUserName()
-  },
   computed: {
     ...mapGetters({
       userData2: 'getUserData2',
@@ -114,7 +125,7 @@ export default {
         form: this.form
       }
       this.patchProfile(setData)
-        .then(response => {
+        .then((response) => {
           this.$bvToast.toast(`${response.msg}`, {
             title: 'Info ',
             variant: 'info',
@@ -122,7 +133,7 @@ export default {
           })
           this.cekPin(this.userData.user_id)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
           this.$bvToast.toast(`${error.data.msg}`, {
             title: 'Check it again ',

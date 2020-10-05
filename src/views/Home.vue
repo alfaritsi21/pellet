@@ -22,18 +22,94 @@
             </p>
             <p class="navbar-phone">{{ userData2.user_phone }}</p>
           </div>
-          <!-- <b-icon
-            v-b-popover.hover.bottom="
-              'Kamu ' +
-              getHistory[0].trans_type +
-              ' Rp.' +
-              getHistory[0].trans_nominal +
-              ' ke ' +
-              getHistory[0].first_name
-            "
-            class="navbar-notification"
-            icon="bell"
-          ></b-icon>-->
+          <div class="notif">
+            <div class="notif-icon">
+              <b-icon
+                v-b-popover.hover.bottom="'Ada 6 pesan baru, segera lihat !'"
+                @click="onBell"
+                class="navbar-notification"
+                icon="bell"
+              ></b-icon>
+              <div v-if="isRed === true" class="red-notif"></div>
+            </div>
+            <div v-if="isNotif === true" class="sub-notif">
+              <div class="today">
+                <p class="day1">Today</p>
+                <div
+                  v-for="(item, index) in getDailyHistory"
+                  :key="index"
+                  class="today-detail"
+                >
+                  <img
+                    v-if="item.target_id === userData.user_id"
+                    src="../assets/image/arrow-up(1).png"
+                    alt=""
+                  />
+                  <img v-else src="../assets/image/arrow-up(2).png" alt="" />
+                  <p>
+                    {{
+                      item.target_id === userData.user_id
+                        ? item.trans_type === 'Top up'
+                          ? 'Top up success'
+                          : 'Transfered From ' + item.user_name
+                        : 'Transfer to ' + item.user_name
+                    }}
+                  </p>
+                  <h6>Rp.{{ item.trans_nominal }}</h6>
+                </div>
+              </div>
+              <div class="today">
+                <p class="day1">This week</p>
+                <div
+                  v-for="(item, index) in getHistory"
+                  :key="index"
+                  class="today-detail"
+                >
+                  <img
+                    v-if="item.target_id === userData.user_id"
+                    src="../assets/image/arrow-up(1).png"
+                    alt=""
+                  />
+                  <img v-else src="../assets/image/arrow-up(2).png" alt="" />
+                  <p>
+                    {{
+                      item.target_id === userData.user_id
+                        ? item.trans_type === 'Top up'
+                          ? 'Top up success'
+                          : 'Transfered From ' + item.user_name
+                        : 'Transfer to ' + item.user_name
+                    }}
+                  </p>
+                  <h6>Rp.{{ item.trans_nominal }}</h6>
+                </div>
+              </div>
+              <div class="today">
+                <p class="day1">This month</p>
+                <div
+                  v-for="(item, index) in getMonthlyHistory"
+                  :key="index"
+                  class="today-detail"
+                >
+                  <img
+                    v-if="item.target_id === userData.user_id"
+                    src="../assets/image/arrow-up(1).png"
+                    alt=""
+                  />
+                  <img v-else src="../assets/image/arrow-up(2).png" alt="" />
+                  <p>
+                    {{
+                      item.target_id === userData.user_id
+                        ? item.trans_type === 'Top up'
+                          ? 'Top up success'
+                          : 'Transfered From ' + item.user_name
+                        : 'Transfer to ' + item.user_name
+                    }}
+                  </p>
+                  <h6>Rp.{{ item.trans_nominal }}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
         </b-col>
       </b-row>
     </b-container>
@@ -101,7 +177,7 @@
                     icon="box-arrow-right"
                   ></b-icon>
                 </b-col>
-                <b-col class="side-menu" cols="6" @click="onLogout"
+                <b-col class="side-menu" cols="6" @click.prevent="handleLogout"
                   >Logout</b-col
                 >
               </b-row>
@@ -164,7 +240,9 @@ export default {
   name: 'Home',
   data() {
     return {
-      urlApi: process.env.VUE_APP_URL
+      urlApi: process.env.VUE_APP_URL,
+      isNotif: false,
+      isRed: true
     }
   },
   components: {
@@ -186,7 +264,9 @@ export default {
       showTransaction: 'getshowTransaction',
       userData: 'userData',
       userData2: 'getUserData2',
-      getHistory: 'getHistory'
+      getHistory: 'getHistory',
+      getMonthlyHistory: 'getMonthlyHistory',
+      getDailyHistory: 'getDailyHistory'
     })
   },
   methods: {
@@ -197,7 +277,13 @@ export default {
       'setShowProfile',
       'setShowMainProfile'
     ]),
-    ...mapActions(['logout', 'cekPin']),
+    ...mapActions([
+      'logout',
+      'cekPin',
+      'monthlyHistory',
+      'weeklyHistory',
+      'dailyHistory'
+    ]),
     cekDataUser() {
       this.cekPin(this.userData.user_id)
         .then(response => {
@@ -223,12 +309,37 @@ export default {
           })
         })
     },
-    onLogout() {
-      this.logout(this.$bvToast)
+    // onLogout() {
+    //   this.logout(this.$bvToast)
+    // },
+    handleLogout() {
+      this.$bvModal
+        .msgBoxConfirm('Are you sure?', {
+          cancelVariant: 'light',
+          okVariant: 'info',
+          headerClass: 'p-2 border-bottom-0',
+          footerClass: 'p-2 border-top-0',
+          centered: true
+        })
+        .then(item => {
+          this.isLogout = item
+          this.isLogout ? this.logout(this.$bvToast) : console.log(item)
+        })
     },
     showProfiles() {
       this.setShowProfile()
       this.setShowMainProfile()
+    },
+    onBell() {
+      if (this.isNotif === false) {
+        this.isNotif = true
+        this.dailyHistory(this.userData.user_id)
+        this.weeklyHistory(this.userData.user_id)
+        this.monthlyHistory(this.userData.user_id)
+        this.isRed = false
+      } else {
+        this.isNotif = false
+      }
     }
   }
 }
@@ -439,5 +550,100 @@ export default {
   margin-left: 30px;
   background: transparent;
   height: 490px;
+}
+.notif {
+  padding: 0;
+  position: relative;
+}
+.navbar-notification {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+.sub-notif {
+  position: absolute;
+  margin-top: 0;
+  border: 1px solid black;
+  width: 300px;
+  max-height: 530px;
+  overflow-y: scroll;
+  z-index: 5;
+  top: 75px;
+  border-radius: 20px;
+  right: -40px;
+  background-color: white;
+  padding: 10px 10px 0 10px;
+}
+
+.sub-notif::-webkit-scrollbar {
+  display: none;
+}
+.today {
+  padding-top: 0px;
+  position: relative;
+  width: 100%;
+  overflow-y: scroll;
+  max-height: 200px;
+  margin-bottom: 10px;
+}
+.today::-webkit-scrollbar {
+  display: none;
+}
+.today .day1 {
+  position: sticky;
+  text-align: left;
+  top: 0;
+  left: 0;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  background-color: white;
+  z-index: 1;
+}
+.today-detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  margin-bottom: 20px;
+}
+.today-detail img {
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+.today-detail p:nth-of-type(1) {
+  text-align: left;
+  width: 100%;
+  padding-left: 50px;
+  font-size: 13px;
+  position: relative;
+  margin-bottom: 5px;
+}
+.today-detail h6 {
+  position: relative;
+  margin-bottom: 0;
+  text-align: left;
+  width: 100%;
+  padding-left: 50px;
+  font-weight: bold;
+  font-size: 14px;
+}
+.navbar-notification {
+  position: relative;
+}
+.notif-icon {
+  position: relative;
+  height: 40px;
+}
+.red-notif {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
 }
 </style>
