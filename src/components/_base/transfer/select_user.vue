@@ -211,7 +211,12 @@ export default {
       'throwSelectTrigger',
       'throwContinue',
       'cekPin',
-      'transfer'
+      'transfer',
+      'weeklyHistory',
+      'getIncomeTotal',
+      'getExpenseTotal',
+      'getIncomePerDay',
+      'getExpensePerDay'
     ]),
     getUserData() {
       this.cekPin(this.userData.user_id)
@@ -250,6 +255,8 @@ export default {
                     variant: 'success',
                     solid: true
                   })
+                  this.weeklyHistory(this.userData.user_id)
+                  this.cekPin(this.userData.user_id)
                   this.isPin = false
                   this.isStatus = true
                   this.statusSuccess = true

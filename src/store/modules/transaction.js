@@ -84,7 +84,7 @@ export default {
       const now = n.toISOString().slice(0, 10)
 
       const d = new Date()
-      d.setDate(d.getDate() - 1)
+      d.setDate(d.getDate() - 0)
       const date = d.toISOString().slice(0, 10)
 
       const form = {

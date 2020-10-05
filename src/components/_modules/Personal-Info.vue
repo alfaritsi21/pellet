@@ -114,7 +114,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['patchProfile']),
+    ...mapActions(['patchProfile', 'cekPin']),
     updateProfile() {
       // console.log(this.form)
       const setData = {
@@ -128,6 +128,7 @@ export default {
             autoHideDelay: 2000,
             appendToast: true
           })
+          this.cekPin(this.userData.user_id)
         })
         .catch((error) => {
           console.log(error)

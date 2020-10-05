@@ -79,10 +79,18 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userData'])
+    ...mapGetters(['userData', 'getUserData2'])
   },
   methods: {
-    ...mapActions(['topup', 'cekPin']),
+    ...mapActions([
+      'topup',
+      'cekPin',
+      'weeklyHistory',
+      'getIncomeTotal',
+      'getExpenseTotal',
+      'getIncomePerDay',
+      'getExpensePerDay'
+    ]),
     onTopUp(val) {
       if (Number(this.nominal) >= 5000) {
         if (val === 1) {
@@ -90,20 +98,22 @@ export default {
         } else {
           const pin = this.pin.join('')
           this.cekPin(this.userData.user_id)
-            .then(result => {
+            .then((result) => {
               if (result === Number(pin)) {
-                this.topup([pin, this.nominal, this.userData])
-                  .then(response => {
+                this.topup([pin, this.nominal, this.getUserData2])
+                  .then((response) => {
                     this.$bvToast.toast(response.msg, {
                       title: 'Success',
                       variant: 'success',
                       solid: true
                     })
+                    this.weeklyHistory(this.userData.user_id)
+                    this.cekPin(this.userData.user_id)
                     this.nominal = ''
                     this.pin = []
                     this.validation = false
                   })
-                  .catch(error => {
+                  .catch((error) => {
                     this.$bvToast.toast(error.data.msg + ' please try again', {
                       title: 'Warning',
                       variant: 'danger',
@@ -124,7 +134,7 @@ export default {
                 this.validation = false
               }
             })
-            .catch(err => {
+            .catch((err) => {
               this.$bvToast.toast(err.data.msg, {
                 title: 'Warning',
                 variant: 'danger',

@@ -208,10 +208,10 @@ export default {
         user: this.userData.user_id
       }
       this.getIncomeTotal(income)
-        .then(response => {
+        .then((response) => {
           this.weeklyIncome = response[0].income
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
@@ -224,10 +224,10 @@ export default {
         user: this.userData.user_id
       }
       this.getExpenseTotal(expense)
-        .then(response => {
+        .then((response) => {
           this.weeklyExpense = response[0].expense
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
@@ -240,8 +240,7 @@ export default {
         user: this.userData.user_id
       }
       this.getIncomePerDay(income)
-        .then(response => {
-          console.log(response)
+        .then((response) => {
           const incomeData = {}
           for (let index = 0; index < 7; index++) {
             const d = new Date()
@@ -257,7 +256,6 @@ export default {
             incomeData[date] = response[index].income
           }
 
-          console.log(incomeData)
           this.chartData = [
             {
               name: 'Income',
@@ -265,12 +263,11 @@ export default {
             },
             this.chartData[1]
           ]
-          console.log(this.chartData)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
@@ -283,8 +280,7 @@ export default {
         user: this.userData.user_id
       }
       this.getExpensePerDay(expense)
-        .then(response => {
-          console.log(response)
+        .then((response) => {
           const expenseData = {}
           for (let index = 0; index < 7; index++) {
             const d = new Date()
@@ -300,7 +296,6 @@ export default {
             expenseData[date] = response[index].expense
           }
 
-          console.log(expenseData)
           this.chartData = [
             this.chartData[0],
             {
@@ -308,12 +303,11 @@ export default {
               data: expenseData
             }
           ]
-          console.log(this.chartData)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
     },
