@@ -22,7 +22,18 @@
             </p>
             <p class="navbar-phone">{{ userData2.user_phone }}</p>
           </div>
-          <b-icon class="navbar-notification" icon="bell"></b-icon>
+          <b-icon
+            v-b-popover.hover.bottom="
+              'Kamu ' +
+              getHistory[0].trans_type +
+              ' Rp.' +
+              getHistory[0].trans_nominal +
+              ' ke ' +
+              getHistory[0].first_name
+            "
+            class="navbar-notification"
+            icon="bell"
+          ></b-icon>
         </b-col>
       </b-row>
     </b-container>
@@ -174,7 +185,8 @@ export default {
       showProfile: 'getshowProfile',
       showTransaction: 'getshowTransaction',
       userData: 'userData',
-      userData2: 'getUserData2'
+      userData2: 'getUserData2',
+      getHistory: 'getHistory'
     })
   },
   methods: {

@@ -48,6 +48,7 @@
         <b-form @submit.prevent style="color: grey">
           <b-form-group label="Name">
             <b-input
+              disabled
               type="text"
               v-model="form.user_name"
               :placeholder="userData2.user_name"
@@ -71,7 +72,7 @@
             <b-input
               type="number"
               v-model="form.user_phone"
-              placeholder="Input Your Phone Number"
+              :placeholder="userData2.user_phone"
             />
           </b-form-group>
           <b-row>
@@ -106,6 +107,9 @@ export default {
       }
     }
   },
+  created() {
+    this.getUserName()
+  },
   computed: {
     ...mapGetters({
       userData2: 'getUserData2',
@@ -138,6 +142,10 @@ export default {
             appendToast: true
           })
         })
+    },
+    getUserName() {
+      this.form.user_name = this.userData.user_name
+      console.log(this.form.user_name)
     }
   }
 }
