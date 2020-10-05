@@ -240,7 +240,7 @@ export default {
     pinContinue() {
       const pin = this.pin.join('')
       this.cekPin(this.userData.user_id)
-        .then((result) => {
+        .then(result => {
           if (result === Number(pin)) {
             if (Number(this.getUserData2.user_saldo) >= Number(this.nominal)) {
               this.transfer([
@@ -249,7 +249,7 @@ export default {
                 this.nominal,
                 this.notes
               ])
-                .then((response) => {
+                .then(response => {
                   this.$bvToast.toast('Transfer Success', {
                     title: 'Success',
                     variant: 'success',
@@ -261,7 +261,7 @@ export default {
                   this.isStatus = true
                   this.statusSuccess = true
                 })
-                .catch((error) => {
+                .catch(error => {
                   this.$bvToast.toast(error.data.msg, {
                     title: 'Warning',
                     variant: 'danger',
@@ -292,7 +292,7 @@ export default {
             this.statusSuccess = false
           }
         })
-        .catch((err) => {
+        .catch(err => {
           this.$bvToast.toast(err.data.msg, {
             title: 'Warning',
             variant: 'danger',

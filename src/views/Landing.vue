@@ -2,26 +2,34 @@
   <b-container fluid class="container">
     <!-- <div class="navbar">zwalet</div> -->
     <b-jumbotron class="jumbotron p-0 m-0">
-      <b-row class="m-0">
-        <b-col cols="12" xl="6">
-          <h1 class="title-banner m-0">
-            Awesome App For Saving <span style="color: #6379f4">Time</span>
-          </h1>
-          <p class="my-4">
-            We bring you a mobile app for banking problems that oftenly wasting
-            much of your times.
-          </p>
-          <router-link to="/login">
-            <b-button class="py-3 try">Try it Free</b-button>
-          </router-link> </b-col
-        ><b-col cols="12" xl="6"
+      <b-row align-h="between" class="mt-1"
+        ><b-col md="3" class="navbar"><h1>Pellet</h1> </b-col>
+        <b-col md="6"
           ><router-link to="/login"
             ><b-button class="btn1">Login</b-button></router-link
           >
           <router-link to="/register"
             ><b-button class="btn2">Sign up</b-button></router-link
-          >
-          <b-row><img src="../assets/phone.png" alt="" /></b-row></b-col
+          ></b-col
+        ></b-row
+      >
+      <b-row class="m-0">
+        <b-col cols="12" md="6">
+          <div class="title-banner m-0">
+            <h1>
+              Awesome App <br />
+              For Saving <span style="color: #6379f4">Time</span>
+            </h1>
+            <p class="my-4">
+              We bring you a mobile app for banking problems that oftenly
+              wasting much of your times.
+            </p>
+            <router-link to="/login">
+              <b-button class="py-2 try">Try it Free</b-button>
+            </router-link>
+          </div> </b-col
+        ><b-col cols="12" md="6">
+          <b-row><img src="../assets/phone.png" alt=""/></b-row></b-col
       ></b-row>
     </b-jumbotron>
     <div class="about">
@@ -91,13 +99,13 @@
             ></b-row
           ></b-col
         ><b-col cols="12" xl="6"
-          ><img src="../assets/company.png" alt="" /></b-col
+          ><img src="../assets/company.png" alt=""/></b-col
       ></b-row>
     </div>
     <div class="features">
       <b-row
         ><b-col cols="12" xl="5">
-          <img src="../assets/phone2.png" alt="" /></b-col
+          <img src="../assets/phone2.png" alt=""/></b-col
         ><b-col cols="12" xl="7" class="text-left"
           ><b-row>
             <h1>
@@ -196,7 +204,15 @@
           <br />
           <hr />
           <br />
-          2020 Pellet. All right reserved
+          <b-row align-h="between"
+            ><b-col md="5">2020 Pellet. All right reserved</b-col
+            ><b-col md="5"
+              ><b-row
+                ><b-col>+62 895 1234 1234 </b-col
+                ><b-col>contact@Pellet.com</b-col></b-row
+              ></b-col
+            ></b-row
+          >
         </b-col></b-row
       >
     </div>
@@ -217,10 +233,15 @@ export default {
 .container {
   font-family: 'Nunito Sans', sans-serif;
 }
+.pellet {
+  font-size: 29px;
+  color: rgba(99, 121, 244, 1);
+}
 
-.navbar {
-  margin-top: 0px;
-  background-color: blue;
+.navbar h1 {
+  font-size: 26px;
+  color: rgba(99, 121, 244, 1);
+  font-weight: 700;
 }
 
 .jumbotron {
@@ -229,7 +250,13 @@ export default {
 }
 
 .title-banner {
-  line-height: 186px;
+  position: relative;
+  top: 100px;
+  text-align: left;
+}
+
+.title-banner h1 {
+  font-weight: 700;
 }
 
 .btn1 {
@@ -297,13 +324,17 @@ export default {
 
 .footer {
   text-align: left;
-  height: 438px;
+  height: 430px;
   background-color: rgba(99, 121, 244, 1);
   color: white;
 }
 
 .footer p {
   line-height: 31px;
+}
+
+.footer h1 {
+  font-weight: 700;
 }
 
 hr {

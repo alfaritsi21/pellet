@@ -4,9 +4,21 @@
       <b-col class="main mt-2" cols="6">
         <b-row>
           <b-col>
-            <img :src="`${urlApi}${userData2.user_img}`" alt class="profile-image" />
-            <input type="file" ref="file" @change="updateImage" style="display: none" />
-            <h6 @click="$refs.file.click()" style="cursor: pointer;margin-top:5px">
+            <img
+              :src="`${urlApi}${userData2.user_img}`"
+              alt
+              class="profile-image"
+            />
+            <input
+              type="file"
+              ref="file"
+              @change="updateImage"
+              style="display: none"
+            />
+            <h6
+              @click="$refs.file.click()"
+              style="cursor: pointer;margin-top:5px"
+            >
               <b-icon icon="pencil"></b-icon>Edit
             </h6>
 
@@ -42,9 +54,9 @@
           <b-col>
             <h5 class="name-text">
               {{
-              userData2.first_name === ''
-              ? userData2.user_name
-              : userData2.first_name + ' ' + userData2.last_name
+                userData2.first_name === ''
+                  ? userData2.user_name
+                  : userData2.first_name + ' ' + userData2.last_name
               }}
             </h5>
             <p class="name-phone">{{ userData2.user_phone }}</p>

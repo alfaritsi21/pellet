@@ -7,13 +7,17 @@
           <p class="navbar-logo" @click="setShowDashboard">Pellet</p>
         </b-col>
         <b-col md="3" class="navbar-profile">
-          <img :src="`${urlApi}${userData2.user_img}`" alt class="navbar-image" />
+          <img
+            :src="`${urlApi}${userData2.user_img}`"
+            alt
+            class="navbar-image"
+          />
           <div class="navbar-detail">
             <p class="navbar-name">
               {{
-              userData2.first_name === ''
-              ? userData2.user_name
-              : userData2.first_name + ' ' + userData2.last_name
+                userData2.first_name === ''
+                  ? userData2.user_name
+                  : userData2.first_name + ' ' + userData2.last_name
               }}
             </p>
             <p class="navbar-phone">{{ userData2.user_phone }}</p>
@@ -71,7 +75,11 @@
                 <b-col class="side-menu" cols="6">Top Up</b-col>
               </b-row>
             </b-col>
-            <b-col cols="12" class="side-content side-profile" @click="showProfiles">
+            <b-col
+              cols="12"
+              class="side-content side-profile"
+              @click="showProfiles"
+            >
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
@@ -88,9 +96,14 @@
                   ><p class="text-hidden">a</p></b-col
                 >-->
                 <b-col cols="3">
-                  <b-icon class="side-notification" icon="box-arrow-right"></b-icon>
+                  <b-icon
+                    class="side-notification"
+                    icon="box-arrow-right"
+                  ></b-icon>
                 </b-col>
-                <b-col class="side-menu" cols="6" @click="onLogout">Logout</b-col>
+                <b-col class="side-menu" cols="6" @click="onLogout"
+                  >Logout</b-col
+                >
               </b-row>
             </b-col>
           </b-row>
@@ -108,7 +121,10 @@
           <div class="dashboard-container main-content" v-show="showProfile">
             <Profile />
           </div>
-          <div class="dashboard-container main-content" v-show="showTransaction">
+          <div
+            class="dashboard-container main-content"
+            v-show="showTransaction"
+          >
             <Transaction />
           </div>
         </b-col>
@@ -126,7 +142,7 @@
               <p class="footer-text">+62 5637 8882 9901</p>
             </b-col>
             <b-col cols="4">
-              <p class="footer-text">contact@zwallet.com</p>
+              <p class="footer-text">contact@Pellet.com</p>
             </b-col>
           </b-row>
         </b-col>
