@@ -4,9 +4,21 @@
       <b-col class="main mt-2" cols="6">
         <b-row>
           <b-col>
-            <img :src="`${urlApi}${userData2.user_img}`" alt class="profile-image" />
-            <input type="file" ref="file" @change="updateImage" style="display: none" />
-            <h6 @click="$refs.file.click()" style="cursor: pointer;margin-top:5px">
+            <img
+              :src="`${urlApi}${userData2.user_img}`"
+              alt
+              class="profile-image"
+            />
+            <input
+              type="file"
+              ref="file"
+              @change="updateImage"
+              style="display: none"
+            />
+            <h6
+              @click="$refs.file.click()"
+              style="cursor: pointer; margin-top: 5px"
+            >
               <b-icon icon="pencil"></b-icon>Edit
             </h6>
 
@@ -42,9 +54,9 @@
           <b-col>
             <h5 class="name-text">
               {{
-              userData2.first_name === ''
-              ? userData2.user_name
-              : userData2.first_name + ' ' + userData2.last_name
+                userData2.first_name === ''
+                  ? userData2.user_name
+                  : userData2.first_name + ' ' + userData2.last_name
               }}
             </h5>
             <p class="name-phone">{{ userData2.user_phone }}</p>
@@ -149,7 +161,7 @@ export default {
       'setShowChangePassword',
       'setShowChangePin'
     ]),
-    ...mapActions(['patchImage', 'getUserById', 'cekpin', 'logout']),
+    ...mapActions(['patchImage', 'getUserById', 'cekPin', 'logout']),
     // handleFile(event) {
     //   this.form.user_img = event.target.files[0]
     // },
@@ -170,19 +182,18 @@ export default {
         form: data
       }
       this.patchImage(setData)
-        .then(response => {
+        .then((response) => {
           console.log(response)
           this.$bvToast.toast(`${response.msg}`, {
             title: 'Info ',
-            variant: 'info',
+            variant: 'success',
             solid: true
           })
           // this.form = {}
-          // this.cekPin(this.userData2.user_id)
+          this.cekPin(this.userData.user_id)
           this.getUserById(this.userData2.user_id)
         })
-        .catch(error => {
-          console.log(error.data)
+        .catch((error) => {
           this.$bvToast.toast(`${error.data.msg}`, {
             title: 'Check it again ',
             variant: 'danger',
@@ -190,10 +201,10 @@ export default {
           })
         })
     },
-    updateProfile() {}
-    // logout() {
-    //   this.logout()
-    // }
+    updateProfile() {},
+    logout() {
+      this.logout()
+    }
   }
 }
 </script>
