@@ -49,10 +49,10 @@
         <b-form @submit.prevent style="color: grey">
           <b-form-group label="Name">
             <b-input
+              disabled
               type="text"
               v-model="form.user_name"
               :placeholder="userData2.user_name"
-              disabled
             />
           </b-form-group>
           <b-form-group label="First Name">
@@ -94,6 +94,9 @@ export default {
         user_phone: null
       }
     }
+  },
+  created() {
+    this.getUserName()
   },
   computed: {
     ...mapGetters({

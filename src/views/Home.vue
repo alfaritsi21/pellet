@@ -3,39 +3,46 @@
     <!-- =====================NAVBAR============================= -->
     <b-container fluid class="navbar-container">
       <b-row align-h="around">
-        <b-col md="4"
-          ><p class="navbar-logo" @click="setShowDashboard">Pellet</p></b-col
-        >
+        <b-col md="4">
+          <p class="navbar-logo" @click="setShowDashboard">Pellet</p>
+        </b-col>
         <b-col md="3" class="navbar-profile">
-          <img
-            :src="`${urlApi}${userData2.user_img}`"
-            alt=""
-            class="navbar-image"
-          />
+          <img :src="`${urlApi}${userData2.user_img}`" alt class="navbar-image" />
           <div class="navbar-detail">
             <p class="navbar-name">
               {{
-                userData2.first_name === ''
-                  ? userData2.user_name
-                  : userData2.first_name + ' ' + userData2.last_name
+              userData2.first_name === ''
+              ? userData2.user_name
+              : userData2.first_name + ' ' + userData2.last_name
               }}
             </p>
             <p class="navbar-phone">{{ userData2.user_phone }}</p>
           </div>
-          <b-icon class="navbar-notification" icon="bell"></b-icon>
+          <!-- <b-icon
+            v-b-popover.hover.bottom="
+              'Kamu ' +
+              getHistory[0].trans_type +
+              ' Rp.' +
+              getHistory[0].trans_nominal +
+              ' ke ' +
+              getHistory[0].first_name
+            "
+            class="navbar-notification"
+            icon="bell"
+          ></b-icon>-->
         </b-col>
       </b-row>
     </b-container>
     <!-- ==================MAIN CONTENT========================== -->
     <div class="main-container">
       <b-row align-h="center">
-        <b-col class="main-side" cols="2"
-          ><b-row align-h="between">
+        <b-col class="main-side" cols="2">
+          <b-row align-h="between">
             <b-col cols="12" class="side-content" @click="setShowDashboard">
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                > -->
+                >-->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="grid"></b-icon>
                 </b-col>
@@ -46,7 +53,7 @@
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                > -->
+                >-->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="arrow-up"></b-icon>
                 </b-col>
@@ -57,22 +64,18 @@
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                > -->
+                >-->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="plus"></b-icon>
                 </b-col>
                 <b-col class="side-menu" cols="6">Top Up</b-col>
               </b-row>
             </b-col>
-            <b-col
-              cols="12"
-              class="side-content side-profile"
-              @click="showProfiles"
-            >
+            <b-col cols="12" class="side-content side-profile" @click="showProfiles">
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                > -->
+                >-->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="person"></b-icon>
                 </b-col>
@@ -83,20 +86,15 @@
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                > -->
+                >-->
                 <b-col cols="3">
-                  <b-icon
-                    class="side-notification"
-                    icon="box-arrow-right"
-                  ></b-icon>
+                  <b-icon class="side-notification" icon="box-arrow-right"></b-icon>
                 </b-col>
-                <b-col class="side-menu" cols="6" @click="onLogout"
-                  >Logout</b-col
-                >
+                <b-col class="side-menu" cols="6" @click="onLogout">Logout</b-col>
               </b-row>
             </b-col>
-          </b-row></b-col
-        >
+          </b-row>
+        </b-col>
         <b-col cols="7">
           <div class="main-content-dashboard" v-show="showDashboard">
             <Dashboard />
@@ -110,10 +108,7 @@
           <div class="dashboard-container main-content" v-show="showProfile">
             <Profile />
           </div>
-          <div
-            class="dashboard-container main-content"
-            v-show="showTransaction"
-          >
+          <div class="dashboard-container main-content" v-show="showTransaction">
             <Transaction />
           </div>
         </b-col>
@@ -122,19 +117,19 @@
     <!-- =====================FOOTER============================= -->
     <b-container fluid class="footer-container">
       <b-row align-h="around">
-        <b-col cols="3"
-          ><p class="footer-text">2020 Pellet. All right reserved.</p></b-col
-        >
-        <b-col cols="5"
-          ><b-row align-h="around">
-            <b-col cols="5"
-              ><p class="footer-text">+62 5637 8882 9901</p></b-col
-            >
-            <b-col cols="4"
-              ><p class="footer-text">contact@zwallet.com</p></b-col
-            >
-          </b-row></b-col
-        >
+        <b-col cols="3">
+          <p class="footer-text">2020 Pellet. All right reserved.</p>
+        </b-col>
+        <b-col cols="5">
+          <b-row align-h="around">
+            <b-col cols="5">
+              <p class="footer-text">+62 5637 8882 9901</p>
+            </b-col>
+            <b-col cols="4">
+              <p class="footer-text">contact@zwallet.com</p>
+            </b-col>
+          </b-row>
+        </b-col>
       </b-row>
     </b-container>
   </b-container>
@@ -174,7 +169,8 @@ export default {
       showProfile: 'getshowProfile',
       showTransaction: 'getshowTransaction',
       userData: 'userData',
-      userData2: 'getUserData2'
+      userData2: 'getUserData2',
+      getHistory: 'getHistory'
     })
   },
   methods: {
@@ -188,7 +184,7 @@ export default {
     ...mapActions(['logout', 'cekPin']),
     cekDataUser() {
       this.cekPin(this.userData.user_id)
-        .then((response) => {
+        .then(response => {
           if (response === 0) {
             this.$bvToast.toast(
               'Please create new pin to secure your account',
@@ -203,7 +199,7 @@ export default {
             }, 2000)
           }
         })
-        .catch((error) => {
+        .catch(error => {
           this.$bvToast.toast(error.data.msg, {
             title: 'Warning',
             variant: 'danger',
