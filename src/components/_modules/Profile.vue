@@ -1,25 +1,21 @@
 <template>
   <div>
-    <b-row align-h="center" v-if="showMainProfile"
-      ><b-col class="main mt-2" cols="6">
-        <b-row
-          ><b-col
-            ><img
-              :src="`${urlApi}${userData2.user_img}`"
-              alt=""
-              class="profile-image"
-            />
+    <b-row align-h="center" v-if="showMainProfile">
+      <b-col class="main mt-2" cols="6">
+        <b-row>
+          <b-col>
+            <img :src="`${urlApi}${userData2.user_img}`" alt class="profile-image" />
+            <input type="file" ref="file" @change="updateImage" style="display: none" />
+            <h6 @click="$refs.file.click()" style="cursor: pointer;margin-top:5px">
+              <b-icon icon="pencil"></b-icon>Edit
+            </h6>
 
-            <p style="cursor: pointer" @click="setImage()" class="mt-2">
-              <b-icon
-                @click="$bvModal.show('modalUpdateImage')"
-                icon="pencil"
-              ></b-icon
-              >Edit
-            </p></b-col
-          ></b-row
-        >
-        <b-modal id="modalUpdateImage" hide-footer style>
+            <!-- <p style="cursor: pointer" @click="setImage()" class="mt-2">
+              <b-icon @click="$bvModal.show('modalUpdateImage')" icon="pencil"></b-icon>Edit
+            </p>-->
+          </b-col>
+        </b-row>
+        <!-- <b-modal id="modalUpdateImage" hide-footer style>
           <template v-slot:modal-title>Update Image</template>
           <b-form v-on:submit.prevent>
             <input type="file" @change="handleFile" />
@@ -30,8 +26,7 @@
                 variant="info"
                 block
                 @click="updateImage()"
-                >Update</b-button
-              >
+              >Update</b-button>
             </div>
             <div>
               <b-button
@@ -39,60 +34,76 @@
                 variant="secondary"
                 block
                 @click="$bvModal.hide('modalUpdateImage')"
-                >Cancel</b-button
-              >
+              >Cancel</b-button>
             </div>
           </b-form>
-        </b-modal>
-        <b-row
-          ><b-col
-            ><h5 class="name-text">
+        </b-modal>-->
+        <b-row>
+          <b-col>
+            <h5 class="name-text">
               {{
-                userData2.first_name === ''
-                  ? userData2.user_name
-                  : userData2.first_name + ' ' + userData2.last_name
+              userData2.first_name === ''
+              ? userData2.user_name
+              : userData2.first_name + ' ' + userData2.last_name
               }}
             </h5>
-            <p class="name-phone">
-              {{ userData2.user_phone }}
-            </p></b-col
-          ></b-row
-        >
-        <b-container fluid class="card" @click="setShowPersonalInfo"
-          ><b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7"
-              ><h6 class="name-text-button">Personal Information</h6>
+            <p class="name-phone">{{ userData2.user_phone }}</p>
+          </b-col>
+        </b-row>
+        <b-container fluid class="card" @click="setShowPersonalInfo">
+          <b-row align-h="around" align-v="center">
+            <b-col class="p-4" md="7">
+              <h6 class="name-text-button">Personal Information</h6>
             </b-col>
-            <b-col md="3"><b-icon icon="arrow-right"></b-icon></b-col> </b-row
-        ></b-container>
+            <b-col md="3">
+              <b-icon icon="arrow-right"></b-icon>
+            </b-col>
+          </b-row>
+        </b-container>
 
-        <b-container fluid class="card" @click="setShowChangePassword"
-          ><b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7"
-              ><h6 class="name-text-button">Change Password</h6>
+        <b-container fluid class="card" @click="setShowChangePassword">
+          <b-row align-h="around" align-v="center">
+            <b-col class="p-4" md="7">
+              <h6 class="name-text-button">Change Password</h6>
             </b-col>
-            <b-col md="3"><b-icon icon="arrow-right"></b-icon></b-col> </b-row
-        ></b-container>
+            <b-col md="3">
+              <b-icon icon="arrow-right"></b-icon>
+            </b-col>
+          </b-row>
+        </b-container>
 
-        <b-container fluid class="card" @click="setShowChangePin"
-          ><b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7"
-              ><h6 class="name-text-button">Change PIN</h6>
+        <b-container fluid class="card" @click="setShowChangePin">
+          <b-row align-h="around" align-v="center">
+            <b-col class="p-4" md="7">
+              <h6 class="name-text-button">Change PIN</h6>
             </b-col>
-            <b-col md="3"><b-icon icon="arrow-right"></b-icon></b-col> </b-row
-        ></b-container>
+            <b-col md="3">
+              <b-icon icon="arrow-right"></b-icon>
+            </b-col>
+          </b-row>
+        </b-container>
 
-        <b-container fluid class="card"
-          ><b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7"
-              ><h6 @click="logout" class="name-text-button">Logout</h6>
+        <b-container fluid class="card">
+          <b-row align-h="around" align-v="center">
+            <b-col class="p-4" md="7">
+              <h6 @click="logout" class="name-text-button">Logout</h6>
             </b-col>
-            <b-col md="3"><b-icon icon="arrow-right"></b-icon></b-col> </b-row
-        ></b-container> </b-col
-    ></b-row>
-    <b-row v-if="showPersonalInfo"> <PersonalInfo /></b-row>
-    <b-row v-if="showChangePassword"> <ChangePassword /></b-row>
-    <b-row v-if="showChangePin"> <ChangePin /></b-row>
+            <b-col md="3">
+              <b-icon icon="arrow-right"></b-icon>
+            </b-col>
+          </b-row>
+        </b-container>
+      </b-col>
+    </b-row>
+    <b-row v-if="showPersonalInfo">
+      <PersonalInfo />
+    </b-row>
+    <b-row v-if="showChangePassword">
+      <ChangePassword />
+    </b-row>
+    <b-row v-if="showChangePin">
+      <ChangePin />
+    </b-row>
   </div>
 </template>
 
@@ -110,6 +121,7 @@ export default {
   data() {
     return {
       urlApi: process.env.VUE_APP_URL,
+      formImage: {},
       form: {
         user_name: '',
         first_name: '',
@@ -137,19 +149,20 @@ export default {
       'setShowChangePassword',
       'setShowChangePin'
     ]),
-    ...mapActions(['patchImage', 'getUserById', 'logout']),
-    handleFile(event) {
-      this.form.user_img = event.target.files[0]
-    },
-    setImage(data) {
-      this.form = {
-        user_img: this.userData2.user_img
-      }
-      // console.log(this.form)
-    },
+    ...mapActions(['patchImage', 'getUserById', 'cekpin', 'logout']),
+    // handleFile(event) {
+    //   this.form.user_img = event.target.files[0]
+    // },
+    // setImage(data) {
+    //   this.form = {
+    //     user_img: this.userData2.user_img
+    //   }
+    //   // console.log(this.form)
+    // },
     updateImage() {
       // console.log(this.userData2.user_id)
       // console.log(this.form)
+      this.form.user_img = event.target.files[0]
       const data = new FormData()
       data.append('user_img', this.form.user_img)
       const setData = {
@@ -157,20 +170,23 @@ export default {
         form: data
       }
       this.patchImage(setData)
-        .then((response) => {
-          this.$bvToast.toast(response.msg, {
-            title: 'Status :',
-            autoHideDelay: 2000,
-            appendToast: true
+        .then(response => {
+          console.log(response)
+          this.$bvToast.toast(`${response.msg}`, {
+            title: 'Info ',
+            variant: 'info',
+            solid: true
           })
-          // this.getUserById(this.userData2.user_id)
+          // this.form = {}
+          // this.cekPin(this.userData2.user_id)
+          this.getUserById(this.userData2.user_id)
         })
-        .catch((error) => {
-          console.log(error)
-          this.$bvToast.toast(error.msg, {
-            title: 'Status :',
-            autoHideDelay: 2000,
-            appendToast: true
+        .catch(error => {
+          console.log(error.data)
+          this.$bvToast.toast(`${error.data.msg}`, {
+            title: 'Check it again ',
+            variant: 'danger',
+            solid: true
           })
         })
     },
