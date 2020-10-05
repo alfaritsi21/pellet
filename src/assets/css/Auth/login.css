@@ -22,6 +22,7 @@
   padding-left: 60px !important;
   position: relative;
   height: 100%;
+  text-align: left;
 }
 
 .cover img:nth-of-type(1) {
@@ -63,6 +64,7 @@
   width: 70%;
   line-height: 40px;
   margin-bottom: 20px;
+  text-align: left;
   max-height: 200px;
   overflow: auto;
 }
@@ -72,6 +74,7 @@
   color: #3a3d4296;
   line-height: 30px;
   margin-bottom: 50px;
+  text-align: left;
   max-height: 200px;
   overflow: auto;
 }

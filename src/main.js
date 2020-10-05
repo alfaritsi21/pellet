@@ -7,8 +7,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Chartkick from 'vue-chartkick'
 import Chart from 'chart.js'
-import * as VueGoogleMaps from 'vue2-google-maps'
-import VueGeolocation from 'vue-browser-geolocation'
 
 require('dotenv').config()
 
@@ -17,13 +15,6 @@ Vue.use(IconsPlugin)
 Vue.use(Chartkick.use(Chart))
 
 Vue.config.productionTip = false
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: 'AIzaSyATI-pRchP7-f0ty8rsP6_Km-3cLvLf6OE',
-    libraries: 'places'
-  }
-})
-Vue.use(VueGeolocation)
 
 new Vue({
   router,

@@ -2,14 +2,13 @@
   <b-container fluid class="conta">
     <b-row class="login">
       <b-col cols="12" sm="12" md="12" lg="6" xl="6" class="cover">
-        <h1>Pellete</h1>
+        <h1>Pellet</h1>
         <img src="../../assets/image/Group57.png" alt="" />
         <h5>App that Covering Banking Needs.</h5>
         <p>
-          Pellete is an application that focussing in banking needs for all
-          users in the world. Always updated and always following world trends.
-          5000+ users registered in Zwallet everyday with worldwide users
-          coverage.
+          Pellet is an application that focussing in banking needs for all users
+          in the world. Always updated and always following world trends. 5000+
+          users registered in Zwallet everyday with worldwide users coverage.
         </p>
       </b-col>
       <b-col cols="12" sm="12" md="12" lg="6" xl="6" class="formRegist">
@@ -22,14 +21,14 @@
           wherever you are. Desktop, laptop, mobile phone? we cover all of that
           for you!
         </p>
-        <b-form @submit.prevent="onSubmit">
+        <b-form @submit.prevent="onSubmit('danger')">
           <div class="username">
             <img src="../../assets/image/person.png" alt="" />
             <b-form-input
               id="input-1"
               required
               placeholder="Enter your username"
-              v-model="user_name"
+              v-model="form.user_name"
             ></b-form-input>
           </div>
           <br />
@@ -40,7 +39,7 @@
               type="number"
               required
               placeholder="Enter your phone number"
-              v-model="user_phone"
+              v-model="form.user_phone"
             ></b-form-input>
           </div>
           <br />
@@ -51,7 +50,7 @@
               type="email"
               required
               placeholder="Enter your e-mail"
-              v-model="user_email"
+              v-model="form.user_email"
             ></b-form-input>
           </div>
           <br />
@@ -62,7 +61,7 @@
               type="password"
               required
               placeholder="Create your password"
-              v-model="user_password"
+              v-model="form.user_password"
             ></b-form-input
             ><img src="../../assets/image/eye-crossed.png" alt="" />
           </div>
@@ -74,12 +73,12 @@
               type="password"
               required
               placeholder="Repeate your password"
-              v-model="re_password"
+              v-model="form.confirm_password"
             ></b-form-input
             ><img src="../../assets/image/eye-crossed.png" alt="" />
           </div>
           <br />
-          <b-button type="submit" variant="primary">Login</b-button>
+          <b-button type="submit" variant="primary">Register</b-button>
           <br />
           <div class="p4">
             <p>
@@ -94,9 +93,47 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Register',
-  components: {}
+  data() {
+    return {
+      form: {
+        user_email: '',
+        user_password: '',
+        user_name: '',
+        user_phone: '',
+        confirm_password: ''
+      }
+    }
+  },
+  computed: {
+    ...mapGetters([])
+  },
+  components: {},
+  methods: {
+    ...mapActions(['register']),
+    onSubmit(variant = null) {
+      this.register(this.form)
+        .then(response => {
+          this.$bvToast.toast('Register success', {
+            title: 'Success',
+            variant: 'success',
+            solid: true
+          })
+          setTimeout(() => {
+            this.$router.push('/login')
+          }, 2000)
+        })
+        .catch(error => {
+          this.$bvToast.toast(error.data.msg, {
+            title: 'Warning',
+            variant: variant,
+            solid: true
+          })
+        })
+    }
+  }
 }
 </script>
 

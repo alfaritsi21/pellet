@@ -3,7 +3,8 @@ export default {
     showDashboard: true,
     showTransfer: false,
     showTopup: false,
-    showProfile: false
+    showProfile: false,
+    showTransaction: false
   },
   mutations: {
     setShowDashboard(state, payload) {
@@ -11,24 +12,35 @@ export default {
       state.showTransfer = false
       state.showTopup = false
       state.showProfile = false
+      state.showTransaction = false
     },
     setShowTransfer(state, payload) {
       state.showDashboard = false
       state.showTransfer = true
       state.showTopup = false
       state.showProfile = false
+      state.showTransaction = false
     },
     setShowTopup(state, payload) {
       state.showDashboard = false
       state.showTransfer = false
       state.showTopup = true
       state.showProfile = false
+      state.showTransaction = false
     },
     setShowProfile(state, payload) {
       state.showDashboard = false
       state.showTransfer = false
       state.showTopup = false
       state.showProfile = true
+      state.showTransaction = false
+    },
+    setShowTransaction(state, payload) {
+      state.showDashboard = false
+      state.showTransfer = false
+      state.showTopup = false
+      state.showProfile = false
+      state.showTransaction = true
     }
   },
   actions: {},
@@ -44,6 +56,9 @@ export default {
     },
     getshowProfile(state) {
       return state.showProfile
+    },
+    getshowTransaction(state) {
+      return state.showTransaction
     }
   }
 }
