@@ -70,9 +70,11 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import io from 'socket.io-client'
 export default {
   data() {
     return {
+      socket: io('http://127.0.0.1:3001'),
       pin: [],
       validation: false,
       nominal: ''
@@ -98,10 +100,10 @@ export default {
         } else {
           const pin = this.pin.join('')
           this.cekPin(this.userData.user_id)
-            .then((result) => {
+            .then(result => {
               if (result === Number(pin)) {
                 this.topup([pin, this.nominal, this.getUserData2])
-                  .then((response) => {
+                  .then(response => {
                     this.$bvToast.toast(response.msg, {
                       title: 'Success',
                       variant: 'success',
@@ -109,11 +111,12 @@ export default {
                     })
                     this.weeklyHistory(this.userData.user_id)
                     this.cekPin(this.userData.user_id)
+                    this.socket.emit('notification', response.data)
                     this.nominal = ''
                     this.pin = []
                     this.validation = false
                   })
-                  .catch((error) => {
+                  .catch(error => {
                     this.$bvToast.toast(error.data.msg + ' please try again', {
                       title: 'Warning',
                       variant: 'danger',
@@ -134,7 +137,7 @@ export default {
                 this.validation = false
               }
             })
-            .catch((err) => {
+            .catch(err => {
               this.$bvToast.toast(err.data.msg, {
                 title: 'Warning',
                 variant: 'danger',
