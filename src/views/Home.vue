@@ -177,7 +177,7 @@
                     icon="box-arrow-right"
                   ></b-icon>
                 </b-col>
-                <b-col class="side-menu" cols="6" @click="onLogout"
+                <b-col class="side-menu" cols="6" @click.prevent="handleLogout"
                   >Logout</b-col
                 >
               </b-row>
@@ -286,7 +286,7 @@ export default {
     ]),
     cekDataUser() {
       this.cekPin(this.userData.user_id)
-        .then((response) => {
+        .then(response => {
           if (response === 0) {
             this.$bvToast.toast(
               'Please create new pin to secure your account',
@@ -301,7 +301,7 @@ export default {
             }, 2000)
           }
         })
-        .catch((error) => {
+        .catch(error => {
           this.$bvToast.toast(error.data.msg, {
             title: 'Warning',
             variant: 'danger',
@@ -309,8 +309,22 @@ export default {
           })
         })
     },
-    onLogout() {
-      this.logout(this.$bvToast)
+    // onLogout() {
+    //   this.logout(this.$bvToast)
+    // },
+    handleLogout() {
+      this.$bvModal
+        .msgBoxConfirm('Are you sure?', {
+          cancelVariant: 'light',
+          okVariant: 'info',
+          headerClass: 'p-2 border-bottom-0',
+          footerClass: 'p-2 border-top-0',
+          centered: true
+        })
+        .then(item => {
+          this.isLogout = item
+          this.isLogout ? this.logout(this.$bvToast) : console.log(item)
+        })
     },
     showProfiles() {
       this.setShowProfile()
