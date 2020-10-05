@@ -6,15 +6,13 @@ export default {
     user: {},
     token: localStorage.getItem('token') || null,
     keys: null,
-    isLogin: false,
-    welcome: false
+    isLogin: false
   },
   mutations: {
     delUser(state) {
       state.user = {}
       state.token = null
       state.isLogin = false
-      state.welcome = false
     },
     setLoginData(state, payload) {
       state.user = payload
@@ -23,6 +21,9 @@ export default {
     },
     setKeys(state, payload) {
       state.keys = payload
+    },
+    setWelcome(state, payload) {
+      state.welcome = payload
     }
   },
   actions: {

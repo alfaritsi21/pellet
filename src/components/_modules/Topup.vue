@@ -3,67 +3,96 @@
     <div class="text">
       <h6><b>Select Top Up Nominal</b></h6>
     </div>
-    <div class="select-topup">
-      <b-form @submit.prevent="onTopUp(1)">
-        <input v-model="nominal" type="number" min="1000" placeholder="0.00" />
-        <b-button type="submit">Top Up Now</b-button>
-      </b-form>
-    </div>
-    <div class="howto-topup">
-      <p v-b-modal.modal-topup><b>How To Top Up ?</b></p>
-    </div>
-    <b-modal id="modal-topup" title="How To Top Up">
-      <div class="card">
-        <span>1</span> Go to the nearest ATM or you can use E-Banking.
+    <div v-if="midtrans === false" class="manual-topup">
+      <div class="select-topup">
+        <b-form @submit.prevent="onTopUp(1)">
+          <input
+            v-model="nominal"
+            type="number"
+            min="1000"
+            placeholder="0.00"
+          />
+          <b-button type="submit">Top Up Now</b-button>
+        </b-form>
       </div>
-      <div class="card">
-        <span>2</span> Type your security number on the ATM or E-Banking.
+      <div class="howto-topup">
+        <p v-b-modal.modal-topup><b>How To Top Up ?</b></p>
       </div>
-      <div class="card"><span>3</span> Select “Transfer” in the menu</div>
-      <div class="card">
-        <span>4</span> Type the virtual account number that we provide you at
-        the top.
-      </div>
-      <div class="card">
-        <span>5</span> Type the amount of the money you want to top up.
-      </div>
-      <div class="card"><span>6</span> Read the summary details</div>
-      <div class="card"><span>7</span> Press transfer / top up</div>
-      <div class="card">
-        <span>8</span> You can see your money in Pellet within 3 hours.
-      </div>
-    </b-modal>
-    <div v-if="validation === true" class="topup">
-      <div class="topUp-modal">
-        <div class="sub-topUp-Modal">
-          <div class="pinCheck">
-            <h4>Please input your pin number</h4>
-            <div class="rowPin2">
-              <div class="sub-rowPin2">
-                <input v-model="pin[0]" maxlength="1" type="text" />
+      <b-modal id="modal-topup" title="How To Top Up">
+        <div class="card">
+          <span>1</span> Go to the nearest ATM or you can use E-Banking.
+        </div>
+        <div class="card">
+          <span>2</span> Type your security number on the ATM or E-Banking.
+        </div>
+        <div class="card"><span>3</span> Select “Transfer” in the menu</div>
+        <div class="card">
+          <span>4</span> Type the virtual account number that we provide you at
+          the top.
+        </div>
+        <div class="card">
+          <span>5</span> Type the amount of the money you want to top up.
+        </div>
+        <div class="card"><span>6</span> Read the summary details</div>
+        <div class="card"><span>7</span> Press transfer / top up</div>
+        <div class="card">
+          <span>8</span> You can see your money in Pellet within 3 hours.
+        </div>
+      </b-modal>
+      <div v-if="validation === true" class="topup">
+        <div class="topUp-modal">
+          <div class="sub-topUp-Modal">
+            <div class="pinCheck">
+              <h4>Please input your pin number</h4>
+              <div class="rowPin2">
+                <div class="sub-rowPin2">
+                  <input v-model="pin[0]" maxlength="1" type="text" />
+                </div>
+                <div class="sub-rowPin2">
+                  <input v-model="pin[1]" maxlength="1" type="text" />
+                </div>
+                <div class="sub-rowPin2">
+                  <input v-model="pin[2]" maxlength="1" type="text" />
+                </div>
+                <div class="sub-rowPin2">
+                  <input v-model="pin[3]" maxlength="1" type="text" />
+                </div>
+                <div class="sub-rowPin2">
+                  <input v-model="pin[4]" maxlength="1" type="text" />
+                </div>
+                <div class="sub-rowPin2">
+                  <input v-model="pin[5]" maxlength="1" type="text" />
+                </div>
               </div>
-              <div class="sub-rowPin2">
-                <input v-model="pin[1]" maxlength="1" type="text" />
+              <div class="btna">
+                <button @click="onTopUp(2)" type="button">Submit</button>
               </div>
-              <div class="sub-rowPin2">
-                <input v-model="pin[2]" maxlength="1" type="text" />
-              </div>
-              <div class="sub-rowPin2">
-                <input v-model="pin[3]" maxlength="1" type="text" />
-              </div>
-              <div class="sub-rowPin2">
-                <input v-model="pin[4]" maxlength="1" type="text" />
-              </div>
-              <div class="sub-rowPin2">
-                <input v-model="pin[5]" maxlength="1" type="text" />
-              </div>
-            </div>
-            <div class="btna">
-              <button @click="onTopUp(2)" type="button">Submit</button>
             </div>
           </div>
         </div>
       </div>
+      <a class="midtransBtn" href="#" @click="topupMidtrans"
+        >Top up with midtrans</a
+      >
+    </div>
+    <div v-if="midtrans === true" class="midtrans-topup">
+      <input
+        class="bn1"
+        type="text"
+        placeholder="input your top up id"
+        v-model="form.topup_id"
+      />
+      <input
+        class="bn2"
+        min="10000"
+        type="number"
+        placeholder="nominal Rp. 0.00"
+        v-model="form.nominal"
+      />
+      <button class="bn3" type="button" @click="midtransSubmit">Submit</button>
+      <a class="midtransBtn2" href="#" @click="cancelMidtrans">
+        cancel
+      </a>
     </div>
   </div>
 </template>
@@ -77,7 +106,12 @@ export default {
       socket: io('http://127.0.0.1:3001'),
       pin: [],
       validation: false,
-      nominal: ''
+      nominal: '',
+      midtrans: false,
+      form: {
+        topup_id: '',
+        nominal: ''
+      }
     }
   },
   computed: {
@@ -155,6 +189,21 @@ export default {
           solid: true
         })
       }
+    },
+    midtransSubmit() {
+      console.log(this.form)
+      this.$bvToast.toast('This feature still in development process', {
+        title: 'Comming soon',
+        variant: 'info',
+        solid: true
+      })
+      this.midtrans = false
+    },
+    topupMidtrans() {
+      this.midtrans = true
+    },
+    cancelMidtrans() {
+      this.midtrans = false
     }
   }
 }
@@ -233,5 +282,50 @@ input:focus {
 }
 .text {
   text-align: left;
+}
+.manual-topup {
+  position: relative;
+  height: 450px;
+}
+.midtransBtn {
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+  padding: 5px 0;
+  font-size: 12px;
+  color: #6379f4;
+  border-radius: 5px;
+}
+.midtrans-topup {
+  height: 430px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 100px;
+}
+.midtransBtn2 {
+  position: absolute;
+  bottom: 0;
+  left: 0px;
+  padding-left: 10px;
+  border-bottom: 1px solid black;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  color: #6379f4;
+}
+.bn1,
+.bn2,
+.bn3 {
+  border: 1px solid black;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  width: 300px;
+  border-radius: 10px;
+}
+.bn3 {
+  color: white;
 }
 </style>
