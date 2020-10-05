@@ -3,13 +3,13 @@
     <!-- =====================NAVBAR============================= -->
     <b-container fluid class="navbar-container">
       <b-row align-h="around">
-        <b-col md="4"
-          ><p class="navbar-logo" @click="setShowDashboard">Pellet</p></b-col
-        >
+        <b-col md="4">
+          <p class="navbar-logo" @click="setShowDashboard">Pellet</p>
+        </b-col>
         <b-col md="3" class="navbar-profile">
           <img
             :src="`${urlApi}${userData2.user_img}`"
-            alt=""
+            alt
             class="navbar-image"
           />
           <div class="navbar-detail">
@@ -116,13 +116,13 @@
     <!-- ==================MAIN CONTENT========================== -->
     <div class="main-container">
       <b-row align-h="center">
-        <b-col class="main-side" cols="2"
-          ><b-row align-h="between">
+        <b-col class="main-side" cols="2">
+          <b-row align-h="between">
             <b-col cols="12" class="side-content" @click="setShowDashboard">
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                > -->
+                >-->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="grid"></b-icon>
                 </b-col>
@@ -133,7 +133,7 @@
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                > -->
+                >-->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="arrow-up"></b-icon>
                 </b-col>
@@ -144,7 +144,7 @@
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                > -->
+                >-->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="plus"></b-icon>
                 </b-col>
@@ -159,7 +159,7 @@
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                > -->
+                >-->
                 <b-col cols="3">
                   <b-icon class="side-notification" icon="person"></b-icon>
                 </b-col>
@@ -170,7 +170,7 @@
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
-                > -->
+                >-->
                 <b-col cols="3">
                   <b-icon
                     class="side-notification"
@@ -182,8 +182,8 @@
                 >
               </b-row>
             </b-col>
-          </b-row></b-col
-        >
+          </b-row>
+        </b-col>
         <b-col cols="7">
           <div class="main-content-dashboard" v-show="showDashboard">
             <Dashboard />
@@ -209,19 +209,19 @@
     <!-- =====================FOOTER============================= -->
     <b-container fluid class="footer-container">
       <b-row align-h="around">
-        <b-col cols="3"
-          ><p class="footer-text">2020 Pellet. All right reserved.</p></b-col
-        >
-        <b-col cols="5"
-          ><b-row align-h="around">
-            <b-col cols="5"
-              ><p class="footer-text">+62 5637 8882 9901</p></b-col
-            >
-            <b-col cols="4"
-              ><p class="footer-text">contact@zwallet.com</p></b-col
-            >
-          </b-row></b-col
-        >
+        <b-col cols="3">
+          <p class="footer-text">2020 Pellet. All right reserved.</p>
+        </b-col>
+        <b-col cols="5">
+          <b-row align-h="around">
+            <b-col cols="5">
+              <p class="footer-text">+62 5637 8882 9901</p>
+            </b-col>
+            <b-col cols="4">
+              <p class="footer-text">contact@zwallet.com</p>
+            </b-col>
+          </b-row>
+        </b-col>
       </b-row>
     </b-container>
   </b-container>

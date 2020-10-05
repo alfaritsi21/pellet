@@ -1,50 +1,51 @@
 <template>
   <b-container fluid>
-    <b-row class="personal"
-      ><b-col cols="12">
+    <b-row class="personal">
+      <b-col cols="12">
         <strong>Personal Information</strong>
         <br />
         <br />
         <p>
-          We got your personal information from the sign <br />
-          up proccess. If you want to make changes on <br />
-          your information, contact our support.
+          We got your personal information from the sign
+          <br />up proccess. If you want to make changes on
+          <br />your information, contact our support.
         </p>
-      </b-col></b-row
-    >
+      </b-col>
+    </b-row>
     <b-container fluid>
       <b-row class="card">
-        <b-col cols="12"
-          ><p>First Name</p>
-          <strong>{{ userData2.first_name }}</strong></b-col
-        >
+        <b-col cols="12">
+          <p>First Name</p>
+          <strong>{{ userData2.first_name }}</strong>
+        </b-col>
       </b-row>
       <b-row class="card">
-        <b-col
-          ><p>Last Name</p>
-          <strong>{{ userData2.last_name }}</strong></b-col
-        >
+        <b-col>
+          <p>Last Name</p>
+          <strong>{{ userData2.last_name }}</strong>
+        </b-col>
       </b-row>
       <b-row class="card">
-        <b-col
-          ><p>Verified E-Mail</p>
-          <strong>{{ userData2.user_email }}</strong></b-col
-        >
+        <b-col>
+          <p>Verified E-Mail</p>
+          <strong>{{ userData2.user_email }}</strong>
+        </b-col>
       </b-row>
       <b-row class="card" align-h="between" align-v="center">
-        <b-col cols="8"
-          ><p>Phone Number</p>
-          <strong>{{ userData2.user_phone }}</strong></b-col
-        ><b-col
+        <b-col cols="8">
+          <p>Phone Number</p>
+          <strong>{{ userData2.user_phone }}</strong>
+        </b-col>
+        <b-col
           style="cursor: pointer"
           cols="4"
           @click="$bvModal.show('updateProfile')"
+          v-on:click="setUpdate()"
           class="text-right"
-          >Manage Personal Info</b-col
-        >
+        >Manage Personal Info</b-col>
       </b-row>
-      <b-modal id="updateProfile" hide-footer style
-        ><template v-slot:modal-title>Manage Personal Info</template>
+      <b-modal id="updateProfile" hide-footer style>
+        <template v-slot:modal-title>Manage Personal Info</template>
         <b-form @submit.prevent style="color: grey">
           <b-form-group label="Name">
             <b-input
@@ -55,25 +56,13 @@
             />
           </b-form-group>
           <b-form-group label="First Name">
-            <b-input
-              type="text"
-              v-model="form.first_name"
-              placeholder="Input first name"
-            />
+            <b-input type="text" v-model="form.first_name" placeholder="Input first name" />
           </b-form-group>
           <b-form-group label="Last Name">
-            <b-input
-              type="text"
-              v-model="form.last_name"
-              placeholder="input Last Name"
-            />
+            <b-input type="text" v-model="form.last_name" placeholder="input Last Name" />
           </b-form-group>
           <b-form-group label="Phone">
-            <b-input
-              type="number"
-              v-model="form.user_phone"
-              :placeholder="userData2.user_phone"
-            />
+            <b-input type="number" v-model="form.user_phone" placeholder="Input your phone" />
           </b-form-group>
           <b-row>
             <b-col @click="$bvModal.hide('updateProfile')">
@@ -84,8 +73,7 @@
                 variant="info"
                 type="submit"
                 class="my-3"
-                >Submit</b-button
-              >
+              >Update</b-button>
             </b-col>
           </b-row>
         </b-form>
@@ -118,7 +106,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['patchProfile', 'cekPin']),
+    ...mapActions(['patchProfile', 'cekPin', 'getUserById']),
     updateProfile() {
       // console.log(this.form)
       const setData = {
@@ -126,26 +114,32 @@ export default {
         form: this.form
       }
       this.patchProfile(setData)
-        .then((response) => {
-          this.$bvToast.toast(response.msg, {
-            title: 'Status :',
-            autoHideDelay: 2000,
-            appendToast: true
+        .then(response => {
+          this.$bvToast.toast(`${response.msg}`, {
+            title: 'Info ',
+            variant: 'info',
+            solid: true
           })
           this.cekPin(this.userData.user_id)
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error)
-          this.$bvToast.toast(error.msg, {
-            title: 'Status :',
-            autoHideDelay: 500,
-            appendToast: true
+          this.$bvToast.toast(`${error.data.msg}`, {
+            title: 'Check it again ',
+            variant: 'danger',
+            solid: true
           })
         })
     },
-    getUserName() {
-      this.form.user_name = this.userData.user_name
-      console.log(this.form.user_name)
+    setUpdate() {
+      this.form = {
+        user_id: this.userData2.user_id,
+        user_name: this.userData2.user_name,
+        first_name: this.userData2.first_name,
+        last_name: this.userData2.last_name,
+        user_phone: this.userData2.user_phone
+        // profile_desc: this.user.profile_desc
+      }
     }
   }
 }
