@@ -80,11 +80,11 @@ export default {
     },
     dailyHistory(context, payload) {
       const n = new Date()
-      n.setDate(n.getDate() + 0)
+      n.setDate(n.getDate() + 1)
       const now = n.toISOString().slice(0, 10)
 
       const d = new Date()
-      d.setDate(d.getDate() - 0)
+      d.setDate(d.getDate() - 1)
       const date = d.toISOString().slice(0, 10)
 
       const form = {
