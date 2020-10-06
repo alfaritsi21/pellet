@@ -140,7 +140,11 @@
           >
             Try Again
           </button>
-          <div v-if="statusSuccess === true" class="downloadPdf">
+          <div
+            @click="download()"
+            v-if="statusSuccess === true"
+            class="downloadPdf"
+          >
             <img src="../../../assets/image/download.png" alt="" />
             <p>Download PDF</p>
           </div>
@@ -181,11 +185,13 @@
         <h4>Enter PIN to Transfer</h4>
       </div>
     </div>
+    <div @click="sini()">SINI</div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import JsPDF from 'jspdf'
 import io from 'socket.io-client'
 export default {
   name: 'SelectUser',
@@ -220,6 +226,7 @@ export default {
       'getIncomePerDay',
       'getExpensePerDay'
     ]),
+    ...mapMutations(['setShowMainProfile']),
     getUserData() {
       this.cekPin(this.userData.user_id)
     },
@@ -242,7 +249,7 @@ export default {
     pinContinue() {
       const pin = this.pin.join('')
       this.cekPin(this.userData.user_id)
-        .then(result => {
+        .then((result) => {
           if (result === Number(pin)) {
             if (Number(this.getUserData2.user_saldo) >= Number(this.nominal)) {
               this.transfer([
@@ -251,7 +258,7 @@ export default {
                 this.nominal,
                 this.notes
               ])
-                .then(response => {
+                .then((response) => {
                   this.$bvToast.toast('Transfer Success', {
                     title: 'Success',
                     variant: 'success',
@@ -264,7 +271,7 @@ export default {
                   this.isStatus = true
                   this.statusSuccess = true
                 })
-                .catch(error => {
+                .catch((error) => {
                   this.$bvToast.toast(error.data.msg, {
                     title: 'Warning',
                     variant: 'danger',
@@ -295,7 +302,7 @@ export default {
             this.statusSuccess = false
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.$bvToast.toast(err.data.msg, {
             title: 'Warning',
             variant: 'danger',
@@ -316,6 +323,23 @@ export default {
       } else {
         this.isStatus = false
       }
+    },
+    download() {
+      // Jspdf.default = Jspdf
+      const doc = new JsPDF()
+      doc.setFontSize(14)
+      doc.text(
+        `Transfer Success!  
+        
+      Amount : Rp. ${this.nominal}  
+      Balance left : Rp.${this.getUserData2.user_saldo - this.nominal}
+      Date : ${new Date()}
+      Note : ${this.notes}`,
+        15,
+        15
+      )
+
+      doc.save('pdf.pdf')
     }
   }
 }

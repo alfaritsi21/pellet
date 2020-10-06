@@ -32,7 +32,7 @@
             </router-link>
           </div>
         </b-col>
-        <b-col cols="12" md="6">
+        <b-col class="right" cols="12" md="6">
           <b-row>
             <img src="../assets/phone.png" alt />
           </b-row>
@@ -260,10 +260,7 @@ export default {
 .container {
   font-family: 'Nunito Sans', sans-serif;
 }
-.pellet {
-  font-size: 29px;
-  color: rgba(99, 121, 244, 1);
-}
+
 .navbar h1 {
   font-size: 26px;
   color: rgba(99, 121, 244, 1);
@@ -278,6 +275,13 @@ export default {
   top: 100px;
   text-align: left;
 }
+
+.right {
+  background-image: url(../assets/rect.png);
+  background-size: 80%;
+  background-repeat: no-repeat;
+}
+
 .title-banner h1 {
   font-weight: 700;
 }
@@ -290,15 +294,7 @@ export default {
   box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
   border-radius: 8px;
 }
-/* .btn1:hover {
-  width: 120px;
-  color: #6379f4;
-  background-color: white;
-  border: 2px solid #ffffff;
-  box-sizing: border-box;
-  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
-  border-radius: 8px;
-} */
+
 .btn2 {
   width: 120px;
   color: #6379f4;
@@ -308,15 +304,7 @@ export default {
   box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
   border-radius: 8px;
 }
-/* .btn2:hover {
-  width: 120px;
-  color: white;
-  background: #6379f4;
-  border: 2px solid #ffffff;
-  box-sizing: border-box;
-  box-shadow: 0px 6px 75px rgba(100, 87, 87, 0.05);
-  border-radius: 5px;
-} */
+
 .try {
   background-color: #6379f4;
 }
