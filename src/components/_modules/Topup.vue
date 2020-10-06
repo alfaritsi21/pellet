@@ -76,6 +76,9 @@
       >
     </div>
     <div v-if="midtrans === true" class="midtrans-topup">
+      <a v-if="midtransSuccess === true" :href="link" target="_blank">{{
+        link
+      }}</a>
       <input
         class="bn1"
         type="text"
@@ -109,7 +112,9 @@ export default {
       form: {
         id_topup: '',
         nominal: ''
-      }
+      },
+      midtransSuccess: false,
+      link: ''
     }
   },
   computed: {
@@ -191,11 +196,19 @@ export default {
     },
     midtransSubmit() {
       this.midtransPayment([this.form, this.$bvToast])
-      this.$bvToast.toast('This feature is still under development', {
-        title: 'Comming soon',
-        variant: 'info',
-        solid: true
-      })
+        .then((result) => {
+          this.link = ''
+          this.$bvToast.toast('Open link below to continue your payment', {
+            title: 'Payment bill created',
+            variant: 'info',
+            solid: true
+          })
+          this.link = result.data
+          this.midtransSuccess = true
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       this.form.nominal = ''
       this.form.id_topup = ''
     },
