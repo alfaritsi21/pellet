@@ -47,6 +47,22 @@ export default {
             }
           })
       })
+    },
+    midtransPayment(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post('https://pellet-backend.fwdev.online/payment', payload[0])
+          .then(response => {
+            resolve(response.data)
+          })
+          .catch(error => {
+            if (error.response === undefined) {
+              alert('Tidak dapat terhubung ke server')
+            } else {
+              reject(error.response)
+            }
+          })
+      })
     }
   },
   getters: {
