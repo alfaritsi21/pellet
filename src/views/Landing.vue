@@ -1,7 +1,7 @@
 <template>
   <b-container-fluid class="container">
     <!-- <div class="navbar">zwalet</div> -->
-    <b-jumbotron class="jumbotron p-0 m-0">
+    <b-jumbotron class="jumbotron p-2 ml-1 mr-1">
       <b-row align-h="between" class="mt-1">
         <b-col md="3" class="navbar">
           <h1>Pellet</h1>
@@ -42,9 +42,7 @@
     <div class="about">
       <b-row>
         <b-col>
-          <h1>
-            <span style="color: #6379f4">About</span> the Application.
-          </h1>
+          <h1><span style="color: #6379f4">About</span> the Application.</h1>
         </b-col>
       </b-row>
       <b-row class="mt-2">
@@ -74,8 +72,8 @@
               <strong>Data Privacy</strong>
             </b-card-title>
             <b-card-text class="pt-3">
-              We make sure your data is safe in our database and we will
-              encrypt any data you submitted to us.
+              We make sure your data is safe in our database and we will encrypt
+              any data you submitted to us.
             </b-card-text>
           </b-card>
         </b-col>
@@ -127,7 +125,7 @@
         </b-col>
         <b-col cols="12" xl="7" class="text-left">
           <b-row>
-            <h1 style="margin-top:60px">
+            <h1 style="margin-top: 60px">
               All The
               <span style="color: #6379f4">Great</span>
               <br />Pellet Features.
@@ -135,9 +133,7 @@
           </b-row>
           <b-row>
             <b-card bg-variant="white" style="width: 80%">
-              <h3>
-                <span>1.</span> Small Fee
-              </h3>
+              <h3><span>1.</span> Small Fee</h3>
               <p>
                 We only charge 5% of every success transaction done in Pellet
                 app.
@@ -146,9 +142,7 @@
           </b-row>
           <b-row>
             <b-card bg-variant="white" style="width: 80%">
-              <h3>
-                <span>2.</span>Data Secured
-              </h3>
+              <h3><span>2.</span>Data Secured</h3>
               <p>
                 All your data is secured properly in our system and it’s
                 encrypted.
@@ -157,10 +151,10 @@
           </b-row>
           <b-row>
             <b-card style="width: 80%">
-              <h3>
-                <span>3.</span>User Friendly
-              </h3>
-              <p>Pellet come up with modern and sleek design and not complicated.</p>
+              <h3><span>3.</span>User Friendly</h3>
+              <p>
+                Pellet come up with modern and sleek design and not complicated.
+              </p>
             </b-card>
           </b-row>
         </b-col>
@@ -169,7 +163,7 @@
     <div class="thought">
       <b-row>
         <b-col>
-          <h1 style="margin-top:20px">
+          <h1 style="margin-top: 20px">
             What Users are
             <span style="color: #6379f4">Saying</span>
           </h1>
@@ -230,8 +224,7 @@
           <h1>Pellet</h1>
           <p>
             Simplify financial needs and saving
-            <br />much time in banking needs with
-            <br />one single app.
+            <br />much time in banking needs with <br />one single app.
           </p>
           <br />
           <br />
