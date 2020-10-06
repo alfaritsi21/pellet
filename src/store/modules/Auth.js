@@ -21,6 +21,9 @@ export default {
     },
     setKeys(state, payload) {
       state.keys = payload
+    },
+    setWelcome(state, payload) {
+      state.welcome = payload
     }
   },
   actions: {

@@ -28,7 +28,14 @@
 .cover img:nth-of-type(1) {
   position: relative;
 }
-
+/* ================================= */
+.cover img {
+  transition: transform 0.5s ease-in-out;
+}
+.cover img:hover {
+  transform: scale(1) rotate(25deg);
+}
+/* ===================================== */
 .cover h1 {
   padding-left: 120px;
   font-size: 26px;

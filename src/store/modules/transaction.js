@@ -4,7 +4,8 @@ export default {
     urlApi: process.env.VUE_APP_URL,
     weeklyHistory: {},
     monthlyHistory: {},
-    dailyHistory: {}
+    dailyHistory: {},
+    notification: false
   },
   mutations: {
     setWeeklyHistory(state, payload) {
@@ -15,6 +16,9 @@ export default {
     },
     setDailyHistory(state, payload) {
       state.dailyHistory = payload
+    },
+    setNotification(state, payload) {
+      state.notification = payload
     }
   },
   actions: {
@@ -107,6 +111,9 @@ export default {
             }
           })
       })
+    },
+    notification(context, payload) {
+      context.commit('setNotification', payload)
     }
   },
   getters: {
@@ -118,6 +125,9 @@ export default {
     },
     getDailyHistory(state) {
       return state.dailyHistory
+    },
+    getNotification(state) {
+      return state.notification
     }
   }
 }

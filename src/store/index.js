@@ -30,7 +30,7 @@ export default new Vuex.Store({
   getters: {},
   plugins: [
     createPersistedState({
-      paths: ['Auth.user', 'Auth.isLogin'],
+      paths: ['Auth.user', 'Auth.isLogin', 'Auth.welcome'],
       storage: window.sessionStorage
     })
   ]
