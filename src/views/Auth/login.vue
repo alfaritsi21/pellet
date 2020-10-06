@@ -3,7 +3,7 @@
     <b-row class="login">
       <b-col cols="12" sm="12" md="12" lg="6" xl="6" class="cover">
         <h1>Pellet</h1>
-        <img src="../../assets/image/Group57.png" alt="" />
+        <img src="../../assets/image/Group57.png" alt />
         <h5>App that Covering Banking Needs.</h5>
         <p>
           Pellet is an application that focussing in banking needs for all users
@@ -23,7 +23,7 @@
         </p>
         <b-form @submit.prevent="onSubmit('danger')">
           <div class="email">
-            <img src="../../assets/image/mail.png" alt="" />
+            <img src="../../assets/image/mail.png" alt />
             <b-form-input
               id="input-2"
               type="email"
@@ -34,15 +34,15 @@
           </div>
           <br />
           <div class="password">
-            <img src="../../assets/image/lock.png" alt="" />
+            <img src="../../assets/image/lock.png" alt />
             <b-form-input
               id="input-3"
               type="password"
               required
               placeholder="Enter your password"
               v-model="form.user_password"
-            ></b-form-input
-            ><img src="../../assets/image/eye-crossed.png" alt="" />
+            ></b-form-input>
+            <img src="../../assets/image/eye-crossed.png" alt />
           </div>
           <div class="forgot">
             <router-link to="/forgot">Forgot password?</router-link>
@@ -82,7 +82,7 @@ export default {
     ...mapActions(['login']),
     onSubmit(variant = null) {
       this.login(this.form)
-        .then((response) => {
+        .then(response => {
           this.$bvToast.toast('Login success', {
             title: 'Success',
             variant: 'success',
@@ -93,7 +93,7 @@ export default {
             this.$router.push('/')
           }, 2000)
         })
-        .catch((error) => {
+        .catch(error => {
           this.$bvToast.toast(error.data.msg, {
             title: 'Warning',
             variant: variant,

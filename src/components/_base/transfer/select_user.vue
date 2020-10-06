@@ -186,11 +186,13 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import io from 'socket.io-client'
 export default {
   name: 'SelectUser',
   data() {
     return {
       urlApi: process.env.VUE_APP_URL,
+      socket: io('http://127.0.0.1:3001'),
       isPin: false,
       isStatus: false,
       statusSuccess: null,
@@ -257,6 +259,7 @@ export default {
                   })
                   this.weeklyHistory(this.userData.user_id)
                   this.cekPin(this.userData.user_id)
+                  this.socket.emit('transferNotif', response.data)
                   this.isPin = false
                   this.isStatus = true
                   this.statusSuccess = true

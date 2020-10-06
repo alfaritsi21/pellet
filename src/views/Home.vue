@@ -25,12 +25,19 @@
           <div class="notif">
             <div class="notif-icon">
               <b-icon
-                v-b-popover.hover.bottom="'Ada 6 pesan baru, segera lihat !'"
+                v-if="getNotification === true"
+                v-b-popover.hover.bottom="'Ada notifikasi baru, segera lihat !'"
                 @click="onBell"
                 class="navbar-notification"
                 icon="bell"
               ></b-icon>
-              <div v-if="isRed === true" class="red-notif"></div>
+              <b-icon
+                v-else
+                @click="onBell"
+                class="navbar-notification"
+                icon="bell"
+              ></b-icon>
+              <div v-if="getNotification === true" class="red-notif"></div>
             </div>
             <div v-if="isNotif === true" class="sub-notif">
               <div class="today">
@@ -235,14 +242,15 @@ import Transfer from '../components/_modules/Transfer'
 import Transaction from '../components/_modules/Transaction'
 
 import { mapGetters, mapMutations, mapActions } from 'vuex'
+import io from 'socket.io-client'
 
 export default {
   name: 'Home',
   data() {
     return {
       urlApi: process.env.VUE_APP_URL,
-      isNotif: false,
-      isRed: true
+      socket: io('http://127.0.0.1:3001'),
+      isNotif: false
     }
   },
   components: {
@@ -252,8 +260,49 @@ export default {
     Transfer,
     Transaction
   },
+  watch: {},
   created() {
     this.cekDataUser()
+  },
+  mounted() {
+    this.socket.on('topupNotif', data => {
+      setTimeout(() => {
+        this.$bvToast.toast(
+          'Top up Anda sebesar Rp.' + data.topup_nominal + ' berhasil diproses',
+          {
+            title: 'Info',
+            variant: 'info',
+            solid: true
+          }
+        )
+        this.notification(true)
+      }, 5000)
+    })
+    this.socket.on('welcome', data => {
+      setTimeout(() => {
+        this.$bvToast.toast('Welcome back ' + data.user_name, {
+          title: 'PELLET_BOT',
+          variant: 'info',
+          solid: true
+        })
+      }, 1000)
+    })
+    this.socket.on('transfer', data => {
+      setTimeout(() => {
+        this.$bvToast.toast(
+          'You have gotten Rp.' +
+            data.tf_nominal +
+            ' from user with id: ' +
+            data.user_id,
+          {
+            title: 'Info',
+            variant: 'info',
+            solid: true
+          }
+        )
+        this.notification(true)
+      }, 1000)
+    })
   },
   computed: {
     ...mapGetters({
@@ -266,7 +315,8 @@ export default {
       userData2: 'getUserData2',
       getHistory: 'getHistory',
       getMonthlyHistory: 'getMonthlyHistory',
-      getDailyHistory: 'getDailyHistory'
+      getDailyHistory: 'getDailyHistory',
+      getNotification: 'getNotification'
     })
   },
   methods: {
@@ -282,7 +332,8 @@ export default {
       'cekPin',
       'monthlyHistory',
       'weeklyHistory',
-      'dailyHistory'
+      'dailyHistory',
+      'notification'
     ]),
     cekDataUser() {
       this.cekPin(this.userData.user_id)
@@ -299,6 +350,8 @@ export default {
             setTimeout(() => {
               this.$router.push('/pin')
             }, 2000)
+          } else {
+            this.socket.emit('welcomeMessage', this.userData)
           }
         })
         .catch(error => {
@@ -327,16 +380,18 @@ export default {
         })
     },
     showProfiles() {
+      this.cekPin(this.userData.user_id)
       this.setShowProfile()
       this.setShowMainProfile()
     },
     onBell() {
+      this.cekPin(this.userData.user_id)
       if (this.isNotif === false) {
         this.isNotif = true
         this.dailyHistory(this.userData.user_id)
         this.weeklyHistory(this.userData.user_id)
         this.monthlyHistory(this.userData.user_id)
-        this.isRed = false
+        this.notification(false)
       } else {
         this.isNotif = false
       }
