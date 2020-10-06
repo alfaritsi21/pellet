@@ -4,33 +4,33 @@
     <b-row align-h="between" class="balance-container">
       <b-col md="5" class="balance-detail">
         <p class="balance-text">Balance</p>
-        <p class="balance-nominal">Rp {{ getUserData2.user_saldo }},00</p>
-        <p class="balance-phone">
-          {{ getUserData2.user_phone }}
-        </p>
+        <p class="balance-nominal">Rp {{ formatPrice(getUserData2.user_saldo) }}</p>
+        <p class="balance-phone">{{ getUserData2.user_phone }}</p>
       </b-col>
       <b-col md="4" class="balance-menu">
         <div>
-          <b-button class="button-transfer" @click="setShowTransfer"
-            ><b-row align-h="center">
-              <b-col class="button-icon-transfer"
-                ><b-icon class="side-notification" icon="arrow-up"></b-icon
-              ></b-col>
-              <b-col class="button-text-transfer"><p>Transfer</p></b-col>
-            </b-row></b-button
-          >
+          <b-button class="button-transfer" @click="setShowTransfer">
+            <b-row align-h="center">
+              <b-col class="button-icon-transfer">
+                <b-icon class="side-notification" icon="arrow-up"></b-icon>
+              </b-col>
+              <b-col class="button-text-transfer">
+                <p>Transfer</p>
+              </b-col>
+            </b-row>
+          </b-button>
         </div>
         <div>
-          <b-button class="button-transfer" @click="setShowTopup"
-            ><b-row align-h="center">
-              <b-col class="button-icon-transfer"
-                ><b-icon class="side-notification" icon="plus"></b-icon
-              ></b-col>
-              <b-col class="button-text-transfer"
-                ><p class="topup">Topup</p></b-col
-              >
-            </b-row></b-button
-          >
+          <b-button class="button-transfer" @click="setShowTopup">
+            <b-row align-h="center">
+              <b-col class="button-icon-transfer">
+                <b-icon class="side-notification" icon="plus"></b-icon>
+              </b-col>
+              <b-col class="button-text-transfer">
+                <p class="topup">Topup</p>
+              </b-col>
+            </b-row>
+          </b-button>
         </div>
       </b-col>
     </b-row>
@@ -62,11 +62,7 @@
             </b-col>
           </b-row>
           <div class="chart">
-            <line-chart
-              :data="chartData"
-              width="380px"
-              height="230px"
-            ></line-chart>
+            <line-chart :data="chartData" width="380px" height="230px"></line-chart>
           </div>
         </div>
       </b-col>
@@ -81,29 +77,21 @@
             </b-col>
           </b-row>
           <div class="transaction-list">
-            <b-col
-              v-for="(item, index) in getHistory"
-              :key="index"
-              class="navbar-profile"
-            >
-              <img
-                :src="`${urlApi}${item.user_img}`"
-                alt=""
-                class="navbar-image"
-              />
+            <b-col v-for="(item, index) in getHistory" :key="index" class="navbar-profile">
+              <img :src="`${urlApi}${item.user_img}`" alt class="navbar-image" />
               <div class="navbar-detail">
                 <p class="navbar-name">
                   {{
-                    item.first_name === ''
-                      ? item.user_name
-                      : item.first_name + ' ' + item.last_name
+                  item.first_name === ''
+                  ? item.user_name
+                  : item.first_name + ' ' + item.last_name
                   }}
                 </p>
                 <p class="navbar-phone">
                   {{
-                    userData.user_id === item.target_id
-                      ? item.trans_type
-                      : 'Subscription'
+                  userData.user_id === item.target_id
+                  ? item.trans_type
+                  : 'Subscription'
                   }}
                 </p>
               </div>
@@ -116,9 +104,9 @@
                 ]"
               >
                 {{
-                  userData.user_id === item.target_id
-                    ? '+' + item.trans_nominal
-                    : '-' + item.trans_nominal
+                userData.user_id === item.target_id
+                ? '+' + formatPrice(item.trans_nominal)
+                : '-' + formatPrice(item.trans_nominal)
                 }}
               </p>
             </b-col>
@@ -208,10 +196,10 @@ export default {
         user: this.userData.user_id
       }
       this.getIncomeTotal(income)
-        .then((response) => {
+        .then(response => {
           this.weeklyIncome = response[0].income
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err)
         })
     },
@@ -224,10 +212,10 @@ export default {
         user: this.userData.user_id
       }
       this.getExpenseTotal(expense)
-        .then((response) => {
+        .then(response => {
           this.weeklyExpense = response[0].expense
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err)
         })
     },
@@ -240,7 +228,7 @@ export default {
         user: this.userData.user_id
       }
       this.getIncomePerDay(income)
-        .then((response) => {
+        .then(response => {
           const incomeData = {}
           for (let index = 0; index < 7; index++) {
             const d = new Date()
@@ -264,10 +252,10 @@ export default {
             this.chartData[1]
           ]
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error)
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err)
         })
     },
@@ -280,7 +268,7 @@ export default {
         user: this.userData.user_id
       }
       this.getExpensePerDay(expense)
-        .then((response) => {
+        .then(response => {
           const expenseData = {}
           for (let index = 0; index < 7; index++) {
             const d = new Date()
@@ -304,10 +292,10 @@ export default {
             }
           ]
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error)
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err)
         })
     },
@@ -316,6 +304,10 @@ export default {
         style: 'currency',
         currency: 'IDR'
       })
+    },
+    formatPrice(value) {
+      const val = (value / 1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
   }
 }
