@@ -132,7 +132,7 @@
             </h1>
           </b-row>
           <b-row>
-            <b-card bg-variant="white" style="width: 80%">
+            <b-card class="card" bg-variant="white" style="width: 80%">
               <h3><span>1.</span> Small Fee</h3>
               <p>
                 We only charge 5% of every success transaction done in Pellet
@@ -141,7 +141,7 @@
             </b-card>
           </b-row>
           <b-row>
-            <b-card bg-variant="white" style="width: 80%">
+            <b-card class="card" bg-variant="white" style="width: 80%">
               <h3><span>2.</span>Data Secured</h3>
               <p>
                 All your data is secured properly in our system and it’s
@@ -150,7 +150,7 @@
             </b-card>
           </b-row>
           <b-row>
-            <b-card style="width: 80%">
+            <b-card class="card" style="width: 80%">
               <h3><span>3.</span>User Friendly</h3>
               <p>
                 Pellet come up with modern and sleek design and not complicated.
@@ -358,5 +358,12 @@ img {
 }
 img:hover {
   transform: scale(1.1);
+}
+
+.card {
+  background: #ffffff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 25px;
+  margin-bottom: 5px;
 }
 </style>
