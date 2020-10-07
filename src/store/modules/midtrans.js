@@ -31,6 +31,27 @@ export default {
           })
       })
     },
+    topupPayment(context, payload) {
+      const form = {
+        user_id: payload[1].user_id,
+        user_phone: payload[1].user_phone,
+        nominal: payload[0]
+      }
+      return new Promise((resolve, reject) => {
+        axios
+          .post('https://pellet-backend.fwdev.online/topup/midtrans', form)
+          .then(response => {
+            resolve(response.data)
+          })
+          .catch(error => {
+            if (error.response === undefined) {
+              alert('Tidak dapat terhubung ke server')
+            } else {
+              reject(error.response)
+            }
+          })
+      })
+    },
     cekPin(context, payload) {
       return new Promise((resolve, reject) => {
         axios

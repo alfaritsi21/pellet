@@ -90,12 +90,12 @@
           Click Here
         </button>
       </a>
-      <input
+      <!-- <input
         class="bn1"
         type="text"
         placeholder="input your top up id"
         v-model="form.id_topup"
-      />
+      /> -->
       <input
         class="bn2"
         min="5000"
@@ -148,7 +148,8 @@ export default {
       'getExpenseTotal',
       'getIncomePerDay',
       'getExpensePerDay',
-      'midtransPayment'
+      'midtransPayment',
+      'topupPayment'
     ]),
     onTopUp(val) {
       if (Number(this.nominal) >= 5000) {
@@ -214,23 +215,35 @@ export default {
       }
     },
     midtransSubmit() {
-      this.midtransPayment([this.form, this.$bvToast])
+      this.topupPayment([this.form.nominal, this.getUserData2])
         .then(result => {
-          this.link = ''
-          this.$bvToast.toast('Open link below to continue your payment', {
-            title: 'Payment bill created',
-            variant: 'info',
-            solid: true
-          })
-          this.link = result.data
-          this.midtransSuccess = true
-          this.isMidtransSubmit = false
+          this.form.id_topup = result.data.topup_code
+          this.midtransPayment([this.form, this.$bvToast])
+            .then(result => {
+              this.$bvToast.toast('Open link below to continue your payment', {
+                title: 'Payment bill created',
+                variant: 'info',
+                solid: true
+              })
+
+              console.log(result)
+              this.link = result.pagination
+              this.midtransSuccess = true
+              this.isMidtransSubmit = false
+            })
+            .catch(err => {
+              console.log(err)
+            })
+          this.form.nominal = ''
+          this.form.id_topup = ''
         })
         .catch(err => {
-          console.log(err)
+          this.$bvToast.toast(err.data.msg, {
+            title: 'Warning',
+            variant: 'danger',
+            solid: true
+          })
         })
-      this.form.nominal = ''
-      this.form.id_topup = ''
     },
     topupMidtrans() {
       this.midtrans = true
@@ -240,6 +253,7 @@ export default {
     },
     onLinkMidtrans() {
       setTimeout(() => {
+        this.link = ''
         this.midtransSuccess = false
       }, 60000)
       this.isMidtransSubmit = true
