@@ -1,7 +1,15 @@
 <template>
   <div>
     <b-row align-h="center" v-if="showMainProfile">
-      <b-col class="main mt-2" cols="6" md="6">
+      <b-col
+        class="main mt-2"
+        cols="12"
+        xs="12"
+        sm="12"
+        md="12"
+        lg="12"
+        xl="12"
+      >
         <b-row>
           <b-col>
             <img
@@ -21,35 +29,9 @@
             >
               <b-icon icon="pencil"></b-icon>Edit
             </h6>
-
-            <!-- <p style="cursor: pointer" @click="setImage()" class="mt-2">
-              <b-icon @click="$bvModal.show('modalUpdateImage')" icon="pencil"></b-icon>Edit
-            </p>-->
           </b-col>
         </b-row>
-        <!-- <b-modal id="modalUpdateImage" hide-footer style>
-          <template v-slot:modal-title>Update Image</template>
-          <b-form v-on:submit.prevent>
-            <input type="file" @change="handleFile" />
-            <div @click="$bvModal.hide('modalUpdateImage')">
-              <b-button
-                type="button"
-                class="mt-3"
-                variant="info"
-                block
-                @click="updateImage()"
-              >Update</b-button>
-            </div>
-            <div>
-              <b-button
-                class="mt-2"
-                variant="secondary"
-                block
-                @click="$bvModal.hide('modalUpdateImage')"
-              >Cancel</b-button>
-            </div>
-          </b-form>
-        </b-modal>-->
+
         <b-row>
           <b-col>
             <h5 class="name-text">
@@ -63,46 +45,46 @@
           </b-col>
         </b-row>
         <b-container fluid class="card" @click="setShowPersonalInfo">
-          <b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7">
+          <b-row align-h="between" class="vh-100" align-v="center">
+            <b-col class=" pl-2 pr-0" md="10">
               <h6 class="name-text-button">Personal Information</h6>
             </b-col>
-            <b-col md="3">
+            <b-col class="text-right" xs="2" sm="2" md="2" lg="2" xl="2">
               <b-icon icon="arrow-right"></b-icon>
             </b-col>
           </b-row>
         </b-container>
 
         <b-container fluid class="card" @click="setShowChangePassword">
-          <b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7">
+          <b-row align-h="between" class="vh-100" align-v="center">
+            <b-col class=" pl-2 pr-0" md="9">
               <h6 class="name-text-button">Change Password</h6>
             </b-col>
-            <b-col md="3">
+            <b-col class="text-right" xs="2" sm="2" md="2" lg="2" xl="2">
               <b-icon icon="arrow-right"></b-icon>
             </b-col>
           </b-row>
         </b-container>
 
         <b-container fluid class="card" @click="setShowChangePin">
-          <b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7">
+          <b-row align-h="between" class="vh-100" align-v="center">
+            <b-col class=" pl-2 pr-0" md="10">
               <h6 class="name-text-button">Change PIN</h6>
             </b-col>
-            <b-col md="3">
+            <b-col class="text-right" xs="2" sm="2" md="2" lg="2" xl="2">
               <b-icon icon="arrow-right"></b-icon>
             </b-col>
           </b-row>
         </b-container>
 
         <b-container fluid class="card" @click.prevent="handleLogout">
-          <b-row align-h="around" align-v="center">
-            <b-col class="p-4" md="7">
+          <b-row align-h="between" class="vh-100" align-v="center">
+            <b-col class=" pl-2 pr-0" md="10">
               <h6 class="name-text-button">
                 Logout
               </h6>
             </b-col>
-            <b-col md="3">
+            <b-col class="text-right" xs="2" sm="2" md="2" lg="2" xl="2">
               <b-icon icon="arrow-right"></b-icon>
             </b-col>
           </b-row>
@@ -226,10 +208,6 @@ export default {
 </script>
 
 <style scoped>
-/* .main {
-  background-color: coral;
-} */
-
 .profile-image {
   max-width: 70px;
   max-height: 70px;
@@ -239,16 +217,18 @@ export default {
 }
 
 .card {
+  width: 60%;
   cursor: pointer;
   text-align: left;
   height: 64px;
   background-color: rgba(229, 232, 237, 1);
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 .name-text {
-  font-family: Nunito Sans;
+  font-family: ' Nunito Sans';
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -260,7 +240,7 @@ export default {
 }
 
 .name-text-button {
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
@@ -270,7 +250,7 @@ export default {
 }
 
 .name-phone {
-  font-family: Nunito Sans;
+  font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
