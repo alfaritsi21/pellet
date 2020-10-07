@@ -81,7 +81,12 @@
     </div>
     <div v-if="midtrans === true" class="midtrans-topup">
       <a v-if="midtransSuccess === true" :href="link" target="_blank">
-        <button class="bn3" type="button" style="color: white">
+        <button
+          @click="onLinkMidtrans"
+          class="bn3"
+          type="button"
+          style="color: white"
+        >
           Click Here
         </button>
       </a>
@@ -98,7 +103,14 @@
         placeholder="nominal Rp. 0.00"
         v-model="form.nominal"
       />
-      <button class="bn3" type="button" @click="midtransSubmit">Submit</button>
+      <button
+        v-if="isMidtransSubmit === true"
+        class="bn3"
+        type="button"
+        @click="midtransSubmit"
+      >
+        Submit
+      </button>
       <a class="midtransBtn2" href="#" @click="cancelMidtrans">cancel</a>
     </div>
   </div>
@@ -120,7 +132,8 @@ export default {
         nominal: ''
       },
       midtransSuccess: false,
-      link: ''
+      link: '',
+      isMidtransSubmit: true
     }
   },
   computed: {
@@ -144,10 +157,10 @@ export default {
         } else {
           const pin = this.pin.join('')
           this.cekPin(this.userData.user_id)
-            .then((result) => {
+            .then(result => {
               if (result === Number(pin)) {
                 this.topup([pin, this.nominal, this.getUserData2])
-                  .then((response) => {
+                  .then(response => {
                     this.$bvToast.toast(response.msg, {
                       title: 'Success',
                       variant: 'success',
@@ -160,7 +173,7 @@ export default {
                     this.pin = []
                     this.validation = false
                   })
-                  .catch((error) => {
+                  .catch(error => {
                     this.$bvToast.toast(error.data.msg + ' please try again', {
                       title: 'Warning',
                       variant: 'danger',
@@ -181,7 +194,7 @@ export default {
                 this.validation = false
               }
             })
-            .catch((err) => {
+            .catch(err => {
               this.$bvToast.toast(err.data.msg, {
                 title: 'Warning',
                 variant: 'danger',
@@ -202,7 +215,7 @@ export default {
     },
     midtransSubmit() {
       this.midtransPayment([this.form, this.$bvToast])
-        .then((result) => {
+        .then(result => {
           this.link = ''
           this.$bvToast.toast('Open link below to continue your payment', {
             title: 'Payment bill created',
@@ -211,8 +224,9 @@ export default {
           })
           this.link = result.data
           this.midtransSuccess = true
+          this.isMidtransSubmit = false
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err)
         })
       this.form.nominal = ''
@@ -223,6 +237,12 @@ export default {
     },
     cancelMidtrans() {
       this.midtrans = false
+    },
+    onLinkMidtrans() {
+      setTimeout(() => {
+        this.midtransSuccess = false
+      }, 60000)
+      this.isMidtransSubmit = true
     }
   }
 }
