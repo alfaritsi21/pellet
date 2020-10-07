@@ -116,14 +116,14 @@
 
 .button {
   text-align: right;
-  width: 650px;
+  width: 630px;
 }
 .button .xx {
   height: 40px;
   border-radius: 5px;
   color: white;
   padding: 0 30px;
-  margin-right: 30px;
+  margin-right: 10px;
   background-color: #6379f4;
   border: 1px solid rgba(0, 0, 0, 0);
 }
@@ -356,4 +356,79 @@
   color: #7a7886;
   font-size: 14px;
   width: 70%;
+}
+
+@media (max-width: 1368px) {
+  .button .xx {
+    margin-right: 10%;
+  }
+}
+@media (max-width: 1068px) {
+  .notes {
+    margin: 0 80px;
+    text-align: center;
+    width: 30%;
+  }
+  .amount {
+    text-align: center;
+    width: 60%;
+  }
+  .aa {
+    width: 50%;
+    margin-left: 30px;
+  }
+  .button {
+    text-align: left;
+    width: 500px;
+  }
+  .button .xx {
+    padding: 0 30px;
+    margin-top: 20px;
+    margin-left: 115px;
+  }
+}
+@media (max-width: 768px) {
+  .button .xx {
+    margin-left: 10px;
+  }
+  .aa {
+    width: 50%;
+    margin-left: 5px;
+    text-align: left;
+  }
+  .amount {
+    text-align: left;
+    padding-left: 30px;
+  }
+  .cc {
+    width: 180px;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #7a7886;
+    line-height: 20px;
+  }
+  .transfer-to-receiver {
+    padding-left: 70px;
+    padding-top: 5px;
+  }
+  .transfer-to-receiver img {
+    width: 60px;
+    margin-left: 1px;
+  }
+  .transfer-to-receiver h6 {
+    font-size: 14px;
+  }
+  .sub-select-receiver .transfer-to-receiver p {
+    font-size: 12px;
+  }
+  .input-value-container {
+    margin-left: 0px;
+  }
+  .notes {
+    margin: 0 0;
+    text-align: center;
+    width: 30%;
+  }
+}
+@media (max-width: 576px) {
 }
