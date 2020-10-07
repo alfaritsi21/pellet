@@ -62,7 +62,7 @@ export default {
       if (val === 1) {
         const pin = this.pin.join('')
         this.cekPin(this.userData.user_id)
-          .then((result) => {
+          .then(result => {
             if (result === Number(pin)) {
               this.$bvToast.toast('Now please input your new pin', {
                 title: 'Check pin success',
@@ -80,7 +80,7 @@ export default {
               this.pin = []
             }
           })
-          .catch((err) => {
+          .catch(err => {
             this.$bvToast.toast(err.data.msg, {
               title: 'Warning',
               variant: 'danger',
@@ -91,7 +91,7 @@ export default {
       } else {
         const pin = this.pin.join('')
         this.changePin([pin, this.userData.user_id])
-          .then((response) => {
+          .then(response => {
             this.$bvToast.toast(response, {
               title: 'Success',
               variant: 'success',
@@ -101,7 +101,7 @@ export default {
             this.currentPin = true
             this.setShowDashboard()
           })
-          .catch((error) => {
+          .catch(error => {
             this.$bvToast.toast(error.data.msg, {
               title: 'Warning',
               variant: 'danger',
@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style  scoped>
+<style scoped>
 p {
   color: grey;
 }

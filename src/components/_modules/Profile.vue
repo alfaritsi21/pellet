@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row align-h="center" v-if="showMainProfile">
-      <b-col class="main mt-2" cols="6">
+      <b-col class="main mt-2" cols="6" md="6">
         <b-row>
           <b-col>
             <img
@@ -231,8 +231,8 @@ export default {
 } */
 
 .profile-image {
-  width: 70px;
-  height: 70px;
+  max-width: 70px;
+  max-height: 70px;
   background-blend-mode: normal;
   border-radius: 10px;
   margin-top: 0;
