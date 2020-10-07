@@ -74,7 +74,7 @@ export default {
     ...mapMutations(['setShowDashboard']),
     onSubmit() {
       this.changePassword([this.userData.user_id, this.form])
-        .then((response) => {
+        .then(response => {
           this.$bvToast.toast(response.msg, {
             title: 'Success',
             variant: 'success',
@@ -85,7 +85,7 @@ export default {
           this.form.confirm_password = ''
           this.setShowDashboard()
         })
-        .catch((error) => {
+        .catch(error => {
           this.$bvToast.toast(error.data.msg, {
             title: 'Warning',
             variant: 'danger',
@@ -132,16 +132,9 @@ p {
 
 .containerPass {
   margin-top: 30px;
-  /* display: flex;
-  flex-flow: row nowrap; */
 }
 
 input {
-  /* padding: 20px; */
-
-  /* font-size: 30px; */
-  /* text-align: center; */
-  /* color: red; */
   width: 431px;
   height: 65px;
   border: 1px solid rgba(169, 169, 169, 0.6);
