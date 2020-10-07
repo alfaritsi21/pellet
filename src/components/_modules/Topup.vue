@@ -381,4 +381,29 @@ input:focus {
 .bn3 {
   color: white;
 }
+
+@media (max-width: 1368px) {
+}
+@media (max-width: 1068px) {
+}
+@media (max-width: 768px) {
+  .bn1,
+  .bn2,
+  .bn3 {
+    width: 250px;
+  }
+}
+@media (max-width: 576px) {
+  .bn1,
+  .bn2,
+  .bn3 {
+    width: 150px;
+  }
+  .howto-topup {
+    top: 125px;
+  }
+  .select-topup button {
+    font-size: 12px;
+  }
+}
 </style>
