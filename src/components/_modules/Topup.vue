@@ -8,7 +8,12 @@
     <div v-if="midtrans === false" class="manual-topup">
       <div class="select-topup">
         <b-form @submit.prevent="onTopUp(1)">
-          <input v-model="nominal" type="number" min="1000" placeholder="0.00" />
+          <input
+            v-model="nominal"
+            type="number"
+            min="1000"
+            placeholder="0.00"
+          />
           <b-button type="submit">Top Up Now</b-button>
         </b-form>
       </div>
@@ -24,9 +29,7 @@
         <div class="card">
           <span>2</span> Type your security number on the ATM or E-Banking.
         </div>
-        <div class="card">
-          <span>3</span> Select “Transfer” in the menu
-        </div>
+        <div class="card"><span>3</span> Select “Transfer” in the menu</div>
         <div class="card">
           <span>4</span> Type the virtual account number that we provide you at
           the top.
@@ -34,12 +37,8 @@
         <div class="card">
           <span>5</span> Type the amount of the money you want to top up.
         </div>
-        <div class="card">
-          <span>6</span> Read the summary details
-        </div>
-        <div class="card">
-          <span>7</span> Press transfer / top up
-        </div>
+        <div class="card"><span>6</span> Read the summary details</div>
+        <div class="card"><span>7</span> Press transfer / top up</div>
         <div class="card">
           <span>8</span> You can see your money in Pellet within 3 hours.
         </div>
@@ -76,21 +75,42 @@
           </div>
         </div>
       </div>
-      <a class="midtransBtn" href="#" @click="topupMidtrans">Top up with midtrans</a>
+      <a class="midtransBtn" href="#" @click="topupMidtrans"
+        >Top up with midtrans</a
+      >
     </div>
     <div v-if="midtrans === true" class="midtrans-topup">
       <a v-if="midtransSuccess === true" :href="link" target="_blank">
-        <button class="bn3" type="button" style="color:white">Click Here</button>
+        <button
+          @click="onLinkMidtrans"
+          class="bn3"
+          type="button"
+          style="color: white"
+        >
+          Click Here
+        </button>
       </a>
-      <input class="bn1" type="text" placeholder="input your top up id" v-model="form.id_topup" />
+      <!-- <input
+        class="bn1"
+        type="text"
+        placeholder="input your top up id"
+        v-model="form.id_topup"
+      /> -->
       <input
         class="bn2"
-        min="10000"
+        min="5000"
         type="number"
         placeholder="nominal Rp. 0.00"
         v-model="form.nominal"
       />
-      <button class="bn3" type="button" @click="midtransSubmit">Submit</button>
+      <button
+        v-if="isMidtransSubmit === true"
+        class="bn3"
+        type="button"
+        @click="midtransSubmit"
+      >
+        Submit
+      </button>
       <a class="midtransBtn2" href="#" @click="cancelMidtrans">cancel</a>
     </div>
   </div>
@@ -112,7 +132,8 @@ export default {
         nominal: ''
       },
       midtransSuccess: false,
-      link: ''
+      link: '',
+      isMidtransSubmit: true
     }
   },
   computed: {
@@ -127,7 +148,8 @@ export default {
       'getExpenseTotal',
       'getIncomePerDay',
       'getExpensePerDay',
-      'midtransPayment'
+      'midtransPayment',
+      'topupPayment'
     ]),
     onTopUp(val) {
       if (Number(this.nominal) >= 5000) {
@@ -193,28 +215,48 @@ export default {
       }
     },
     midtransSubmit() {
-      this.midtransPayment([this.form, this.$bvToast])
+      this.topupPayment([this.form.nominal, this.getUserData2])
         .then(result => {
-          this.link = ''
-          this.$bvToast.toast('Open link below to continue your payment', {
-            title: 'Payment bill created',
-            variant: 'info',
-            solid: true
-          })
-          this.link = result.data
-          this.midtransSuccess = true
+          this.form.id_topup = result.data.topup_code
+          this.midtransPayment([this.form, this.$bvToast])
+            .then(result => {
+              this.$bvToast.toast('Open link below to continue your payment', {
+                title: 'Payment bill created',
+                variant: 'info',
+                solid: true
+              })
+
+              console.log(result)
+              this.link = result.pagination
+              this.midtransSuccess = true
+              this.isMidtransSubmit = false
+            })
+            .catch(err => {
+              console.log(err)
+            })
+          this.form.nominal = ''
+          this.form.id_topup = ''
         })
         .catch(err => {
-          console.log(err)
+          this.$bvToast.toast(err.data.msg, {
+            title: 'Warning',
+            variant: 'danger',
+            solid: true
+          })
         })
-      this.form.nominal = ''
-      this.form.id_topup = ''
     },
     topupMidtrans() {
       this.midtrans = true
     },
     cancelMidtrans() {
       this.midtrans = false
+    },
+    onLinkMidtrans() {
+      setTimeout(() => {
+        this.link = ''
+        this.midtransSuccess = false
+      }, 60000)
+      this.isMidtransSubmit = true
     }
   }
 }
@@ -338,5 +380,30 @@ input:focus {
 }
 .bn3 {
   color: white;
+}
+
+@media (max-width: 1368px) {
+}
+@media (max-width: 1068px) {
+}
+@media (max-width: 768px) {
+  .bn1,
+  .bn2,
+  .bn3 {
+    width: 250px;
+  }
+}
+@media (max-width: 576px) {
+  .bn1,
+  .bn2,
+  .bn3 {
+    width: 150px;
+  }
+  .howto-topup {
+    top: 125px;
+  }
+  .select-topup button {
+    font-size: 12px;
+  }
 }
 </style>
