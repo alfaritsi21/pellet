@@ -212,16 +212,11 @@ export default {
 .transaction-title {
   padding-top: 15px;
   padding-left: 30px;
-
   font-family: Nunito Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
   text-align: left;
-  /* identical to box height */
-
-  /* Zwallet/Dark */
-
   color: #3a3d42;
 }
 
@@ -232,8 +227,6 @@ export default {
   font-weight: normal;
   font-size: 16px;
   text-align: left;
-  /* identical to box height, or 169% */
-
   color: #7a7886;
 }
 
@@ -245,8 +238,6 @@ export default {
   font-weight: normal;
   font-size: 16px;
   text-align: left;
-  /* identical to box height, or 169% */
-
   color: #7a7886;
 }
 
@@ -276,8 +267,6 @@ export default {
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  /* identical to box height, or 172% */
-
   text-align: left;
 
   color: #3a3d42;
@@ -289,8 +278,6 @@ export default {
   font-weight: normal;
   font-size: 13px;
   padding-bottom: 15px;
-  /* identical to box height, or 185% */
-
   color: rgba(58, 61, 66, 0.9);
 }
 
@@ -312,8 +299,6 @@ export default {
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  /* identical to box height */
-
   text-align: center;
 
   color: #1ec15f;
@@ -328,10 +313,33 @@ export default {
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
-  /* identical to box height */
-
   text-align: center;
 
   color: #ff5b37;
+}
+
+@media (max-width: 768px) {
+  .sort-history {
+    top: 55px;
+    right: 30px;
+    font-size: 12px;
+  }
+}
+@media (max-width: 576px) {
+  .navbar-profile {
+    padding: 0 0px;
+    margin-left: -15px;
+  }
+  .transaction-container {
+    padding-right: 20px !important;
+  }
+  .transaction-title {
+    font-size: 16px;
+    padding-left: 10px;
+  }
+  .transaction-week {
+    padding-left: 10px;
+    font-size: 16px;
+  }
 }
 </style>

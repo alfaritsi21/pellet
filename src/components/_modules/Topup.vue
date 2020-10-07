@@ -382,10 +382,6 @@ input:focus {
   color: white;
 }
 
-@media (max-width: 1368px) {
-}
-@media (max-width: 1068px) {
-}
 @media (max-width: 768px) {
   .bn1,
   .bn2,
