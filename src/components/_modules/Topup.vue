@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="text">
-      <h6><b>Select Top Up Nominal</b></h6>
+      <h6>
+        <b>Select Top Up Nominal</b>
+      </h6>
     </div>
     <div v-if="midtrans === false" class="manual-topup">
       <div class="select-topup">
@@ -16,7 +18,9 @@
         </b-form>
       </div>
       <div class="howto-topup">
-        <p v-b-modal.modal-topup><b>How To Top Up ?</b></p>
+        <p v-b-modal.modal-topup>
+          <b>How To Top Up ?</b>
+        </p>
       </div>
       <b-modal id="modal-topup" title="How To Top Up">
         <div class="card">
@@ -76,9 +80,11 @@
       >
     </div>
     <div v-if="midtrans === true" class="midtrans-topup">
-      <a v-if="midtransSuccess === true" :href="link" target="_blank"
-        >Klik here !</a
-      >
+      <a v-if="midtransSuccess === true" :href="link" target="_blank">
+        <button class="bn3" type="button" style="color: white">
+          Click Here
+        </button>
+      </a>
       <input
         class="bn1"
         type="text"
@@ -93,7 +99,7 @@
         v-model="form.nominal"
       />
       <button class="bn3" type="button" @click="midtransSubmit">Submit</button>
-      <a class="midtransBtn2" href="#" @click="cancelMidtrans"> cancel </a>
+      <a class="midtransBtn2" href="#" @click="cancelMidtrans">cancel</a>
     </div>
   </div>
 </template>
@@ -138,10 +144,10 @@ export default {
         } else {
           const pin = this.pin.join('')
           this.cekPin(this.userData.user_id)
-            .then(result => {
+            .then((result) => {
               if (result === Number(pin)) {
                 this.topup([pin, this.nominal, this.getUserData2])
-                  .then(response => {
+                  .then((response) => {
                     this.$bvToast.toast(response.msg, {
                       title: 'Success',
                       variant: 'success',
@@ -154,7 +160,7 @@ export default {
                     this.pin = []
                     this.validation = false
                   })
-                  .catch(error => {
+                  .catch((error) => {
                     this.$bvToast.toast(error.data.msg + ' please try again', {
                       title: 'Warning',
                       variant: 'danger',
@@ -175,7 +181,7 @@ export default {
                 this.validation = false
               }
             })
-            .catch(err => {
+            .catch((err) => {
               this.$bvToast.toast(err.data.msg, {
                 title: 'Warning',
                 variant: 'danger',
@@ -196,7 +202,7 @@ export default {
     },
     midtransSubmit() {
       this.midtransPayment([this.form, this.$bvToast])
-        .then(result => {
+        .then((result) => {
           this.link = ''
           this.$bvToast.toast('Open link below to continue your payment', {
             title: 'Payment bill created',
@@ -206,7 +212,7 @@ export default {
           this.link = result.data
           this.midtransSuccess = true
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err)
         })
       this.form.nominal = ''

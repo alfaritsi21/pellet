@@ -7,17 +7,13 @@
           <p class="navbar-logo" @click="setShowDashboard">Pellet</p>
         </b-col>
         <b-col md="3" class="navbar-profile">
-          <img
-            :src="`${urlApi}${userData2.user_img}`"
-            alt
-            class="navbar-image"
-          />
+          <img :src="`${urlApi}${userData2.user_img}`" alt class="navbar-image" />
           <div class="navbar-detail">
             <p class="navbar-name">
               {{
-                userData2.first_name === ''
-                  ? userData2.user_name
-                  : userData2.first_name + ' ' + userData2.last_name
+              userData2.first_name === ''
+              ? userData2.user_name
+              : userData2.first_name + ' ' + userData2.last_name
               }}
             </p>
             <p class="navbar-phone">{{ userData2.user_phone }}</p>
@@ -31,88 +27,71 @@
                 class="navbar-notification"
                 icon="bell"
               ></b-icon>
-              <b-icon
-                v-else
-                @click="onBell"
-                class="navbar-notification"
-                icon="bell"
-              ></b-icon>
+              <b-icon v-else @click="onBell" class="navbar-notification" icon="bell"></b-icon>
               <div v-if="getNotification === true" class="red-notif"></div>
             </div>
             <div v-if="isNotif === true" class="sub-notif">
               <div class="today">
                 <p class="day1">Today</p>
-                <div
-                  v-for="(item, index) in getDailyHistory"
-                  :key="index"
-                  class="today-detail"
-                >
+                <div v-for="(item, index) in getDailyHistory" :key="index" class="today-detail">
                   <img
                     v-if="item.target_id === userData.user_id"
                     src="../assets/image/arrow-up(1).png"
-                    alt=""
+                    alt
                   />
-                  <img v-else src="../assets/image/arrow-up(2).png" alt="" />
+                  <img v-else src="../assets/image/arrow-up(2).png" alt />
                   <p>
                     {{
-                      item.target_id === userData.user_id
-                        ? item.trans_type === 'Top up'
-                          ? 'Top up success'
-                          : 'Transfered From ' + item.user_name
-                        : 'Transfer to ' + item.user_name
+                    item.target_id === userData.user_id
+                    ? item.trans_type === 'Top up'
+                    ? 'Top up success'
+                    : 'Transfered From ' + item.user_name
+                    : 'Transfer to ' + item.user_name
                     }}
                   </p>
-                  <h6>Rp.{{ item.trans_nominal }}</h6>
+                  <h6>Rp.{{ formatPrice(item.trans_nominal) }}</h6>
                 </div>
               </div>
               <div class="today">
                 <p class="day1">This week</p>
-                <div
-                  v-for="(item, index) in getHistory"
-                  :key="index"
-                  class="today-detail"
-                >
+                <div v-for="(item, index) in getHistory" :key="index" class="today-detail">
                   <img
                     v-if="item.target_id === userData.user_id"
                     src="../assets/image/arrow-up(1).png"
-                    alt=""
+                    alt
                   />
-                  <img v-else src="../assets/image/arrow-up(2).png" alt="" />
+                  <img v-else src="../assets/image/arrow-up(2).png" alt />
                   <p>
                     {{
-                      item.target_id === userData.user_id
-                        ? item.trans_type === 'Top up'
-                          ? 'Top up success'
-                          : 'Transfered From ' + item.user_name
-                        : 'Transfer to ' + item.user_name
+                    item.target_id === userData.user_id
+                    ? item.trans_type === 'Top up'
+                    ? 'Top up success'
+                    : 'Transfered From ' + item.user_name
+                    : 'Transfer to ' + item.user_name
                     }}
                   </p>
-                  <h6>Rp.{{ item.trans_nominal }}</h6>
+                  <h6>Rp.{{ formatPrice(item.trans_nominal) }}</h6>
                 </div>
               </div>
               <div class="today">
                 <p class="day1">This month</p>
-                <div
-                  v-for="(item, index) in getMonthlyHistory"
-                  :key="index"
-                  class="today-detail"
-                >
+                <div v-for="(item, index) in getMonthlyHistory" :key="index" class="today-detail">
                   <img
                     v-if="item.target_id === userData.user_id"
                     src="../assets/image/arrow-up(1).png"
-                    alt=""
+                    alt
                   />
-                  <img v-else src="../assets/image/arrow-up(2).png" alt="" />
+                  <img v-else src="../assets/image/arrow-up(2).png" alt />
                   <p>
                     {{
-                      item.target_id === userData.user_id
-                        ? item.trans_type === 'Top up'
-                          ? 'Top up success'
-                          : 'Transfered From ' + item.user_name
-                        : 'Transfer to ' + item.user_name
+                    item.target_id === userData.user_id
+                    ? item.trans_type === 'Top up'
+                    ? 'Top up success'
+                    : 'Transfered From ' + item.user_name
+                    : 'Transfer to ' + item.user_name
                     }}
                   </p>
-                  <h6>Rp.{{ item.trans_nominal }}</h6>
+                  <h6>Rp.{{ formatPrice(item.trans_nominal) }}</h6>
                 </div>
               </div>
             </div>
@@ -158,11 +137,7 @@
                 <b-col class="side-menu" cols="6">Top Up</b-col>
               </b-row>
             </b-col>
-            <b-col
-              cols="12"
-              class="side-content side-profile"
-              @click="showProfiles"
-            >
+            <b-col cols="12" class="side-content side-profile" @click="showProfiles">
               <b-row>
                 <!-- <b-col cols="1" class="side-indicator"
                   ><p class="text-hidden">a</p></b-col
@@ -179,14 +154,9 @@
                   ><p class="text-hidden">a</p></b-col
                 >-->
                 <b-col cols="3">
-                  <b-icon
-                    class="side-notification"
-                    icon="box-arrow-right"
-                  ></b-icon>
+                  <b-icon class="side-notification" icon="box-arrow-right"></b-icon>
                 </b-col>
-                <b-col class="side-menu" cols="6" @click.prevent="handleLogout"
-                  >Logout</b-col
-                >
+                <b-col class="side-menu" cols="6" @click.prevent="handleLogout">Logout</b-col>
               </b-row>
             </b-col>
           </b-row>
@@ -204,10 +174,7 @@
           <div class="dashboard-container main-content" v-show="showProfile">
             <Profile />
           </div>
-          <div
-            class="dashboard-container main-content"
-            v-show="showTransaction"
-          >
+          <div class="dashboard-container main-content" v-show="showTransaction">
             <Transaction />
           </div>
         </b-col>
@@ -395,6 +362,10 @@ export default {
       } else {
         this.isNotif = false
       }
+    },
+    formatPrice(value) {
+      const val = (value / 1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
   }
 }
@@ -495,7 +466,7 @@ export default {
 
 .main-container {
   margin: 30px 0;
-  height: 488px;
+  height: 600px;
 }
 
 .main-side {
@@ -581,7 +552,7 @@ export default {
   background-color: #6379f4;
 
   /* border-radius: 15px 15px 0 0; */
-  height: 49px;
+  height: 70px;
 }
 
 .footer-text {
