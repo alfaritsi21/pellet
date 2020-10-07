@@ -76,9 +76,9 @@
       >
     </div>
     <div v-if="midtrans === true" class="midtrans-topup">
-      <a v-if="midtransSuccess === true" :href="link" target="_blank">{{
-        link
-      }}</a>
+      <a v-if="midtransSuccess === true" :href="link" target="_blank"
+        >Klik here !</a
+      >
       <input
         class="bn1"
         type="text"
@@ -87,7 +87,7 @@
       />
       <input
         class="bn2"
-        min="10000"
+        min="5000"
         type="number"
         placeholder="nominal Rp. 0.00"
         v-model="form.nominal"
@@ -138,10 +138,10 @@ export default {
         } else {
           const pin = this.pin.join('')
           this.cekPin(this.userData.user_id)
-            .then((result) => {
+            .then(result => {
               if (result === Number(pin)) {
                 this.topup([pin, this.nominal, this.getUserData2])
-                  .then((response) => {
+                  .then(response => {
                     this.$bvToast.toast(response.msg, {
                       title: 'Success',
                       variant: 'success',
@@ -154,7 +154,7 @@ export default {
                     this.pin = []
                     this.validation = false
                   })
-                  .catch((error) => {
+                  .catch(error => {
                     this.$bvToast.toast(error.data.msg + ' please try again', {
                       title: 'Warning',
                       variant: 'danger',
@@ -175,7 +175,7 @@ export default {
                 this.validation = false
               }
             })
-            .catch((err) => {
+            .catch(err => {
               this.$bvToast.toast(err.data.msg, {
                 title: 'Warning',
                 variant: 'danger',
@@ -196,7 +196,7 @@ export default {
     },
     midtransSubmit() {
       this.midtransPayment([this.form, this.$bvToast])
-        .then((result) => {
+        .then(result => {
           this.link = ''
           this.$bvToast.toast('Open link below to continue your payment', {
             title: 'Payment bill created',
@@ -206,7 +206,7 @@ export default {
           this.link = result.data
           this.midtransSuccess = true
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err)
         })
       this.form.nominal = ''

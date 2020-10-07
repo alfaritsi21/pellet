@@ -48,7 +48,7 @@
             <router-link to="/forgot">Forgot password?</router-link>
           </div>
           <br />
-          <b-button type="submit" variant="danger" class="mb-2">Login</b-button>
+          <b-button type="submit" variant="light" class="mb-2">Login</b-button>
           <br />
           <div class="p4">
             <p>

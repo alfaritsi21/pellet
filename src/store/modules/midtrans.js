@@ -51,7 +51,8 @@ export default {
     midtransPayment(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .post(`${context.state.urlApi}payment`, payload[0])
+          // .post(`${context.state.urlApi}payment`, payload[0])
+          .post('https://pellet-backend.fwdev.online/payment', payload[0])
           .then(response => {
             resolve(response.data)
           })
