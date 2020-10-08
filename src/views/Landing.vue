@@ -355,7 +355,6 @@ export default {
 }
 
 .trusted {
-  background-color: aqua;
   height: 300px;
   width: 100%;
 }
