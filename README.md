@@ -1,15 +1,17 @@
 <h1 align='center'>Vue JS - PELLET</h1>
   <p align="center">
-    <a href="https://sharp-pike-396661.netlify.app/">View Demo</a>
+    <a href="https://pellet.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/alfaritsi21/bug/issues">Report Bug</a>
     ·
     <a href="https://github.com/alfaritsi21/issues">Request Feature</a>
   </p>
 
+![Image Banner](https://raw.githubusercontent.com/alfaritsi21/pellet/master/Pellet-Dashboard.jpg)
+
 ## About The Project
 
-#Pellet is payment transaction web-based are present in Indonesia, in this modern era and can help to assist you on digital payments for various types of transactions. This application is supported by an e-payment feature that widely used by Indonesian's today.
+Pellet is payment transaction web-based are present in Indonesia, in this modern era and can help to assist you on digital payments for various types of transactions. This application is supported by an e-payment feature that widely used by Indonesian's today.
 
 ## Built With
 
