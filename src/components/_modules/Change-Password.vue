@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="container">
     <b-row class="text-left p-3"
       ><b-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12"
         ><h3>Change Password</h3>
@@ -163,5 +163,17 @@ input {
 
 ::placeholder {
   color: rgba(169, 169, 169, 0.6);
+}
+@media only screen and (max-width: 770px) {
+  .input-prepend {
+    width: 100%;
+  }
+  input {
+    width: 80%;
+  }
+
+  .container {
+    width: 100%;
+  }
 }
 </style>
