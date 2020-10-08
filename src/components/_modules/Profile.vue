@@ -29,6 +29,12 @@
             >
               <b-icon icon="pencil"></b-icon>Edit
             </h6>
+            <h6
+              @click.prevent="delImg()"
+              style="cursor: pointer; margin-top: 5px"
+            >
+              <b-icon icon="trash"></b-icon>
+            </h6>
           </b-col>
         </b-row>
 
@@ -145,7 +151,13 @@ export default {
       'setShowChangePassword',
       'setShowChangePin'
     ]),
-    ...mapActions(['patchImage', 'getUserById', 'cekPin', 'logout']),
+    ...mapActions([
+      'patchImage',
+      'getUserById',
+      'cekPin',
+      'logout',
+      'deleteImg'
+    ]),
     // handleFile(event) {
     //   this.form.user_img = event.target.files[0]
     // },
@@ -179,6 +191,32 @@ export default {
         })
         .catch(error => {
           this.$bvToast.toast(`${error.data.msg}`, {
+            title: 'Check it again ',
+            variant: 'danger',
+            solid: true
+          })
+        })
+    },
+    delImg(data) {
+      console.log(this.userData2.user_id)
+      const setData = {
+        user_id: this.userData2.user_id,
+        form: data
+      }
+      this.deleteImg(setData)
+        .then(response => {
+          console.log(response)
+          this.$bvToast.toast(`${response.msg}`, {
+            title: 'Info ',
+            variant: 'success',
+            solid: true
+          })
+          // this.form = {}
+          this.cekPin(this.userData.user_id)
+          this.getUserById(this.userData2.user_id)
+        })
+        .catch(error => {
+          this.$bvToast.toast(`${error.data}`, {
             title: 'Check it again ',
             variant: 'danger',
             solid: true
