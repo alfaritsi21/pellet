@@ -85,6 +85,22 @@ export default {
           })
       })
     },
+    deleteImg(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .delete(
+            `${process.env.VUE_APP_URL}profile/delimg/${payload.user_id}`,
+            payload.form
+          )
+          .then(response => {
+            resolve(response.data)
+          })
+          .catch(error => {
+            reject(error.response)
+            console.log(error)
+          })
+      })
+    },
     changePassword(context, payload) {
       return new Promise((resolve, reject) => {
         axios
