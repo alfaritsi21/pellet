@@ -3,10 +3,10 @@
     <!-- =====================NAVBAR============================= -->
     <b-container fluid class="navbar-container">
       <b-row align-h="around">
-        <b-col md="4">
+        <b-col cols="4" sm="4" md="4" lg="4" xl="4">
           <p class="navbar-logo" @click="setShowDashboard">Pellet</p>
         </b-col>
-        <b-col md="3" class="navbar-profile">
+        <b-col cols="3" sm="3" md="3" lg="3" xl="3" class="navbar-profile">
           <img
             :src="`${urlApi}${userData2.user_img}`"
             alt
@@ -123,7 +123,7 @@
     <!-- ==================MAIN CONTENT========================== -->
     <div class="main-container">
       <b-row align-h="center">
-        <b-col class="main-side" cols="2">
+        <b-col class="main-side" cols="12" sm="12" md="2" lg="3" xl="2">
           <b-row align-h="between">
             <b-col cols="12" class="side-content" @click="setShowDashboard">
               <b-row @click="onDashboard" class="dash">
@@ -191,7 +191,7 @@
             </b-col>
           </b-row>
         </b-col>
-        <b-col cols="7">
+        <b-col cols="12" sm="12" md="9" lg="9" xl="7">
           <div class="main-content-dashboard" v-show="showDashboard">
             <Dashboard />
           </div>
@@ -216,15 +216,15 @@
     <!-- =====================FOOTER============================= -->
     <b-container fluid class="footer-container">
       <b-row align-h="around">
-        <b-col cols="3">
+        <b-col cols="3" sm="3" md="3" lg="3" xl="3">
           <p class="footer-text">2020 Pellet. All right reserved.</p>
         </b-col>
-        <b-col cols="5">
+        <b-col cols="9" sm="9" md="9" lg="9" xl="9">
           <b-row align-h="around">
-            <b-col cols="5">
+            <b-col cols="7" sm="7" md="7" lg="7" xl="7">
               <p class="footer-text">+62 5637 8882 9901</p>
             </b-col>
-            <b-col cols="4">
+            <b-col cols="5" sm="5" md="5" lg="5" xl="5">
               <p class="footer-text">contact@Pellet.com</p>
             </b-col>
           </b-row>
@@ -476,10 +476,7 @@ export default {
   font-weight: bold;
   font-size: 14px;
   line-height: 31px;
-  /* identical to box height, or 172% */
-
   text-align: center;
-
   color: #3a3d42;
 }
 
@@ -490,8 +487,6 @@ export default {
   font-size: 13px;
   line-height: 24px;
   padding-bottom: 15px;
-  /* identical to box height, or 185% */
-
   color: rgba(58, 61, 66, 0.9);
 }
 
@@ -506,7 +501,6 @@ export default {
 }
 
 .main-side {
-  /* background-color: greenyellow; */
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 15px;
@@ -580,14 +574,10 @@ export default {
   line-height: 31px;
   text-align: left;
   margin-bottom: 15px;
-
-  /* color: #6379f4; */
 }
 
 .footer-container {
   background-color: #6379f4;
-
-  /* border-radius: 15px 15px 0 0; */
   height: 70px;
 }
 
@@ -598,8 +588,6 @@ export default {
   font-weight: normal;
   font-size: 16px;
   line-height: 28px;
-  /* identical to box height, or 175% */
-
   color: rgba(239, 239, 239, 0.9);
 }
 
@@ -707,5 +695,48 @@ export default {
   height: 10px;
   border-radius: 50%;
   background-color: red;
+}
+
+@media (max-width: 768px) {
+  .side-content {
+    margin: 10px 0;
+    border-radius: 10px;
+  }
+
+  .side-profile {
+    margin-bottom: 20px;
+  }
+
+  .side-menu {
+    line-height: 31px;
+    margin-bottom: 0px;
+  }
+  .main-container {
+    margin: 15px 0;
+    height: 910px;
+  }
+
+  .main-side {
+    height: 200px;
+    margin-bottom: 20px;
+    overflow: auto;
+  }
+  .sub-notif {
+    width: 250px;
+    max-height: 430px;
+    right: 10px;
+    padding: 10px 10px 0 10px;
+  }
+  .footer-container {
+    /* display: none; */
+    height: 80px;
+  }
+
+  .footer-text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+@media (max-width: 576px) {
 }
 </style>

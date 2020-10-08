@@ -184,3 +184,12 @@
 .sub-rowPin3 input:focus {
   outline: none;
 }
+
+@media (max-width: 768px) {
+  .cover p {
+    font-size: 12px;
+    line-height: 25px;
+  }
+}
+@media (max-width: 576px) {
+}

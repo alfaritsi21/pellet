@@ -4,7 +4,9 @@
     <b-row align-h="between" class="balance-container">
       <b-col md="5" class="balance-detail">
         <p class="balance-text">Balance</p>
-        <p class="balance-nominal">Rp {{ formatPrice(getUserData2.user_saldo) }}</p>
+        <p class="balance-nominal">
+          Rp {{ formatPrice(getUserData2.user_saldo) }}
+        </p>
         <p class="balance-phone">{{ getUserData2.user_phone }}</p>
       </b-col>
       <b-col md="4" class="balance-menu">
@@ -62,7 +64,12 @@
             </b-col>
           </b-row>
           <div class="chart">
-            <line-chart :data="chartData" width="380px" height="230px"></line-chart>
+            <line-chart
+              class="lineChart"
+              :data="chartData"
+              width="380px"
+              height="230px"
+            ></line-chart>
           </div>
         </div>
       </b-col>
@@ -77,21 +84,29 @@
             </b-col>
           </b-row>
           <div class="transaction-list">
-            <b-col v-for="(item, index) in getHistory" :key="index" class="navbar-profile">
-              <img :src="`${urlApi}${item.user_img}`" alt class="navbar-image" />
+            <b-col
+              v-for="(item, index) in getHistory"
+              :key="index"
+              class="navbar-profile"
+            >
+              <img
+                :src="`${urlApi}${item.user_img}`"
+                alt
+                class="navbar-image"
+              />
               <div class="navbar-detail">
                 <p class="navbar-name">
                   {{
-                  item.first_name === ''
-                  ? item.user_name
-                  : item.first_name + ' ' + item.last_name
+                    item.first_name === ''
+                      ? item.user_name
+                      : item.first_name + ' ' + item.last_name
                   }}
                 </p>
                 <p class="navbar-phone">
                   {{
-                  userData.user_id === item.target_id
-                  ? item.trans_type
-                  : 'Subscription'
+                    userData.user_id === item.target_id
+                      ? item.trans_type
+                      : 'Subscription'
                   }}
                 </p>
               </div>
@@ -104,9 +119,9 @@
                 ]"
               >
                 {{
-                userData.user_id === item.target_id
-                ? '+' + formatPrice(item.trans_nominal)
-                : '-' + formatPrice(item.trans_nominal)
+                  userData.user_id === item.target_id
+                    ? '+' + formatPrice(item.trans_nominal)
+                    : '-' + formatPrice(item.trans_nominal)
                 }}
               </p>
             </b-col>
@@ -455,8 +470,14 @@ export default {
 }
 
 .chart {
-  width: 400px;
+  width: 100%;
   height: 230px;
+  position: relative;
+}
+
+.lineChart {
+  position: absolute;
+  width: 100% !important;
 }
 
 .transaction-see {

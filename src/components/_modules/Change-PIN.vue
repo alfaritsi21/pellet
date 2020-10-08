@@ -1,7 +1,7 @@
 <template>
   <b-container fluid>
     <b-row class="text-left p-3"
-      ><b-col cols="12"
+      ><b-col cols="12" xs="12" sm="12" md="12" lg="12" xl="12"
         ><h3>Change PIN</h3>
         <p>
           Enter your current 6 digits Zwallet PIN below to <br />
