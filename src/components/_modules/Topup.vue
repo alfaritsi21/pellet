@@ -122,7 +122,8 @@ import io from 'socket.io-client'
 export default {
   data() {
     return {
-      socket: io('http://127.0.0.1:3001'),
+      socket: io(process.env.VUE_APP_URL),
+      // socket: io('http://127.0.0.1:3001'),
       pin: [],
       validation: false,
       nominal: '',
